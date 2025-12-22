@@ -3,10 +3,10 @@ import cloudinary from '@/lib/cloudinary';
 
 export async function DELETE(
     request: Request,
-    { params }: { params: { public_id: string } }
+    { params }: { params: Promise<{ public_id: string }> }
 ) {
     try {
-        const public_id = params.public_id;
+        const { public_id } = await params;
 
         if (!public_id) {
             return NextResponse.json({ success: false, error: 'Public ID is required' }, { status: 400 });
