@@ -497,7 +497,7 @@ export default function Home() {
             </div>
 
             <h1
-              className="text-8xl md:text-[12rem] font-black mb-10 relative"
+              className="text-5xl sm:text-7xl md:text-[12rem] font-black mb-10 relative"
               style={{
                 transform: `
                   translateY(${scrollY * 0.05}px) 
@@ -520,7 +520,7 @@ export default function Home() {
               </span>
             </h1>
 
-            <p className={`text-3xl md:text-4xl mb-16 max-w-5xl mx-auto font-light leading-relaxed ${darkMode ? "text-gray-300" : "text-slate-600"}`}>
+            <p className={`text-xl md:text-4xl mb-16 max-w-5xl mx-auto font-light leading-relaxed ${darkMode ? "text-gray-300" : "text-slate-600"}`}>
               <span className="text-cyan-400 font-semibold">Sun&apos;iy intellekt</span> •{' '}
               <span className="text-purple-400 font-semibold">ChatGPT</span> •{' '}
               <span className="text-pink-400 font-semibold">Midjourney</span> •{' '}
@@ -533,7 +533,7 @@ export default function Home() {
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
               <button
                 onClick={scrollToContact}
-                className="group relative text-2xl px-14 py-8 rounded-2xl font-bold overflow-hidden hover:scale-105 transition-all duration-300"
+                className="group relative text-xl md:text-2xl px-14 py-8 rounded-2xl font-bold overflow-hidden hover:scale-105 transition-all duration-300"
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 animate-gradient-x" />
                 <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 blur-xl opacity-50 group-hover:opacity-75 transition-opacity" />
@@ -544,14 +544,14 @@ export default function Home() {
               </button>
               <button
                 onClick={() => handleViewChange('legal')}
-                className="text-2xl px-14 py-8 rounded-2xl border-2 border-cyan-500/30 hover:bg-cyan-500/10 backdrop-blur-xl transition-all font-bold hover:scale-105 hover:border-cyan-500/50 hover:shadow-[0_0_30px_rgba(6,182,212,0.3)]"
+                className="text-xl md:text-2xl px-14 py-8 rounded-2xl border-2 border-cyan-500/30 hover:bg-cyan-500/10 backdrop-blur-xl transition-all font-bold hover:scale-105 hover:border-cyan-500/50 hover:shadow-[0_0_30px_rgba(6,182,212,0.3)]"
               >
                 Huquqiy IT
               </button>
             </div>
 
             {/* 3D Stats Cards */}
-            <div className="grid grid-cols-4 gap-8 max-w-6xl mx-auto mt-24 mb-60">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto mt-24 mb-60">
               {[
                 {
                   icon: <Users className="w-10 h-10" />,

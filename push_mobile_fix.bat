@@ -1,0 +1,9 @@
+@echo off
+set GIT_PATH="C:\Users\AI300\AppData\Local\GitHubDesktop\app-3.5.4\resources\app\git\cmd\git.exe"
+echo Adding files...
+%GIT_PATH% add .
+echo Committing...
+%GIT_PATH% commit -m "feat: improve mobile responsiveness"
+echo Pushing...
+%GIT_PATH% push origin main
+echo Done!
