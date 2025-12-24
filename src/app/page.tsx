@@ -431,11 +431,11 @@ export default function Home() {
         handleViewChange('paid-courses')
       } else {
         const data = await res.json()
-        alert("❌ Xatolik: " + (data.error || "Noma'lum xato"))
+        alert("❌ Xatolik: " + (data.error || "Noma'lum xato") + (data.details ? `\n\nTafsilot: ${data.details}` : ""))
       }
     } catch (error) {
       console.error("Registration error:", error)
-      alert("❌ Serverga ulanishda xatolik!")
+      alert("❌ Serverga ulanishda xatolik! Internet aloqasini tekshiring.")
     }
   }
 

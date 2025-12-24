@@ -26,6 +26,16 @@ export async function GET() {
 export async function POST(request: Request) {
     try {
         const body = await request.json();
+
+        // Validate required fields
+        if (!body.name) {
+            return NextResponse.json({ error: 'Name is required' }, { status: 400 });
+        }
+
+        if (!body.phoneNumber && !body.email) {
+            return NextResponse.json({ error: 'Phone or email is required' }, { status: 400 });
+        }
+
         const newUser = await prisma.user.create({
             data: {
                 name: body.name,
@@ -37,11 +47,22 @@ export async function POST(request: Request) {
             }
         });
         return NextResponse.json(newUser, { status: 201 });
-    } catch (error) {
+    } catch (error: any) {
         console.error("Error creating user:", error);
+
+        // Check for unique constraint violation
+        if (error?.code === 'P2002') {
+            const field = error?.meta?.target?.[0] || 'field';
+            return NextResponse.json({
+                error: `Bu ${field === 'email' ? 'email' : 'telefon raqam'} allaqachon ro'yxatdan o'tgan`,
+                details: 'Unique constraint violation'
+            }, { status: 409 });
+        }
+
         return NextResponse.json({
             error: 'Error creating user',
-            details: error instanceof Error ? error.message : String(error)
+            details: error instanceof Error ? error.message : String(error),
+            code: error?.code || 'UNKNOWN'
         }, { status: 500 });
     }
 }
