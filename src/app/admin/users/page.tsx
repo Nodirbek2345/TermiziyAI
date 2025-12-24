@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
-import { Search, Edit, Trash2, MoreHorizontal, UserPlus, RefreshCcw } from "lucide-react";
+import { useEffect, useState, useRef, useCallback } from "react";
+import { Search, Edit, Trash2, UserPlus, RefreshCcw } from "lucide-react";
 
 interface User {
     id: number;
@@ -105,7 +105,7 @@ export default function UsersPage() {
         }
     };
 
-    const fetchUsers = async (showLoading = true) => {
+    const fetchUsers = useCallback(async (showLoading = true) => {
         if (showLoading) setLoading(true);
         try {
             const res = await fetch('/api/users');
@@ -118,13 +118,13 @@ export default function UsersPage() {
         } catch (error) {
             console.error("Failed to fetch users", error);
         } finally {
-            setLoading(false);
+            if (showLoading) setLoading(false);
         }
-    };
+    }, []);
 
     useEffect(() => {
         fetchUsers();
-    }, []);
+    }, [fetchUsers]);
 
     // Poll every 5 seconds
     useInterval(() => {
