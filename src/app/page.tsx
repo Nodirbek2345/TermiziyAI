@@ -339,7 +339,10 @@ export default function Home() {
     }
 
     const particles: Particle[] = []
-    for (let i = 0; i < 150; i++) {
+    // Mobil qurilmalarda kamroq zarracha (50 ta), kompyuterda ko'proq (150 ta)
+    const particleCount = window.innerWidth < 768 ? 50 : 150
+
+    for (let i = 0; i < particleCount; i++) {
       particles.push(new Particle())
     }
 
@@ -372,12 +375,17 @@ export default function Home() {
     }
   }, [darkMode])
 
-  // Mouse tracking for 3D tilt
+  // Mouse tracking for 3D tilt (Optimized)
   useEffect(() => {
+    // Mobil qurilmalarda 3D efektni o'chirish (batareya va unumdorlik uchun)
+    if (window.innerWidth < 768) return
+
     const handleMouseMove = (e: MouseEvent) => {
-      setMousePos({
-        x: (e.clientX / window.innerWidth - 0.5) * 20,
-        y: (e.clientY / window.innerHeight - 0.5) * 20
+      requestAnimationFrame(() => {
+        setMousePos({
+          x: (e.clientX / window.innerWidth - 0.5) * 20,
+          y: (e.clientY / window.innerHeight - 0.5) * 20
+        })
       })
     }
 
@@ -387,7 +395,9 @@ export default function Home() {
 
   // Scroll tracking
   useEffect(() => {
-    const handleScroll = () => setScrollY(window.scrollY)
+    const handleScroll = () => {
+      requestAnimationFrame(() => setScrollY(window.scrollY))
+    }
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
@@ -472,9 +482,9 @@ export default function Home() {
 
         {/* Animated gradient orbs */}
         <div className="fixed inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-0 -left-1/4 w-1/2 h-1/2 bg-purple-500 rounded-full mix-blend-multiply filter blur-[128px] opacity-20 animate-blob" />
-          <div className="absolute top-0 -right-1/4 w-1/2 h-1/2 bg-cyan-500 rounded-full mix-blend-multiply filter blur-[128px] opacity-20 animate-blob animation-delay-2000" />
-          <div className="absolute -bottom-1/4 left-1/3 w-1/2 h-1/2 bg-pink-500 rounded-full mix-blend-multiply filter blur-[128px] opacity-20 animate-blob animation-delay-4000" />
+          <div className="absolute top-0 -left-1/4 w-1/2 h-1/2 bg-purple-500 rounded-full mix-blend-multiply filter blur-[128px] opacity-20 animate-blob will-change-transform" />
+          <div className="absolute top-0 -right-1/4 w-1/2 h-1/2 bg-cyan-500 rounded-full mix-blend-multiply filter blur-[128px] opacity-20 animate-blob animation-delay-2000 will-change-transform" />
+          <div className="absolute -bottom-1/4 left-1/3 w-1/2 h-1/2 bg-pink-500 rounded-full mix-blend-multiply filter blur-[128px] opacity-20 animate-blob animation-delay-4000 will-change-transform" />
         </div>
 
         {/* Neural network grid */}
@@ -493,7 +503,7 @@ export default function Home() {
         {view === 'hero' && (
           <button
             onClick={() => setDarkMode(!darkMode)}
-            className={`fixed top-8 right-8 z-50 p-4 rounded-2xl backdrop-blur-2xl transition-all shadow-2xl hover:scale-110 group ${darkMode ? "bg-white/5 border-white/10 hover:bg-white/10" : "bg-white/10 border-white/20 hover:bg-white/30 shadow-lg"}`}
+            className={`fixed top-8 right-8 z-50 p-4 rounded-2xl backdrop-blur-lg md:backdrop-blur-2xl transition-all shadow-2xl hover:scale-110 group ${darkMode ? "bg-white/5 border-white/10 hover:bg-white/10" : "bg-white/10 border-white/20 hover:bg-white/30 shadow-lg"}`}
             style={{ borderWidth: 1 }}
           >
             <div className="relative">
@@ -516,7 +526,7 @@ export default function Home() {
                 href={link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`p-3 rounded-xl backdrop-blur-2xl transition-all hover:scale-110 cursor-pointer group border ${darkMode ? "bg-white/5 border-white/10 hover:bg-white/10 active:bg-white/20" : "bg-white/10 border-white/20 hover:bg-white/30 active:bg-white/50 shadow-lg"}`}
+                className={`p-3 rounded-xl backdrop-blur-lg md:backdrop-blur-2xl transition-all hover:scale-110 cursor-pointer group border ${darkMode ? "bg-white/5 border-white/10 hover:bg-white/10 active:bg-white/20" : "bg-white/10 border-white/20 hover:bg-white/30 active:bg-white/50 shadow-lg"}`}
                 style={{
                   animation: `float 3s ease-in-out infinite`,
                   animationDelay: `${i * 0.5}s`
@@ -652,7 +662,7 @@ export default function Home() {
                   className="group relative"
                 >
                   <div
-                    className={`relative p-6 md:p-8 rounded-2xl md:rounded-3xl backdrop-blur-2xl border transition-all duration-300 active:scale-95 active:opacity-80 ${darkMode ? "bg-white/5 border-white/10 active:bg-white/15" : "bg-white/10 border-white/20 active:bg-white/40 shadow-lg"} cursor-pointer`}
+                    className={`relative p-6 md:p-8 rounded-2xl md:rounded-3xl backdrop-blur-lg md:backdrop-blur-2xl border transition-all duration-300 active:scale-95 active:opacity-80 ${darkMode ? "bg-white/5 border-white/10 active:bg-white/15" : "bg-white/10 border-white/20 active:bg-white/40 shadow-lg"} cursor-pointer`}
                     style={{ WebkitTapHighlightColor: 'transparent' }}
                     onClick={() => setActiveDropdown(activeDropdown === i ? null : i)}
                   >
@@ -666,7 +676,7 @@ export default function Home() {
 
                   {/* Dropdown Menu */}
                   {activeDropdown === i && (
-                    <div className="absolute top-full mt-3 left-0 right-0 md:left-1/2 md:right-auto md:-translate-x-1/2 w-auto md:w-64 mx-2 md:mx-0 rounded-2xl bg-slate-900/95 backdrop-blur-2xl border border-white/10 shadow-2xl overflow-hidden animate-slideDown z-50">
+                    <div className="absolute top-full mt-3 left-0 right-0 md:left-1/2 md:right-auto md:-translate-x-1/2 w-auto md:w-64 mx-2 md:mx-0 rounded-2xl bg-slate-900/95 backdrop-blur-lg md:backdrop-blur-2xl border border-white/10 shadow-2xl overflow-hidden animate-slideDown z-50">
                       <div className="p-2">
                         {stat.items.map((item, idx) => (
                           <button
@@ -704,7 +714,7 @@ export default function Home() {
             <div className={`grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8 max-w-6xl mx-auto mb-20 md:mb-40 px-2 md:px-4 relative z-10`}>
 
               {/* Column 1: Kimlar uchun? */}
-              <div className={`p-4 md:p-8 rounded-2xl md:rounded-3xl backdrop-blur-2xl border transition-all duration-300 hover:shadow-2xl ${darkMode ? "bg-white/5 border-white/10" : "bg-white/10 border-white/20 shadow-lg"}`}>
+              <div className={`p-4 md:p-8 rounded-2xl md:rounded-3xl backdrop-blur-lg md:backdrop-blur-2xl border transition-all duration-300 hover:shadow-2xl ${darkMode ? "bg-white/5 border-white/10" : "bg-white/10 border-white/20 shadow-lg"}`}>
                 <h3 className={`text-xl md:text-3xl font-bold mb-4 md:mb-8 bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent`}>
                   Kimlar uchun?
                 </h3>
@@ -723,7 +733,7 @@ export default function Home() {
                         {item.label}
                       </span>
                       {/* Tooltip */}
-                      <div className={`absolute bottom-full left-1/2 -translate-x-1/2 mb-3 w-48 p-3 rounded-xl backdrop-blur-2xl border shadow-xl opacity-0 translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 z-20 text-center ${darkMode ? "bg-slate-900/90 border-white/10 text-gray-200" : "bg-white/90 border-white/20 text-slate-700"}`}>
+                      <div className={`absolute bottom-full left-1/2 -translate-x-1/2 mb-3 w-48 p-3 rounded-xl backdrop-blur-lg md:backdrop-blur-2xl border shadow-xl opacity-0 translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 z-20 text-center ${darkMode ? "bg-slate-900/90 border-white/10 text-gray-200" : "bg-white/90 border-white/20 text-slate-700"}`}>
                         <p className="text-xs leading-relaxed font-medium">{item.desc}</p>
                         {/* Arrow */}
                         <div className={`absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 border-b border-r rotate-45 ${darkMode ? "bg-slate-900/90 border-white/10" : "bg-white/90 border-white/20"}`}></div>
@@ -734,7 +744,7 @@ export default function Home() {
               </div>
 
               {/* Column 2: Biz nimani o'rgatamiz? */}
-              <div className={`p-4 md:p-8 rounded-2xl md:rounded-3xl backdrop-blur-2xl border transition-all duration-300 hover:shadow-2xl flex flex-col ${darkMode ? "bg-white/5 border-white/10" : "bg-white/10 border-white/20 shadow-lg"}`}>
+              <div className={`p-4 md:p-8 rounded-2xl md:rounded-3xl backdrop-blur-lg md:backdrop-blur-2xl border transition-all duration-300 hover:shadow-2xl flex flex-col ${darkMode ? "bg-white/5 border-white/10" : "bg-white/10 border-white/20 shadow-lg"}`}>
                 <h3 className={`text-xl md:text-3xl font-bold mb-4 md:mb-8 bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent`}>
                   Biz nimani o'rgatamiz?
                 </h3>
@@ -753,7 +763,7 @@ export default function Home() {
                         {item.title}
                       </span>
                       {/* Tooltip */}
-                      <div className={`absolute bottom-full left-1/2 -translate-x-1/2 mb-3 w-48 p-3 rounded-xl backdrop-blur-2xl border shadow-xl opacity-0 translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 z-20 text-center ${darkMode ? "bg-slate-900/90 border-white/10 text-gray-200" : "bg-white/90 border-white/20 text-slate-700"}`}>
+                      <div className={`absolute bottom-full left-1/2 -translate-x-1/2 mb-3 w-48 p-3 rounded-xl backdrop-blur-lg md:backdrop-blur-2xl border shadow-xl opacity-0 translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 z-20 text-center ${darkMode ? "bg-slate-900/90 border-white/10 text-gray-200" : "bg-white/90 border-white/20 text-slate-700"}`}>
                         <p className="text-xs leading-relaxed font-medium">{item.desc}</p>
                         {/* Arrow */}
                         <div className={`absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 border-b border-r rotate-45 ${darkMode ? "bg-slate-900/90 border-white/10" : "bg-white/90 border-white/20"}`}></div>
@@ -764,7 +774,7 @@ export default function Home() {
               </div>
 
               {/* Column 3: Qanday o'qitamiz? */}
-              <div className={`p-4 md:p-8 rounded-2xl md:rounded-3xl backdrop-blur-2xl border transition-all duration-300 hover:shadow-2xl flex flex-col ${darkMode ? "bg-white/5 border-white/10" : "bg-white/10 border-white/20 shadow-lg"}`}>
+              <div className={`p-4 md:p-8 rounded-2xl md:rounded-3xl backdrop-blur-lg md:backdrop-blur-2xl border transition-all duration-300 hover:shadow-2xl flex flex-col ${darkMode ? "bg-white/5 border-white/10" : "bg-white/10 border-white/20 shadow-lg"}`}>
                 <h3 className={`text-xl md:text-3xl font-bold mb-4 md:mb-8 bg-gradient-to-r from-emerald-400 to-cyan-500 bg-clip-text text-transparent`}>
                   Qanday o'qitamiz?
                 </h3>
@@ -784,7 +794,7 @@ export default function Home() {
                       </span>
 
                       {/* Tooltip */}
-                      <div className={`absolute bottom-full left-1/2 -translate-x-1/2 mb-3 w-48 p-3 rounded-xl backdrop-blur-2xl border shadow-xl opacity-0 translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 z-20 text-center ${darkMode ? "bg-slate-900/90 border-white/10 text-gray-200" : "bg-white/90 border-white/20 text-slate-700"}`}>
+                      <div className={`absolute bottom-full left-1/2 -translate-x-1/2 mb-3 w-48 p-3 rounded-xl backdrop-blur-lg md:backdrop-blur-2xl border shadow-xl opacity-0 translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 z-20 text-center ${darkMode ? "bg-slate-900/90 border-white/10 text-gray-200" : "bg-white/90 border-white/20 text-slate-700"}`}>
                         <p className="text-xs leading-relaxed font-medium">{step.desc}</p>
                         {/* Arrow */}
                         <div className={`absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 border-b border-r rotate-45 ${darkMode ? "bg-slate-900/90 border-white/10" : "bg-white/90 border-white/20"}`}></div>
@@ -818,7 +828,7 @@ export default function Home() {
                 </div>
               </div>
 
-              <div className="bg-slate-900/40 backdrop-blur-2xl border border-white/10 rounded-3xl p-4 md:p-8">
+              <div className="bg-slate-900/40 backdrop-blur-lg md:backdrop-blur-2xl border border-white/10 rounded-3xl p-4 md:p-8">
 
                 {/* Top Statistics Cards - Mobile Grid v2 (2 columns) */}
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6 mb-8">
@@ -1006,7 +1016,7 @@ export default function Home() {
               </h2>
 
               <div
-                className={`max-w-3xl mx-auto p-6 md:p-12 rounded-3xl backdrop-blur-2xl border shadow-2xl relative overflow-hidden mobile-disable-3d ${darkMode ? "bg-white/5 border-white/10" : "bg-white/10 border-white/20 shadow-xl"}`}
+                className={`max-w-3xl mx-auto p-6 md:p-12 rounded-3xl backdrop-blur-lg md:backdrop-blur-2xl border shadow-2xl relative overflow-hidden mobile-disable-3d ${darkMode ? "bg-white/5 border-white/10" : "bg-white/10 border-white/20 shadow-xl"}`}
                 style={{
                   transform: `perspective(1000px) rotateX(${mousePos.y * 0.2}deg) rotateY(${mousePos.x * 0.2}deg)`,
                   transformStyle: 'preserve-3d'
@@ -1343,7 +1353,7 @@ export default function Home() {
 
               <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
                 {/* Kurs 1 - AI Engineering */}
-                <div className={`p-8 rounded-3xl backdrop-blur-2xl border transition-all duration-300 hover:scale-105 group relative overflow-hidden ${darkMode ? "bg-white/5 border-white/10 hover:border-amber-500/50" : "bg-white/10 border-white/20 hover:border-amber-500/50 shadow-xl"}`}>
+                <div className={`p-8 rounded-3xl backdrop-blur-lg md:backdrop-blur-2xl border transition-all duration-300 hover:scale-105 group relative overflow-hidden ${darkMode ? "bg-white/5 border-white/10 hover:border-amber-500/50" : "bg-white/10 border-white/20 hover:border-amber-500/50 shadow-xl"}`}>
                   <div className="absolute top-0 right-0 p-4">
                     <span className="px-4 py-1 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold border border-amber-500/50">
                       PREMIUM
@@ -1375,7 +1385,7 @@ export default function Home() {
                 </div>
 
                 {/* Kurs 2 - Data Science & AI */}
-                <div className={`p-8 rounded-3xl backdrop-blur-2xl border transition-all duration-300 hover:scale-105 group relative overflow-hidden ${darkMode ? "bg-white/5 border-white/10 hover:border-blue-500/50" : "bg-white/10 border-white/20 hover:border-blue-500/50 shadow-xl"}`}>
+                <div className={`p-8 rounded-3xl backdrop-blur-lg md:backdrop-blur-2xl border transition-all duration-300 hover:scale-105 group relative overflow-hidden ${darkMode ? "bg-white/5 border-white/10 hover:border-blue-500/50" : "bg-white/10 border-white/20 hover:border-blue-500/50 shadow-xl"}`}>
                   <div className="absolute top-0 right-0 p-4">
                     <span className="px-4 py-1 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold border border-blue-500/50">
                       BUSINESS
@@ -1525,7 +1535,7 @@ export default function Home() {
         {/* FOOTER - Faqat 'hero' holatida ko'rsatish (ixtiyoriy) */}
         {
           view === 'hero' && (
-            <footer className={`relative border-t py-16 text-center backdrop-blur-2xl ${darkMode ? "border-white/10 bg-white/5" : "border-white/20 bg-white/30"}`}>
+            <footer className={`relative border-t py-16 text-center backdrop-blur-lg md:backdrop-blur-2xl ${darkMode ? "border-white/10 bg-white/5" : "border-white/20 bg-white/30"}`}>
               <div className="absolute inset-0 bg-gradient-to-t from-cyan-500/5 to-transparent" />
               <p className="text-xl mb-4 relative z-10 font-semibold">© 2025-2030 Termiziy AI</p>
               <p className="text-gray-400 relative z-10">Sun&apos;iy Intellekt</p>
