@@ -29,40 +29,45 @@ export async function POST(request: Request) {
 
         // Validate required fields
         if (!body.name) {
-            return NextResponse.json({ error: 'Name is required' }, { status: 400 });
+            return NextResponse.json({ error: 'Ism kiritilmagan' }, { status: 400 });
         }
 
         if (!body.phoneNumber && !body.email) {
-            return NextResponse.json({ error: 'Phone or email is required' }, { status: 400 });
+            return NextResponse.json({ error: 'Telefon yoki email kiritilmagan' }, { status: 400 });
         }
 
+        // Build user data object
+        const userData = {
+            name: String(body.name),
+            email: body.email ? String(body.email) : null,
+            phoneNumber: body.phoneNumber ? String(body.phoneNumber) : null,
+            role: body.role ? String(body.role) : 'Student',
+            status: 'Active',
+            message: body.message ? String(body.message) : null
+        };
+
         const newUser = await prisma.user.create({
-            data: {
-                name: body.name,
-                email: body.email || null,
-                phoneNumber: body.phoneNumber || null,
-                role: body.role || 'Student',
-                status: 'Active',
-                message: body.message || null
-            }
+            data: userData as any
         });
+
         return NextResponse.json(newUser, { status: 201 });
-    } catch (error: any) {
+    } catch (error: unknown) {
         console.error("Error creating user:", error);
 
+        const err = error as { code?: string; meta?: { target?: string[] } };
+
         // Check for unique constraint violation
-        if (error?.code === 'P2002') {
-            const field = error?.meta?.target?.[0] || 'field';
+        if (err?.code === 'P2002') {
+            const field = err?.meta?.target?.[0] || 'field';
             return NextResponse.json({
                 error: `Bu ${field === 'email' ? 'email' : 'telefon raqam'} allaqachon ro'yxatdan o'tgan`,
-                details: 'Unique constraint violation'
             }, { status: 409 });
         }
 
         return NextResponse.json({
-            error: 'Error creating user',
+            error: 'Foydalanuvchi yaratishda xatolik',
             details: error instanceof Error ? error.message : String(error),
-            code: error?.code || 'UNKNOWN'
         }, { status: 500 });
     }
 }
+
