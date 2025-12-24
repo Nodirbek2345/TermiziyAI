@@ -1,6 +1,5 @@
 generator client {
   provider = "prisma-client-js"
-
 }
 
 datasource db {
@@ -9,18 +8,18 @@ datasource db {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
-  email     String?  @unique
-  phoneNumber String? @unique
-  password  String?
-  name      String
-  surname   String?
-  bio       String?
-  image     String?
-  role      String   @default("Student")
-  status    String   @default("Active")
-  message   String?
-  createdAt DateTime @default(now())
+  id          Int      @id @default(autoincrement())
+  email       String?  @unique
+  name        String
+  role        String   @default("Student")
+  status      String   @default("Active")
+  createdAt   DateTime @default(now())
+  bio         String?
+  image       String?
+  message     String?
+  password    String?
+  phoneNumber String?  @unique
+  surname     String?
 }
 
 model Course {
@@ -32,14 +31,13 @@ model Course {
   duration  String
   image     String?
   createdAt DateTime @default(now())
-
 }
 
 model Project {
   id          Int      @id @default(autoincrement())
   title       String
   description String
-  category    String   
+  category    String
   image       String?
   createdAt   DateTime @default(now())
 }
@@ -55,9 +53,9 @@ model Review {
 }
 
 model Graduate {
-   id        Int      @id @default(autoincrement())
-   name      String
-   company   String?
-   story     String
-   image     String?
+  id      Int     @id @default(autoincrement())
+  name    String
+  company String?
+  story   String
+  image   String?
 }
