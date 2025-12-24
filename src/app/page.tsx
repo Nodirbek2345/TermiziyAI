@@ -652,16 +652,9 @@ export default function Home() {
                   className="group relative"
                 >
                   <div
-                    className={`relative p-6 md:p-8 rounded-2xl md:rounded-3xl backdrop-blur-2xl border transition-all duration-500 active:scale-95 md:hover:scale-110 hover:shadow-2xl ${darkMode ? "bg-white/5 border-white/10 hover:bg-white/10 active:bg-white/15" : "bg-white/10 border-white/20 hover:bg-white/30 active:bg-white/40 shadow-lg"} cursor-pointer touch-manipulation`}
-                    onClick={(e) => {
-                      e.stopPropagation()
-                      e.preventDefault()
-                      setActiveDropdown(activeDropdown === i ? null : i)
-                    }}
-                    onTouchEnd={(e) => {
-                      e.stopPropagation()
-                      setActiveDropdown(activeDropdown === i ? null : i)
-                    }}
+                    className={`relative p-6 md:p-8 rounded-2xl md:rounded-3xl backdrop-blur-2xl border transition-all duration-300 active:scale-95 active:opacity-80 ${darkMode ? "bg-white/5 border-white/10 active:bg-white/15" : "bg-white/10 border-white/20 active:bg-white/40 shadow-lg"} cursor-pointer`}
+                    style={{ WebkitTapHighlightColor: 'transparent' }}
+                    onClick={() => setActiveDropdown(activeDropdown === i ? null : i)}
                   >
                     <div className={`absolute inset-0 bg-gradient-to-br ${stat.color} opacity-0 group-hover:opacity-20 rounded-2xl md:rounded-3xl transition-opacity blur-xl`} />
                     <div className="flex justify-center mb-3 md:mb-4 text-cyan-400">{stat.icon}</div>
