@@ -796,19 +796,21 @@ export default function Home() {
             </div>
 
             {/* DASHBOARD SECTION - STATIC RESULTS */}
-            <div className="max-w-7xl mx-auto mb-20 md:mb-40 px-2 md:px-4 relative z-10">
-              <h2 className="text-2xl md:text-4xl font-bold text-center mb-6 md:mb-8 text-white">
-                Yillar kesimida erishilgan natijalar
+            <div className="max-w-7xl mx-auto mb-20 md:mb-40 px-3 md:px-4 relative z-10">
+              <h2 className="text-2xl md:text-4xl font-bold text-center mb-8 md:mb-10 text-white leading-tight">
+                <span className="bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">Yillar kesimida</span>
+                <br className="md:hidden" /> erishilgan natijalar
               </h2>
 
-              {/* Year Toggle */}
-              <div className="flex justify-center mb-12">
-                <div className="bg-slate-900/50 p-1.5 rounded-xl border border-white/10 flex gap-1">
+              {/* Year Toggle - Premium Style */}
+              <div className="flex justify-center mb-10">
+                <div className="bg-slate-900/80 backdrop-blur-xl p-1.5 rounded-2xl border border-white/10 flex gap-1 shadow-2xl relative overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10 opacity-50" />
                   {[2025, 2026].map((year) => (
                     <button
                       key={year}
                       onClick={() => setActiveYear(year as 2025 | 2026)}
-                      className={`px-8 py-2.5 rounded-lg text-sm font-medium transition-all duration-300 ${activeYear === year ? "bg-blue-600 text-white shadow-lg shadow-blue-500/25" : "text-slate-400 hover:text-white hover:bg-white/5"}`}
+                      className={`relative z-10 px-8 py-3 rounded-xl text-base font-bold transition-all duration-300 ${activeYear === year ? "bg-gradient-to-r from-blue-600 to-blue-500 text-white shadow-lg shadow-blue-500/25 scale-[1.02]" : "text-slate-400 hover:text-white hover:bg-white/5"}`}
                     >
                       {year}
                     </button>
@@ -816,103 +818,99 @@ export default function Home() {
                 </div>
               </div>
 
-              <div className="bg-slate-900/40 backdrop-blur-2xl border border-white/10 rounded-3xl p-6 md:p-8">
+              <div className="bg-slate-900/40 backdrop-blur-2xl border border-white/10 rounded-3xl p-4 md:p-8">
 
-                {/* Top Statistics Cards */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                {/* Top Statistics Cards - Mobile Grid v2 (2 columns) */}
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6 mb-8">
                   {/* Card 1 */}
-                  <div className="bg-gradient-to-br from-slate-800/80 to-slate-900/80 p-5 rounded-2xl border border-white/5 relative overflow-hidden group hover:border-blue-500/50 hover:shadow-[0_0_20px_rgba(59,130,246,0.15)] transition-all duration-300">
+                  <div className="bg-gradient-to-br from-slate-800/80 to-slate-900/80 p-4 md:p-5 rounded-2xl border border-white/5 relative overflow-hidden group hover:border-blue-500/50 hover:shadow-[0_0_20px_rgba(59,130,246,0.15)] transition-all duration-300">
                     <div className="absolute inset-0 bg-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity" />
                     <div className="relative z-10">
-                      <div className="flex justify-between items-start mb-4">
-                        <span className="text-slate-400 text-sm font-medium">Ro'yxatdan o'tganlar</span>
-                        <div className="p-2 rounded-lg bg-blue-500/10 group-hover:bg-blue-500/20 transition-colors">
-                          <Users className="w-5 h-5 text-blue-400" />
+                      <div className="flex justify-between items-start mb-3">
+                        <span className="text-slate-400 text-xs md:text-sm font-medium leading-tight">Ro'yxatdan<br />o'tganlar</span>
+                        <div className="p-1.5 md:p-2 rounded-lg bg-blue-500/10 group-hover:bg-blue-500/20 transition-colors">
+                          <Users className="w-4 h-4 md:w-5 md:h-5 text-blue-400" />
                         </div>
                       </div>
                       <div className="mb-2">
-                        <span className="text-3xl font-black text-white block tracking-tight group-hover:scale-105 transition-transform origin-left">
+                        <span className="text-xl md:text-3xl font-black text-white block tracking-tight group-hover:scale-105 transition-transform origin-left">
                           {currentStats.registered.toLocaleString()}
                         </span>
-                        <span className="text-slate-500 text-xs font-medium">nafar</span>
+                        <span className="text-slate-500 text-[10px] md:text-xs font-medium">nafar</span>
                       </div>
-                      <div className="flex items-center gap-1.5 mt-2 bg-emerald-500/10 px-2 py-1 rounded-md w-fit">
-                        <TrendingUp className="w-3 h-3 text-emerald-400" />
-                        <span className="text-emerald-400 text-xs font-bold">{currentStats.growth}%</span>
-                        <span className="text-emerald-400/60 text-[10px] uppercase tracking-wide ml-1">o'sish</span>
+                      <div className="flex items-center gap-1 mt-2 bg-emerald-500/10 px-1.5 py-0.5 md:px-2 md:py-1 rounded-md w-fit">
+                        <TrendingUp className="w-2.5 h-2.5 md:w-3 md:h-3 text-emerald-400" />
+                        <span className="text-emerald-400 text-[10px] md:text-xs font-bold">{currentStats.growth}%</span>
                       </div>
                     </div>
                   </div>
 
                   {/* Card 2 */}
-                  <div className="bg-gradient-to-br from-slate-800/80 to-slate-900/80 p-5 rounded-2xl border border-white/5 relative overflow-hidden group hover:border-purple-500/50 hover:shadow-[0_0_20px_rgba(168,85,247,0.15)] transition-all duration-300">
+                  <div className="bg-gradient-to-br from-slate-800/80 to-slate-900/80 p-4 md:p-5 rounded-2xl border border-white/5 relative overflow-hidden group hover:border-purple-500/50 hover:shadow-[0_0_20px_rgba(168,85,247,0.15)] transition-all duration-300">
                     <div className="absolute inset-0 bg-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity" />
                     <div className="relative z-10">
-                      <div className="flex justify-between items-start mb-4">
-                        <span className="text-slate-400 text-sm font-medium">Bitirganlar</span>
-                        <div className="p-2 rounded-lg bg-purple-500/10 group-hover:bg-purple-500/20 transition-colors">
-                          <GraduationCap className="w-5 h-5 text-purple-400" />
+                      <div className="flex justify-between items-start mb-3">
+                        <span className="text-slate-400 text-xs md:text-sm font-medium leading-tight">Bitirganlar<br />soni</span>
+                        <div className="p-1.5 md:p-2 rounded-lg bg-purple-500/10 group-hover:bg-purple-500/20 transition-colors">
+                          <GraduationCap className="w-4 h-4 md:w-5 md:h-5 text-purple-400" />
                         </div>
                       </div>
                       <div className="mb-2">
-                        <span className="text-3xl font-black text-white block tracking-tight group-hover:scale-105 transition-transform origin-left">
+                        <span className="text-xl md:text-3xl font-black text-white block tracking-tight group-hover:scale-105 transition-transform origin-left">
                           {currentStats.graduates.toLocaleString()}
                         </span>
-                        <span className="text-slate-500 text-xs font-medium">nafar</span>
+                        <span className="text-slate-500 text-[10px] md:text-xs font-medium">nafar</span>
                       </div>
-                      <div className="flex items-center gap-1.5 mt-2 bg-emerald-500/10 px-2 py-1 rounded-md w-fit">
-                        <TrendingUp className="w-3 h-3 text-emerald-400" />
-                        <span className="text-emerald-400 text-xs font-bold">17%</span>
-                        <span className="text-emerald-400/60 text-[10px] uppercase tracking-wide ml-1">o'sish</span>
+                      <div className="flex items-center gap-1 mt-2 bg-emerald-500/10 px-1.5 py-0.5 md:px-2 md:py-1 rounded-md w-fit">
+                        <TrendingUp className="w-2.5 h-2.5 md:w-3 md:h-3 text-emerald-400" />
+                        <span className="text-emerald-400 text-[10px] md:text-xs font-bold">17%</span>
                       </div>
                     </div>
                   </div>
 
                   {/* Card 3 */}
-                  <div className="bg-gradient-to-br from-slate-800/80 to-slate-900/80 p-5 rounded-2xl border border-white/5 relative overflow-hidden group hover:border-pink-500/50 hover:shadow-[0_0_20px_rgba(236,72,153,0.15)] transition-all duration-300">
+                  <div className="bg-gradient-to-br from-slate-800/80 to-slate-900/80 p-4 md:p-5 rounded-2xl border border-white/5 relative overflow-hidden group hover:border-pink-500/50 hover:shadow-[0_0_20px_rgba(236,72,153,0.15)] transition-all duration-300">
                     <div className="absolute inset-0 bg-pink-500/5 opacity-0 group-hover:opacity-100 transition-opacity" />
                     <div className="relative z-10">
-                      <div className="flex justify-between items-start mb-4">
-                        <span className="text-slate-400 text-sm font-medium">Erkak-ayol nisbati</span>
+                      <div className="flex justify-between items-start mb-3">
+                        <span className="text-slate-400 text-xs md:text-sm font-medium leading-tight">Erkak/Ayol<br />nisbati</span>
                         <div className="flex -space-x-1">
-                          <div className="w-7 h-7 rounded-full bg-blue-500/20 border-2 border-slate-800 flex items-center justify-center text-[10px] text-blue-400 font-bold">M</div>
-                          <div className="w-7 h-7 rounded-full bg-pink-500/20 border-2 border-slate-800 flex items-center justify-center text-[10px] text-pink-400 font-bold">F</div>
+                          <div className="w-5 h-5 md:w-7 md:h-7 rounded-full bg-blue-500/20 border-2 border-slate-800 flex items-center justify-center text-[8px] md:text-[10px] text-blue-400 font-bold">M</div>
+                          <div className="w-5 h-5 md:w-7 md:h-7 rounded-full bg-pink-500/20 border-2 border-slate-800 flex items-center justify-center text-[8px] md:text-[10px] text-pink-400 font-bold">F</div>
                         </div>
                       </div>
                       <div className="mb-2">
-                        <div className="flex items-baseline gap-2 group-hover:scale-105 transition-transform origin-left">
-                          <span className="text-3xl font-black text-blue-400 tracking-tight">{currentStats.genderRatio.m}</span>
-                          <span className="text-slate-500 text-sm font-medium">ga</span>
-                          <span className="text-3xl font-black text-pink-400 tracking-tight">{currentStats.genderRatio.f}</span>
+                        <div className="flex items-baseline gap-1 md:gap-2 group-hover:scale-105 transition-transform origin-left">
+                          <span className="text-xl md:text-3xl font-black text-blue-400 tracking-tight">{currentStats.genderRatio.m}</span>
+                          <span className="text-slate-500 text-[10px] md:text-sm font-medium">:</span>
+                          <span className="text-xl md:text-3xl font-black text-pink-400 tracking-tight">{currentStats.genderRatio.f}</span>
                         </div>
-                        <span className="text-slate-500 text-xs font-medium">har 100 inson ichida</span>
+                        <span className="text-slate-500 text-[10px] md:text-xs font-medium">har 100 tadan</span>
                       </div>
                     </div>
                   </div>
 
                   {/* Card 4 */}
-                  <div className="bg-gradient-to-br from-slate-800/80 to-slate-900/80 p-5 rounded-2xl border border-white/5 relative overflow-hidden group hover:border-cyan-500/50 hover:shadow-[0_0_20px_rgba(6,182,212,0.15)] transition-all duration-300">
+                  <div className="bg-gradient-to-br from-slate-800/80 to-slate-900/80 p-4 md:p-5 rounded-2xl border border-white/5 relative overflow-hidden group hover:border-cyan-500/50 hover:shadow-[0_0_20px_rgba(6,182,212,0.15)] transition-all duration-300">
                     <div className="absolute inset-0 bg-cyan-500/5 opacity-0 group-hover:opacity-100 transition-opacity" />
                     <div className="relative z-10">
-                      <div className="flex justify-between items-start mb-4">
-                        <span className="text-slate-400 text-sm font-medium">Eng tez o'sayotgan</span>
-                        <div className="p-2 rounded-lg bg-cyan-500/10 group-hover:bg-cyan-500/20 transition-colors">
-                          <MapPin className="w-5 h-5 text-cyan-400" />
+                      <div className="flex justify-between items-start mb-3">
+                        <span className="text-slate-400 text-xs md:text-sm font-medium leading-tight">Top<br />hudud</span>
+                        <div className="p-1.5 md:p-2 rounded-lg bg-cyan-500/10 group-hover:bg-cyan-500/20 transition-colors">
+                          <MapPin className="w-4 h-4 md:w-5 md:h-5 text-cyan-400" />
                         </div>
                       </div>
                       <div className="mb-2">
-                        <span className="text-3xl font-black text-white block tracking-tight group-hover:scale-105 transition-transform origin-left">
+                        <span className="text-lg md:text-3xl font-black text-white block tracking-tight group-hover:scale-105 transition-transform origin-left truncate">
                           {currentStats.fastestRegion}
                         </span>
-                        <span className="text-slate-500 text-xs font-medium">Is almost certainly 'shahri' since Jizzax is replaced by Termiz, but let's make it conditional or just 'shahri' if it's Termiz</span>
-                        <span className="text-slate-500 text-xs font-medium">
+                        <span className="text-slate-500 text-[10px] md:text-xs font-medium">
                           {currentStats.fastestRegion === "Andijon" ? "viloyati" : "shahri"}
                         </span>
                       </div>
-                      <div className="flex items-center gap-1.5 mt-2 bg-emerald-500/10 px-2 py-1 rounded-md w-fit">
-                        <TrendingUp className="w-3 h-3 text-emerald-400" />
-                        <span className="text-emerald-400 text-xs font-bold">{currentStats.growth}%</span>
-                        <span className="text-emerald-400/60 text-[10px] uppercase tracking-wide ml-1">o'sish</span>
+                      <div className="flex items-center gap-1 mt-2 bg-emerald-500/10 px-1.5 py-0.5 md:px-2 md:py-1 rounded-md w-fit">
+                        <TrendingUp className="w-2.5 h-2.5 md:w-3 md:h-3 text-emerald-400" />
+                        <span className="text-emerald-400 text-[10px] md:text-xs font-bold">{currentStats.growth}%</span>
                       </div>
                     </div>
                   </div>
