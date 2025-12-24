@@ -13,7 +13,8 @@ import {
     Briefcase,
     MessageCircle,
     GraduationCap,
-    Image as ImageIcon
+    Image as ImageIcon,
+    BarChart3
 } from "lucide-react";
 
 interface User {
@@ -169,6 +170,7 @@ function AdminSidebarContent({ user, handleLogout }: { user: User, handleLogout:
                 <NavItem href="/admin/reviews" icon={<MessageCircle size={20} />} label="Izohlar" />
                 <NavItem href="/admin/graduates" icon={<GraduationCap size={20} />} label="Bitiruvchilar" />
                 <NavItem href="/admin/media" icon={<ImageIcon size={20} />} label="Media" />
+                <NavItem href="/admin/stats" icon={<BarChart3 size={20} />} label="Statistika" />
                 <NavItem href="/admin/settings" icon={<Settings size={20} />} label="Sozlamalar" />
             </nav>
 

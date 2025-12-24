@@ -19,6 +19,7 @@ model User {
   image     String?
   role      String   @default("Student")
   status    String   @default("Active")
+  message   String?
   createdAt DateTime @default(now())
 }
 

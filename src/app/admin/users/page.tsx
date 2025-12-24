@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Search, Edit, Trash2, MoreHorizontal, UserPlus, RefreshCcw } from "lucide-react";
 
 interface User {
@@ -11,6 +11,23 @@ interface User {
     role: string;
     status: string;
     date: string;
+    message?: string | null;
+}
+
+// Custom hook for polling
+function useInterval(callback: () => void, delay: number | null) {
+    const savedCallback = useRef(callback);
+
+    useEffect(() => {
+        savedCallback.current = callback;
+    }, [callback]);
+
+    useEffect(() => {
+        if (delay !== null) {
+            const id = setInterval(() => savedCallback.current(), delay);
+            return () => clearInterval(id);
+        }
+    }, [delay]);
 }
 
 export default function UsersPage() {
@@ -88,8 +105,8 @@ export default function UsersPage() {
         }
     };
 
-    const fetchUsers = async () => {
-        setLoading(true);
+    const fetchUsers = async (showLoading = true) => {
+        if (showLoading) setLoading(true);
         try {
             const res = await fetch('/api/users');
             const data = await res.json();
@@ -109,6 +126,11 @@ export default function UsersPage() {
         fetchUsers();
     }, []);
 
+    // Poll every 5 seconds
+    useInterval(() => {
+        fetchUsers(false);
+    }, 5000);
+
     return (
         <div className="space-y-6">
             {/* Header */}
@@ -121,7 +143,7 @@ export default function UsersPage() {
                 </div>
                 <div className="flex gap-3">
                     <button
-                        onClick={fetchUsers}
+                        onClick={() => fetchUsers(true)}
                         disabled={loading}
                         className="bg-white/5 hover:bg-white/10 text-white p-2 rounded-lg transition-colors disabled:opacity-50"
                     >
@@ -172,9 +194,9 @@ export default function UsersPage() {
                             <thead>
                                 <tr className="border-b border-white/5 bg-white/5">
                                     <th className="p-4 text-xs font-medium text-white/40 uppercase tracking-wider">Foydalanuvchi</th>
-                                    <th className="p-4 text-xs font-medium text-white/40 uppercase tracking-wider">Rol</th>
-                                    <th className="p-4 text-xs font-medium text-white/40 uppercase tracking-wider">Status</th>
-                                    <th className="p-4 text-xs font-medium text-white/40 uppercase tracking-wider">Sana</th>
+                                    <th className="p-4 text-xs font-medium text-white/40 uppercase tracking-wider hidden md:table-cell">Rol</th>
+                                    <th className="p-4 text-xs font-medium text-white/40 uppercase tracking-wider hidden md:table-cell">Status</th>
+                                    <th className="p-4 text-xs font-medium text-white/40 uppercase tracking-wider hidden lg:table-cell">Sana</th>
                                     <th className="p-4 text-xs font-medium text-white/40 uppercase tracking-wider text-right">Amallar</th>
                                 </tr>
                             </thead>
@@ -183,20 +205,30 @@ export default function UsersPage() {
                                     <tr key={user.id} className="group hover:bg-white/5 transition-colors">
                                         <td className="p-4">
                                             <div className="flex items-center gap-3">
-                                                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-purple-500/20 to-blue-500/20 flex items-center justify-center text-sm font-bold text-white uppercase border border-white/10">
+                                                <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-br from-purple-500/20 to-blue-500/20 flex items-center justify-center text-xs md:text-sm font-bold text-white uppercase border border-white/10 shrink-0">
                                                     {user.name.charAt(0)}
                                                 </div>
-                                                <div>
-                                                    <div className="font-medium text-white">{user.name}</div>
-                                                    <div className="text-xs text-white/40">
-                                                        {user.email && user.phoneNumber
-                                                            ? `${user.email} | ${user.phoneNumber}`
-                                                            : (user.email || user.phoneNumber || 'Bog\'lanish yo\'q')}
+                                                <div className="min-w-0">
+                                                    <div className="font-medium text-white truncate">{user.name}</div>
+                                                    <div className="text-xs text-white/40 truncate max-w-[150px] md:max-w-none">
+                                                        {user.email || user.phoneNumber || 'Bog\'lanish yo\'q'}
+                                                    </div>
+                                                    {/* Mobile Role/Status */}
+                                                    <div className="flex md:hidden items-center gap-2 mt-1">
+                                                        <span className={`text-[10px] px-1.5 py-0.5 rounded ${user.role === 'Admin' ? 'bg-purple-500/10 text-purple-400' : 'bg-blue-500/10 text-blue-400'}`}>{user.role}</span>
+                                                        <span className={`w-1.5 h-1.5 rounded-full ${user.status === 'Active' ? 'bg-emerald-400' : 'bg-neutral-400'}`} />
                                                     </div>
                                                 </div>
                                             </div>
+                                            {/* Show Message on Mobile if exists */}
+                                            {user.message && (
+                                                <div className="mt-2 text-xs text-white/60 bg-white/5 p-2 rounded-lg md:hidden">
+                                                    <span className="text-white/40 mr-1">Xabar:</span>
+                                                    {user.message}
+                                                </div>
+                                            )}
                                         </td>
-                                        <td className="p-4">
+                                        <td className="p-4 hidden md:table-cell">
                                             <span className={`inline-flex items-center px-2 py-1 rounded-md text-xs font-medium ring-1 ring-inset ${user.role === 'Admin' || user.role === 'Teacher'
                                                 ? 'bg-purple-400/10 text-purple-400 ring-purple-400/20'
                                                 : 'bg-blue-400/10 text-blue-400 ring-blue-400/20'
@@ -204,7 +236,7 @@ export default function UsersPage() {
                                                 {user.role}
                                             </span>
                                         </td>
-                                        <td className="p-4">
+                                        <td className="p-4 hidden md:table-cell">
                                             <span className={`inline-flex items-center gap-1.5 px-2 py-1 rounded-md text-xs font-medium ${user.status === 'Active'
                                                 ? 'text-emerald-400'
                                                 : 'text-neutral-400'
@@ -214,8 +246,13 @@ export default function UsersPage() {
                                                 {user.status}
                                             </span>
                                         </td>
-                                        <td className="p-4 text-sm text-white/60">
+                                        <td className="p-4 text-sm text-white/60 hidden lg:table-cell">
                                             {user.date}
+                                            {user.message && (
+                                                <div className="mt-1 text-xs text-white/40 truncate max-w-[200px]" title={user.message}>
+                                                    Example: {user.message}
+                                                </div>
+                                            )}
                                         </td>
                                         <td className="p-4 text-right">
                                             <div className="flex items-center justify-end gap-2 text-white opacity-100">

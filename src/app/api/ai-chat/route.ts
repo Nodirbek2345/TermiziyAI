@@ -164,7 +164,28 @@ export async function POST(request: Request) {
 
         let lastError = null;
 
-        // 1. Try GitHub Models (PRIORITY 1)
+        // 1. Try OpenAI (PRIORITY 1)
+        if (OPENAI_API_KEY) {
+            for (const model of OPENAI_MODELS) {
+                try {
+                    const aiResponse = await callOpenAICompatible(
+                        message, history, OPENAI_API_KEY, model, "https://api.openai.com/v1/chat/completions"
+                    );
+                    if (aiResponse && aiResponse.content) {
+                        return NextResponse.json({
+                            success: true,
+                            response: aiResponse.content,
+                            debug: { provider: 'OpenAI', model, limits: aiResponse.limits }
+                        });
+                    }
+                } catch (error) {
+                    console.warn(`OpenAI Failed: Model=${model}`, error);
+                    lastError = error;
+                }
+            }
+        }
+
+        // 2. Try GitHub Models (PRIORITY 2)
         if (GITHUB_TOKEN) {
             for (const model of GITHUB_MODELS) {
                 try {
@@ -185,7 +206,7 @@ export async function POST(request: Request) {
             }
         }
 
-        // 2. Try Gemini Models (Fallback)
+        // 3. Try Gemini Models (Fallback)
         for (const model of GEMINI_MODELS) {
             for (const apiKey of GEMINI_API_KEYS) {
                 try {
@@ -204,26 +225,8 @@ export async function POST(request: Request) {
             }
         }
 
-        // 3. Try OpenAI (Fallback)
-        if (OPENAI_API_KEY) {
-            for (const model of OPENAI_MODELS) {
-                try {
-                    const aiResponse = await callOpenAICompatible(
-                        message, history, OPENAI_API_KEY, model, "https://api.openai.com/v1/chat/completions"
-                    );
-                    if (aiResponse && aiResponse.content) {
-                        return NextResponse.json({
-                            success: true,
-                            response: aiResponse.content,
-                            debug: { provider: 'OpenAI', model, limits: aiResponse.limits }
-                        });
-                    }
-                } catch (error) {
-                    console.warn(`OpenAI Failed: Model=${model}`, error);
-                    lastError = error;
-                }
-            }
-        }
+        // 4. Try OpenAI (Already tried as Priority 1, but keeping structure if needed for fallback logic later, currently empty here as it's moved up)
+        // OpenAI logic moved to top.
 
         // If all failed
         const err = lastError as any;

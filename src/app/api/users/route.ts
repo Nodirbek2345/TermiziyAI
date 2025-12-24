@@ -32,7 +32,8 @@ export async function POST(request: Request) {
                 email: body.email || null,
                 phoneNumber: body.phoneNumber || null,
                 role: body.role || 'Student',
-                status: 'Active'
+                status: 'Active',
+                message: body.message || null
             }
         });
         return NextResponse.json(newUser, { status: 201 });

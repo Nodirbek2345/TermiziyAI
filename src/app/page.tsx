@@ -169,8 +169,7 @@ export default function Home() {
     }
   }
 
-  // Dashboard State
-  const [activeYear, setActiveYear] = useState<2025 | 2026>(2026)
+  // Dashboard State (Moved to line 184)
 
   // Dynamic Data State
   const [projects, setProjects] = useState<any[]>([])
@@ -181,6 +180,52 @@ export default function Home() {
   const [modalTitle, setModalTitle] = useState("")
   const [modalContent, setModalContent] = useState<any[]>([])
   const [modalType, setModalType] = useState<"project" | "review" | "graduate" | "text">("project")
+  const [activeYear, setActiveYear] = useState<2025 | 2026>(2025);
+
+  // Dashboard Data
+  const statsData = {
+    2025: {
+      registered: 751318,
+      graduates: 439860,
+      genderRatio: { m: 51, f: 49 },
+      fastestRegion: "Andijon",
+      growth: 25,
+      regionRanking: [
+        { name: "Samarqand viloyati", count: 181129, color: "from-blue-600 to-blue-500" },
+        { name: "Qashqadaryo viloyati", count: 161661, color: "from-blue-600 to-blue-500" },
+        { name: "Surxondaryo viloyati", count: 155460, color: "from-blue-500 to-cyan-500" },
+        { name: "Toshkent viloyati", count: 141165, color: "from-blue-500 to-cyan-500" },
+        { name: "Farg'ona viloyati", count: 128254, color: "from-blue-500 to-cyan-500" },
+        { name: "Toshkent shahri", count: 215400, color: "from-indigo-600 to-purple-600" },
+      ],
+      courseRanking: [
+        { name: "O'zingiz Kod Yozing: Dasturlashga Kirish", count: 234170, color: "from-emerald-600 to-emerald-400" },
+        { name: "Generativ Sun'iy Intellektga Kirish", count: 210550, color: "from-emerald-600 to-teal-400" },
+        { name: "AI Engineering Masterclass", count: 100421, color: "from-amber-600 to-orange-400" },
+        { name: "Google Cloud Asoslari", count: 90450, color: "from-blue-600 to-cyan-400" },
+        { name: "Data Science & AI for Business", count: 85420, color: "from-cyan-600 to-blue-400" },
+      ]
+    },
+    2026: {
+      registered: 1205100,
+      graduates: 980200,
+      genderRatio: { m: 48, f: 52 },
+      fastestRegion: "Termiz",
+      growth: 42,
+      regionRanking: [
+        { name: "Toshkent shahri", count: 320000, color: "from-indigo-600 to-purple-600" },
+        { name: "Navoiy viloyati", count: 195000, color: "from-blue-600 to-blue-500" },
+        { name: "Buxoro viloyati", count: 175000, color: "from-blue-600 to-blue-500" },
+        { name: "Termiz shahri", count: 155000, color: "from-blue-500 to-cyan-500" },
+      ],
+      courseRanking: [
+        { name: "AI Engineering Masterclass", count: 310000, color: "from-amber-600 to-orange-400" },
+        { name: "Data Science & AI for Business", count: 280000, color: "from-cyan-600 to-blue-400" },
+      ]
+    }
+  };
+
+  const currentStats = statsData[activeYear];
 
   useEffect(() => {
     fetch('/api/projects').then(res => res.json()).then(data => Array.isArray(data) && setProjects(data)).catch(console.error)
@@ -188,7 +233,7 @@ export default function Home() {
     fetch('/api/graduates').then(res => res.json()).then(data => Array.isArray(data) && setGraduates(data)).catch(console.error)
   }, [])
 
-  const openInfoModal = (title: string, type: "project" | "review" | "graduate" | "text", filter?: string) => {
+  const openInfoModal = (title: string, type: "project" | "review" | "graduate" | "text", filter?: string, text?: string) => {
     setModalTitle(title)
     setModalType(type)
     setModalOpen(true)
@@ -199,6 +244,8 @@ export default function Home() {
       setModalContent(reviews)
     } else if (type === 'graduate') {
       setModalContent(graduates)
+    } else if (type === 'text' && text) {
+      setModalContent([{ text }])
     } else {
       setModalContent([])
     }
@@ -370,7 +417,8 @@ export default function Home() {
           email: email || null,
           phoneNumber: phone,
           role: 'Student',
-          status: 'Active'
+          status: 'Active',
+          message: message || null
         })
       })
 
@@ -482,22 +530,22 @@ export default function Home() {
 
         {/* HERO Section with 3D effect */}
         {view === 'hero' && (
-          <section className="container mx-auto px-6 pt-48 pb-40 text-center relative z-10">
+          <section className="container mx-auto px-6 pt-24 pb-12 md:pt-48 md:pb-40 text-center relative z-10">
             <div
-              className="inline-flex items-center gap-3 mb-10 px-8 py-4 bg-gradient-to-r from-cyan-500/10 to-purple-500/10 rounded-full border border-cyan-500/20 backdrop-blur-xl"
+              className="inline-flex items-center gap-2 md:gap-3 mb-6 md:mb-10 px-4 md:px-8 py-2 md:py-4 bg-gradient-to-r from-cyan-500/10 to-purple-500/10 rounded-full border border-cyan-500/20 backdrop-blur-xl"
               style={{
                 transform: `translateY(${scrollY * 0.1}px)`,
                 boxShadow: '0 0 50px rgba(6, 182, 212, 0.2)'
               }}
             >
-              <Sparkles className="w-6 h-6 text-cyan-400 animate-pulse" />
-              <span className="text-xl font-semibold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
+              <Sparkles className="w-4 h-4 md:w-6 md:h-6 text-cyan-400 animate-pulse" />
+              <span className="text-sm md:text-xl font-semibold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
                 AIni biz bilan o&apos;rganing
               </span>
             </div>
 
             <h1
-              className="text-5xl sm:text-7xl md:text-[12rem] font-black mb-10 relative"
+              className="text-3xl sm:text-5xl md:text-7xl lg:text-[9rem] font-black mb-6 md:mb-10 relative"
               style={{
                 transform: `
                   translateY(${scrollY * 0.05}px) 
@@ -520,7 +568,7 @@ export default function Home() {
               </span>
             </h1>
 
-            <p className={`text-xl md:text-4xl mb-16 max-w-5xl mx-auto font-light leading-relaxed ${darkMode ? "text-gray-300" : "text-slate-600"}`}>
+            <p className={`text-base md:text-4xl mb-8 md:mb-16 max-w-5xl mx-auto font-light leading-relaxed ${darkMode ? "text-gray-300" : "text-slate-600"}`}>
               <span className="text-cyan-400 font-semibold">Sun&apos;iy intellekt</span> •{' '}
               <span className="text-purple-400 font-semibold">ChatGPT</span> •{' '}
               <span className="text-pink-400 font-semibold">Midjourney</span> •{' '}
@@ -533,7 +581,7 @@ export default function Home() {
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
               <button
                 onClick={scrollToContact}
-                className="group relative text-xl md:text-2xl px-14 py-8 rounded-2xl font-bold overflow-hidden hover:scale-105 transition-all duration-300"
+                className="group relative text-lg md:text-2xl px-8 py-4 md:px-14 md:py-8 rounded-2xl font-bold overflow-hidden hover:scale-105 transition-all duration-300"
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 animate-gradient-x" />
                 <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 blur-xl opacity-50 group-hover:opacity-75 transition-opacity" />
@@ -544,14 +592,14 @@ export default function Home() {
               </button>
               <button
                 onClick={() => handleViewChange('legal')}
-                className="text-xl md:text-2xl px-14 py-8 rounded-2xl border-2 border-cyan-500/30 hover:bg-cyan-500/10 backdrop-blur-xl transition-all font-bold hover:scale-105 hover:border-cyan-500/50 hover:shadow-[0_0_30px_rgba(6,182,212,0.3)]"
+                className="text-lg md:text-2xl px-8 py-4 md:px-14 md:py-8 rounded-2xl border-2 border-cyan-500/30 hover:bg-cyan-500/10 backdrop-blur-xl transition-all font-bold hover:scale-105 hover:border-cyan-500/50 hover:shadow-[0_0_30px_rgba(6,182,212,0.3)]"
               >
                 Huquqiy IT
               </button>
             </div>
 
             {/* 3D Stats Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto mt-24 mb-60">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto mt-12 md:mt-24 mb-20 md:mb-60">
               {[
                 {
                   icon: <Users className="w-10 h-10" />,
@@ -582,8 +630,8 @@ export default function Home() {
                   color: "from-purple-500 to-pink-500",
                   items: [
                     { label: "AI kurslar", subLabel: "Professional ta'lim", icon: "🎓", onClick: () => handleViewChange('courses') },
-                    { label: "AI kutubxona", subLabel: "Resurslar to'plami", icon: "📚", onClick: () => alert('AI kutubxona tez orada!') },
-                    { label: "Foydali AI", subLabel: "AI vositalar", icon: "⚡", onClick: () => alert('Foydali AI vositalari tez orada!') }
+                    { label: "AI kutubxona", subLabel: "Resurslar to'plami", icon: "📚", onClick: () => openInfoModal('AI kutubxona', 'text', undefined, 'Sun\'iy intellekt bo\'yicha eng so\'nggi kitoblar va qo\'llanmalar tez orada shu yerda bo\'ladi.') },
+                    { label: "Foydali AI", subLabel: "AI vositalar", icon: "⚡", onClick: () => openInfoModal('Foydali AI', 'text', undefined, 'Ishingizni osonlashtiruvchi eng sara AI vositalar ro\'yxati shakllantirilmoqda.') }
                   ]
                 },
                 {
@@ -592,9 +640,9 @@ export default function Home() {
                   label: "Batafsil", // O'zgartirildi
                   color: "from-emerald-500 to-cyan-500",
                   items: [
-                    { label: "100% amaliyot", subLabel: "Real loyihalar", icon: "✅", onClick: () => alert("Bizning barcha kurslarimiz real keyslar va amaliyotga asoslangan.") },
-                    { label: "Ishga tayyor bilim", subLabel: "Karyera", icon: "🎯", onClick: () => alert("Bitiruvchilarimiz ishga joylashishda ko'mak oladilar.") },
-                    { label: "Mentor yordami", subLabel: "24/7 qo'llab-quvvatlash", icon: "🧠", onClick: () => alert("Sizga shaxsiy mentor biriktiriladi va savollaringizga javob beradi.") }
+                    { label: "100% amaliyot", subLabel: "Real loyihalar", icon: "✅", onClick: () => openInfoModal('100% Amaliyot', 'text', undefined, "Bizning barcha kurslarimiz real keyslar va amaliyotga asoslangan. Siz shunchaki nazariyani emas, balki haqiqiy loyihalarni qanday qilishni o'rganasiz.") },
+                    { label: "Ishga tayyor bilim", subLabel: "Karyera", icon: "🎯", onClick: () => openInfoModal('Ishga tayyor', 'text', undefined, "Bitiruvchilarimiz ishga joylashishda ko'mak oladilar. Biz eng yaxshi talabalarni hamkor kompaniyalarga tavsiya qilamiz.") },
+                    { label: "Mentor yordami", subLabel: "24/7 qo'llab-quvvatlash", icon: "🧠", onClick: () => openInfoModal('Mentor yordami', 'text', undefined, "Sizga shaxsiy mentor biriktiriladi. O'qish davomida yuzaga kelgan har qanday savollaringizga javob olishingiz mumkin.") }
                   ]
                 }
               ].map((stat, i) => (
@@ -602,26 +650,22 @@ export default function Home() {
                   key={i}
                   ref={(el) => { dropdownRefs.current[i] = el }}
                   className="group relative"
-                  style={{
-                    transform: `
-                      perspective(1000px) 
-                      rotateX(${mousePos.y * 0.5}deg) 
-                      rotateY(${mousePos.x * 0.5}deg) 
-                      translateZ(${i * 20}px)
-                    `,
-                    transformStyle: 'preserve-3d'
-                  }}
                 >
                   <div
-                    className={`relative p-8 rounded-3xl backdrop-blur-2xl border transition-all duration-500 hover:scale-110 hover:shadow-2xl ${darkMode ? "bg-white/5 border-white/10 hover:bg-white/10" : "bg-white/10 border-white/20 hover:bg-white/30 shadow-lg"} cursor-pointer`}
+                    className={`relative p-6 md:p-8 rounded-2xl md:rounded-3xl backdrop-blur-2xl border transition-all duration-500 active:scale-95 md:hover:scale-110 hover:shadow-2xl ${darkMode ? "bg-white/5 border-white/10 hover:bg-white/10 active:bg-white/15" : "bg-white/10 border-white/20 hover:bg-white/30 active:bg-white/40 shadow-lg"} cursor-pointer touch-manipulation`}
                     onClick={(e) => {
+                      e.stopPropagation()
+                      e.preventDefault()
+                      setActiveDropdown(activeDropdown === i ? null : i)
+                    }}
+                    onTouchEnd={(e) => {
                       e.stopPropagation()
                       setActiveDropdown(activeDropdown === i ? null : i)
                     }}
                   >
-                    <div className={`absolute inset-0 bg-gradient-to-br ${stat.color} opacity-0 group-hover:opacity-20 rounded-3xl transition-opacity blur-xl`} />
-                    <div className="flex justify-center mb-4 text-cyan-400">{stat.icon}</div>
-                    <div className={`text-3xl font-black bg-gradient-to-r ${stat.color} bg-clip-text text-transparent mb-2 whitespace-nowrap`}>
+                    <div className={`absolute inset-0 bg-gradient-to-br ${stat.color} opacity-0 group-hover:opacity-20 rounded-2xl md:rounded-3xl transition-opacity blur-xl`} />
+                    <div className="flex justify-center mb-3 md:mb-4 text-cyan-400">{stat.icon}</div>
+                    <div className={`text-2xl md:text-3xl font-black bg-gradient-to-r ${stat.color} bg-clip-text text-transparent mb-2 whitespace-nowrap text-center`}>
                       {stat.number}
                     </div>
                     <div className={`text-sm font-semibold ${darkMode ? "text-gray-400" : "text-slate-600"}`}>{stat.label}</div>
@@ -629,7 +673,7 @@ export default function Home() {
 
                   {/* Dropdown Menu */}
                   {activeDropdown === i && (
-                    <div className="absolute top-full mt-3 left-1/2 -translate-x-1/2 w-64 rounded-2xl bg-slate-900/95 backdrop-blur-2xl border border-white/10 shadow-2xl overflow-hidden animate-slideDown z-50">
+                    <div className="absolute top-full mt-3 left-0 right-0 md:left-1/2 md:right-auto md:-translate-x-1/2 w-auto md:w-64 mx-2 md:mx-0 rounded-2xl bg-slate-900/95 backdrop-blur-2xl border border-white/10 shadow-2xl overflow-hidden animate-slideDown z-50">
                       <div className="p-2">
                         {stat.items.map((item, idx) => (
                           <button
@@ -664,11 +708,11 @@ export default function Home() {
             </div>
 
             {/* New Info Grid Section */}
-            <div className={`grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto mb-40 px-4 relative z-10`}>
+            <div className={`grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8 max-w-6xl mx-auto mb-20 md:mb-40 px-2 md:px-4 relative z-10`}>
 
               {/* Column 1: Kimlar uchun? */}
-              <div className={`p-8 rounded-3xl backdrop-blur-2xl border transition-all duration-300 hover:shadow-2xl ${darkMode ? "bg-white/5 border-white/10" : "bg-white/10 border-white/20 shadow-lg"}`}>
-                <h3 className={`text-3xl font-bold mb-8 bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent`}>
+              <div className={`p-4 md:p-8 rounded-2xl md:rounded-3xl backdrop-blur-2xl border transition-all duration-300 hover:shadow-2xl ${darkMode ? "bg-white/5 border-white/10" : "bg-white/10 border-white/20 shadow-lg"}`}>
+                <h3 className={`text-xl md:text-3xl font-bold mb-4 md:mb-8 bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent`}>
                   Kimlar uchun?
                 </h3>
                 <div className="flex flex-wrap gap-4">
@@ -697,8 +741,8 @@ export default function Home() {
               </div>
 
               {/* Column 2: Biz nimani o'rgatamiz? */}
-              <div className={`p-8 rounded-3xl backdrop-blur-2xl border transition-all duration-300 hover:shadow-2xl flex flex-col ${darkMode ? "bg-white/5 border-white/10" : "bg-white/10 border-white/20 shadow-lg"}`}>
-                <h3 className={`text-3xl font-bold mb-8 bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent`}>
+              <div className={`p-4 md:p-8 rounded-2xl md:rounded-3xl backdrop-blur-2xl border transition-all duration-300 hover:shadow-2xl flex flex-col ${darkMode ? "bg-white/5 border-white/10" : "bg-white/10 border-white/20 shadow-lg"}`}>
+                <h3 className={`text-xl md:text-3xl font-bold mb-4 md:mb-8 bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent`}>
                   Biz nimani o'rgatamiz?
                 </h3>
                 <div className="flex flex-wrap gap-4">
@@ -727,8 +771,8 @@ export default function Home() {
               </div>
 
               {/* Column 3: Qanday o'qitamiz? */}
-              <div className={`p-8 rounded-3xl backdrop-blur-2xl border transition-all duration-300 hover:shadow-2xl flex flex-col ${darkMode ? "bg-white/5 border-white/10" : "bg-white/10 border-white/20 shadow-lg"}`}>
-                <h3 className={`text-3xl font-bold mb-8 bg-gradient-to-r from-emerald-400 to-cyan-500 bg-clip-text text-transparent`}>
+              <div className={`p-4 md:p-8 rounded-2xl md:rounded-3xl backdrop-blur-2xl border transition-all duration-300 hover:shadow-2xl flex flex-col ${darkMode ? "bg-white/5 border-white/10" : "bg-white/10 border-white/20 shadow-lg"}`}>
+                <h3 className={`text-xl md:text-3xl font-bold mb-4 md:mb-8 bg-gradient-to-r from-emerald-400 to-cyan-500 bg-clip-text text-transparent`}>
                   Qanday o'qitamiz?
                 </h3>
                 <div className="flex flex-wrap gap-4">
@@ -759,8 +803,8 @@ export default function Home() {
             </div>
 
             {/* DASHBOARD SECTION - STATIC RESULTS */}
-            <div className="max-w-7xl mx-auto mb-40 px-4 relative z-10">
-              <h2 className="text-3xl md:text-4xl font-bold text-center mb-8 text-white">
+            <div className="max-w-7xl mx-auto mb-20 md:mb-40 px-2 md:px-4 relative z-10">
+              <h2 className="text-2xl md:text-4xl font-bold text-center mb-6 md:mb-8 text-white">
                 Yillar kesimida erishilgan natijalar
               </h2>
 
@@ -794,12 +838,14 @@ export default function Home() {
                         </div>
                       </div>
                       <div className="mb-2">
-                        <span className="text-3xl font-black text-white block tracking-tight group-hover:scale-105 transition-transform origin-left">751 318</span>
+                        <span className="text-3xl font-black text-white block tracking-tight group-hover:scale-105 transition-transform origin-left">
+                          {currentStats.registered.toLocaleString()}
+                        </span>
                         <span className="text-slate-500 text-xs font-medium">nafar</span>
                       </div>
                       <div className="flex items-center gap-1.5 mt-2 bg-emerald-500/10 px-2 py-1 rounded-md w-fit">
                         <TrendingUp className="w-3 h-3 text-emerald-400" />
-                        <span className="text-emerald-400 text-xs font-bold">14%</span>
+                        <span className="text-emerald-400 text-xs font-bold">{currentStats.growth}%</span>
                         <span className="text-emerald-400/60 text-[10px] uppercase tracking-wide ml-1">o'sish</span>
                       </div>
                     </div>
@@ -816,7 +862,9 @@ export default function Home() {
                         </div>
                       </div>
                       <div className="mb-2">
-                        <span className="text-3xl font-black text-white block tracking-tight group-hover:scale-105 transition-transform origin-left">439 860</span>
+                        <span className="text-3xl font-black text-white block tracking-tight group-hover:scale-105 transition-transform origin-left">
+                          {currentStats.graduates.toLocaleString()}
+                        </span>
                         <span className="text-slate-500 text-xs font-medium">nafar</span>
                       </div>
                       <div className="flex items-center gap-1.5 mt-2 bg-emerald-500/10 px-2 py-1 rounded-md w-fit">
@@ -840,9 +888,9 @@ export default function Home() {
                       </div>
                       <div className="mb-2">
                         <div className="flex items-baseline gap-2 group-hover:scale-105 transition-transform origin-left">
-                          <span className="text-3xl font-black text-blue-400 tracking-tight">51</span>
+                          <span className="text-3xl font-black text-blue-400 tracking-tight">{currentStats.genderRatio.m}</span>
                           <span className="text-slate-500 text-sm font-medium">ga</span>
-                          <span className="text-3xl font-black text-pink-400 tracking-tight">49</span>
+                          <span className="text-3xl font-black text-pink-400 tracking-tight">{currentStats.genderRatio.f}</span>
                         </div>
                         <span className="text-slate-500 text-xs font-medium">har 100 inson ichida</span>
                       </div>
@@ -860,12 +908,17 @@ export default function Home() {
                         </div>
                       </div>
                       <div className="mb-2">
-                        <span className="text-3xl font-black text-white block tracking-tight group-hover:scale-105 transition-transform origin-left">Andijon</span>
-                        <span className="text-slate-500 text-xs font-medium">viloyati</span>
+                        <span className="text-3xl font-black text-white block tracking-tight group-hover:scale-105 transition-transform origin-left">
+                          {currentStats.fastestRegion}
+                        </span>
+                        <span className="text-slate-500 text-xs font-medium">Is almost certainly 'shahri' since Jizzax is replaced by Termiz, but let's make it conditional or just 'shahri' if it's Termiz</span>
+                        <span className="text-slate-500 text-xs font-medium">
+                          {currentStats.fastestRegion === "Andijon" ? "viloyati" : "shahri"}
+                        </span>
                       </div>
                       <div className="flex items-center gap-1.5 mt-2 bg-emerald-500/10 px-2 py-1 rounded-md w-fit">
                         <TrendingUp className="w-3 h-3 text-emerald-400" />
-                        <span className="text-emerald-400 text-xs font-bold">25%</span>
+                        <span className="text-emerald-400 text-xs font-bold">{currentStats.growth}%</span>
                         <span className="text-emerald-400/60 text-[10px] uppercase tracking-wide ml-1">o'sish</span>
                       </div>
                     </div>
@@ -888,26 +941,11 @@ export default function Home() {
                     </div>
 
                     <div className="space-y-4 max-h-[400px] overflow-y-auto pr-2 custom-scrollbar">
-                      {[
-                        { name: "Samarqand viloyati", count: 181129, color: "from-blue-600 to-blue-500" },
-                        { name: "Qashqadaryo viloyati", count: 161661, color: "from-blue-600 to-blue-500" },
-                        { name: "Surxondaryo viloyati", count: 155460, color: "from-blue-500 to-cyan-500" },
-                        { name: "Toshkent viloyati", count: 141165, color: "from-blue-500 to-cyan-500" },
-                        { name: "Farg'ona viloyati", count: 128254, color: "from-blue-500 to-cyan-500" },
-                        { name: "Andijon viloyati", count: 119555, color: "from-cyan-500 to-teal-500" },
-                        { name: "Namangan viloyati", count: 108200, color: "from-cyan-500 to-teal-500" },
-                        { name: "Buxoro viloyati", count: 98450, color: "from-cyan-500 to-teal-500" },
-                        { name: "Xorazm viloyati", count: 85100, color: "from-teal-500 to-emerald-500" },
-                        { name: "Navoiy viloyati", count: 62300, color: "from-teal-500 to-emerald-500" },
-                        { name: "Jizzax viloyati", count: 54200, color: "from-emerald-500 to-green-500" },
-                        { name: "Qoraqalpog'iston Res.", count: 48500, color: "from-emerald-500 to-green-500" },
-                        { name: "Sirdaryo viloyati", count: 32100, color: "from-green-500 to-lime-500" },
-                        { name: "Toshkent shahri", count: 215400, color: "from-indigo-600 to-purple-600" },
-                      ].sort((a, b) => b.count - a.count).map((region, i) => (
+                      {currentStats.regionRanking.map((region, i) => (
                         <div key={i} className="relative h-14 rounded-xl overflow-hidden group bg-slate-900/50 border border-white/5">
                           <div
                             className={`absolute inset-y-0 left-0 bg-gradient-to-r ${region.color} transition-all duration-1000 group-hover:brightness-110 opacity-80`}
-                            style={{ width: `${(region.count / 220000) * 100}%` }}
+                            style={{ width: `${(region.count / 350000) * 100}%` }}
                           />
                           <div className="absolute inset-0 flex items-center justify-between px-6 z-10">
                             <div className="flex items-center gap-3">
@@ -938,17 +976,11 @@ export default function Home() {
                     </div>
 
                     <div className="space-y-4">
-                      {[
-                        { name: "O'zingiz Kod Yozing: Dasturlashga Kirish", count: 234170, color: "from-emerald-600 to-emerald-400" },
-                        { name: "Generativ Sun'iy Intellektga Kirish", count: 210550, color: "from-emerald-600 to-teal-400" },
-                        { name: "AI Engineering Masterclass", count: 100421, color: "from-amber-600 to-orange-400" },
-                        { name: "Google Cloud Asoslari", count: 90450, color: "from-blue-600 to-cyan-400" },
-                        { name: "Data Science & AI for Business", count: 85420, color: "from-cyan-600 to-blue-400" },
-                      ].map((course, i) => (
+                      {currentStats.courseRanking.map((course, i) => (
                         <div key={i} className="relative h-16 rounded-xl overflow-hidden group bg-slate-900/50 border border-white/5">
                           <div
                             className={`absolute inset-y-0 left-0 bg-gradient-to-r ${course.color} transition-all duration-1000 group-hover:brightness-110 opacity-80`}
-                            style={{ width: `${(course.count / 250000) * 100}%` }}
+                            style={{ width: `${(course.count / 350000) * 100}%` }}
                           />
                           <div className="absolute inset-0 flex items-center justify-between px-6 z-10">
                             <div className="flex items-center gap-3 overflow-hidden">
@@ -977,13 +1009,13 @@ export default function Home() {
         {/* CONTACT Section - Hero qismida */}
         {
           view === 'contact' && (
-            <section ref={contactRef} className="container mx-auto px-6 py-40 relative z-10">
-              <h2 className="text-7xl md:text-8xl font-black text-center mb-24 bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent leading-tight pb-4">
+            <section ref={contactRef} className="container mx-auto px-6 py-20 md:py-40 relative z-10">
+              <h2 className="text-4xl md:text-8xl font-black text-center mb-12 md:mb-24 bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent leading-tight pb-4">
                 Ro&apos;yhatdan o&apos;tish
               </h2>
 
               <div
-                className={`max-w-3xl mx-auto p-12 rounded-3xl backdrop-blur-2xl border shadow-2xl relative overflow-hidden ${darkMode ? "bg-white/5 border-white/10" : "bg-white/10 border-white/20 shadow-xl"}`}
+                className={`max-w-3xl mx-auto p-6 md:p-12 rounded-3xl backdrop-blur-2xl border shadow-2xl relative overflow-hidden mobile-disable-3d ${darkMode ? "bg-white/5 border-white/10" : "bg-white/10 border-white/20 shadow-xl"}`}
                 style={{
                   transform: `perspective(1000px) rotateX(${mousePos.y * 0.2}deg) rotateY(${mousePos.x * 0.2}deg)`,
                   transformStyle: 'preserve-3d'
@@ -1053,8 +1085,8 @@ export default function Home() {
         {/* COURSES Section - Tasdiqdan keyin ko'rinadi */}
         {
           view === 'courses' && (
-            <section className="container mx-auto px-6 py-40 relative z-10">
-              <h2 className="text-6xl md:text-7xl font-black text-center mb-6 bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+            <section className="container mx-auto px-6 py-20 md:py-40 relative z-10">
+              <h2 className="text-3xl md:text-7xl font-black text-center mb-6 bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
                 AI kurslari
               </h2>
               <p className={`text-center mb-16 text-xl ${darkMode ? "text-gray-400" : "text-slate-600"}`}>
@@ -1082,12 +1114,12 @@ export default function Home() {
                       Generativ Sun&apos;iy Intellektga Kirish
                     </h3>
                     <div className="flex gap-2 mt-3">
-                      <button className={`flex-1 py-3 rounded-xl border transition-all text-sm font-bold ${darkMode ? "border-white/20 text-white hover:bg-white/10" : "border-slate-500/30 text-slate-700 hover:bg-slate-500/10"}`}>
+                      <div className={`flex-1 py-3 rounded-xl border transition-all text-sm font-bold flex items-center justify-center cursor-pointer ${darkMode ? "border-white/20 text-white hover:bg-white/10" : "border-slate-500/30 text-slate-700 hover:bg-slate-500/10"}`}>
                         Batafsil
-                      </button>
-                      <button className="flex-1 py-3 rounded-xl bg-gradient-to-r from-emerald-500 to-cyan-600 hover:from-emerald-600 hover:to-cyan-700 transition-all text-sm font-bold text-white shadow-lg shadow-emerald-500/20">
+                      </div>
+                      <div className="flex-1 py-3 rounded-xl bg-gradient-to-r from-emerald-500 to-cyan-600 hover:from-emerald-600 hover:to-cyan-700 transition-all text-sm font-bold text-white shadow-lg shadow-emerald-500/20 flex items-center justify-center cursor-pointer">
                         Boshlash →
-                      </button>
+                      </div>
                     </div>
                   </div>
                 </a>
@@ -1112,12 +1144,12 @@ export default function Home() {
                       Google Cloud Asoslari: Asosiy Infratuzilma
                     </h3>
                     <div className="flex gap-2 mt-3">
-                      <button className={`flex-1 py-3 rounded-xl border transition-all text-sm font-bold ${darkMode ? "border-white/20 text-white hover:bg-white/10" : "border-slate-500/30 text-slate-700 hover:bg-slate-500/10"}`}>
+                      <div className={`flex-1 py-3 rounded-xl border transition-all text-sm font-bold flex items-center justify-center cursor-pointer ${darkMode ? "border-white/20 text-white hover:bg-white/10" : "border-slate-500/30 text-slate-700 hover:bg-slate-500/10"}`}>
                         Batafsil
-                      </button>
-                      <button className="flex-1 py-3 rounded-xl bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 transition-all text-sm font-bold text-white shadow-lg shadow-blue-500/20">
+                      </div>
+                      <div className="flex-1 py-3 rounded-xl bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 transition-all text-sm font-bold text-white shadow-lg shadow-blue-500/20 flex items-center justify-center cursor-pointer">
                         Boshlash →
-                      </button>
+                      </div>
                     </div>
                   </div>
                 </a>
@@ -1142,12 +1174,12 @@ export default function Home() {
                       ChatGPT, DALL·E va GPT-4 dasturi Sun&apos;iy Intellekt Ilovalari Yaratish
                     </h3>
                     <div className="flex gap-2 mt-3">
-                      <button className={`flex-1 py-3 rounded-xl border transition-all text-sm font-bold ${darkMode ? "border-white/20 text-white hover:bg-white/10" : "border-slate-500/30 text-slate-700 hover:bg-slate-500/10"}`}>
+                      <div className={`flex-1 py-3 rounded-xl border transition-all text-sm font-bold flex items-center justify-center cursor-pointer ${darkMode ? "border-white/20 text-white hover:bg-white/10" : "border-slate-500/30 text-slate-700 hover:bg-slate-500/10"}`}>
                         Batafsil
-                      </button>
-                      <button className="flex-1 py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 transition-all text-sm font-bold text-white shadow-lg shadow-cyan-500/20">
+                      </div>
+                      <div className="flex-1 py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 transition-all text-sm font-bold text-white shadow-lg shadow-cyan-500/20 flex items-center justify-center cursor-pointer">
                         Boshlash →
-                      </button>
+                      </div>
                     </div>
                   </div>
                 </a>
@@ -1172,12 +1204,12 @@ export default function Home() {
                       O&apos;zingiz Kod Yozing: Dasturlashga Kirish
                     </h3>
                     <div className="flex gap-2 mt-3">
-                      <button className={`flex-1 py-3 rounded-xl border transition-all text-sm font-bold ${darkMode ? "border-white/20 text-white hover:bg-white/10" : "border-slate-500/30 text-slate-700 hover:bg-slate-500/10"}`}>
+                      <div className={`flex-1 py-3 rounded-xl border transition-all text-sm font-bold flex items-center justify-center cursor-pointer ${darkMode ? "border-white/20 text-white hover:bg-white/10" : "border-slate-500/30 text-slate-700 hover:bg-slate-500/10"}`}>
                         Batafsil
-                      </button>
-                      <button className="flex-1 py-3 rounded-xl bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-600 hover:to-pink-700 transition-all text-sm font-bold text-white shadow-lg shadow-purple-500/20">
+                      </div>
+                      <div className="flex-1 py-3 rounded-xl bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-600 hover:to-pink-700 transition-all text-sm font-bold text-white shadow-lg shadow-purple-500/20 flex items-center justify-center cursor-pointer">
                         Boshlash →
-                      </button>
+                      </div>
                     </div>
                   </div>
                 </a>
@@ -1202,12 +1234,12 @@ export default function Home() {
                       IoT (Narsalar interneti) Simsiz va Bulutli Hisoblash — Yangi
                     </h3>
                     <div className="flex gap-2 mt-3">
-                      <button className={`flex-1 py-3 rounded-xl border transition-all text-sm font-bold ${darkMode ? "border-white/20 text-white hover:bg-white/10" : "border-slate-500/30 text-slate-700 hover:bg-slate-500/10"}`}>
+                      <div className={`flex-1 py-3 rounded-xl border transition-all text-sm font-bold flex items-center justify-center cursor-pointer ${darkMode ? "border-white/20 text-white hover:bg-white/10" : "border-slate-500/30 text-slate-700 hover:bg-slate-500/10"}`}>
                         Batafsil
-                      </button>
-                      <button className="flex-1 py-3 rounded-xl bg-gradient-to-r from-orange-500 to-amber-600 hover:from-orange-600 hover:to-amber-700 transition-all text-sm font-bold text-white shadow-lg shadow-orange-500/20">
+                      </div>
+                      <div className="flex-1 py-3 rounded-xl bg-gradient-to-r from-orange-500 to-amber-600 hover:from-orange-600 hover:to-amber-700 transition-all text-sm font-bold text-white shadow-lg shadow-orange-500/20 flex items-center justify-center cursor-pointer">
                         Boshlash →
-                      </button>
+                      </div>
                     </div>
                   </div>
                 </a>
@@ -1310,8 +1342,8 @@ export default function Home() {
         {/* PAID COURSES Section - Form submitdan keyin ochiladi */}
         {
           view === 'paid-courses' && (
-            <section className="container mx-auto px-6 py-40 relative z-10">
-              <h2 className="text-6xl md:text-7xl font-black text-center mb-6 bg-gradient-to-r from-amber-400 via-orange-500 to-yellow-400 bg-clip-text text-transparent">
+            <section className="container mx-auto px-6 py-20 md:py-40 relative z-10">
+              <h2 className="text-3xl md:text-7xl font-black text-center mb-6 bg-gradient-to-r from-amber-400 via-orange-500 to-yellow-400 bg-clip-text text-transparent">
                 Pullik kurslar
               </h2>
               <p className={`text-center mb-16 text-xl ${darkMode ? "text-gray-400" : "text-slate-600"}`}>
@@ -1390,7 +1422,7 @@ export default function Home() {
         {/* LEGAL SEARCH SECTION - Android 8 Style UI */}
         {
           view === 'legal' && (
-            <section className="container mx-auto px-6 py-40 relative z-10">
+            <section className="container mx-auto px-6 py-20 md:py-40 relative z-10">
               <div className="max-w-3xl mx-auto">
                 {/* Header with Back Button */}
                 <div className="flex items-center gap-4 mb-8">
@@ -1545,6 +1577,11 @@ export default function Home() {
           .animation-delay-4000 {
             animation-delay: 4s;
           }
+          @media (max-width: 768px) {
+            .mobile-disable-3d {
+              transform: none !important;
+            }
+          }
         `}</style>
 
         {/* Info Modal */}
@@ -1611,12 +1648,21 @@ export default function Home() {
                         </div>
                       ))}
                     </div>
+                  ) : modalType === 'text' ? (
+                    <div className="p-4 rounded-2xl bg-white/5 border border-white/5">
+                      {modalContent.map((item: any, i: number) => (
+                        <p key={i} className="text-lg text-white/80 leading-relaxed text-center">
+                          {item.text}
+                        </p>
+                      ))}
+                    </div>
                   ) : null
                 )}
               </div>
             </div>
           </div>
-        )}
+        )
+        }
 
         {/* Universal AI Agent - Bottom Right */}
         <UniversalAgent />

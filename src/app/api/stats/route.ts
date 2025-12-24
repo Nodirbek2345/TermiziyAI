@@ -14,6 +14,9 @@ export async function GET() {
         // Kurslar soni
         const totalCourses = await prisma.course.count();
 
+        // Bitiruvchilar soni
+        const totalGraduates = await prisma.graduate.count();
+
         // Jami talabalar (barcha kurslardagi)
         const studentsAggregate = await prisma.course.aggregate({
             _sum: {
@@ -41,6 +44,10 @@ export async function GET() {
                 students: totalStudents,
                 averageRating: averageRating,
                 trend: '+4'
+            },
+            graduates: {
+                total: totalGraduates,
+                trend: '+17%'
             },
             revenue: {
                 total: '45.2M', // Bu hozircha statik
