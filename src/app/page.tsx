@@ -609,7 +609,7 @@ export default function Home() {
             </div>
 
             {/* 3D Stats Cards */}
-            <div className="grid grid-cols-4 gap-1.5 md:gap-8 max-w-6xl mx-auto mt-8 md:mt-24 mb-10 md:mb-60 px-1 md:px-0">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-8 max-w-6xl mx-auto mt-12 md:mt-24 mb-20 md:mb-60 px-2 md:px-0">
               {[
                 {
                   icon: <Users className="w-10 h-10" />,
@@ -662,24 +662,22 @@ export default function Home() {
                   className="group relative"
                 >
                   <div
-                    className={`relative p-2 md:p-8 rounded-xl md:rounded-3xl backdrop-blur-lg md:backdrop-blur-2xl border transition-all duration-300 active:scale-95 active:opacity-80 ${darkMode ? "bg-white/5 border-white/10 active:bg-white/15" : "bg-white/10 border-white/20 active:bg-white/40 shadow-lg"} cursor-pointer`}
+                    className={`relative p-6 md:p-8 rounded-2xl md:rounded-3xl backdrop-blur-lg md:backdrop-blur-2xl border transition-all duration-300 active:scale-95 active:opacity-80 ${darkMode ? "bg-white/5 border-white/10 active:bg-white/15" : "bg-white/10 border-white/20 active:bg-white/40 shadow-lg"} cursor-pointer`}
                     style={{ WebkitTapHighlightColor: 'transparent' }}
                     onClick={() => setActiveDropdown(activeDropdown === i ? null : i)}
                   >
-                    <div className={`absolute inset-0 bg-gradient-to-br ${stat.color} opacity-0 group-hover:opacity-20 rounded-xl md:rounded-3xl transition-opacity blur-xl`} />
-                    <div className="flex justify-center mb-1 md:mb-4 text-cyan-400">
-                      <div className="w-5 h-5 md:w-10 md:h-10">{stat.icon}</div>
-                    </div>
-                    <div className={`text-[10px] md:text-3xl font-black bg-gradient-to-r ${stat.color} bg-clip-text text-transparent mb-1 md:mb-2 whitespace-nowrap text-center truncate`}>
+                    <div className={`absolute inset-0 bg-gradient-to-br ${stat.color} opacity-0 group-hover:opacity-20 rounded-2xl md:rounded-3xl transition-opacity blur-xl`} />
+                    <div className="flex justify-center mb-3 md:mb-4 text-cyan-400">{stat.icon}</div>
+                    <div className={`text-2xl md:text-3xl font-black bg-gradient-to-r ${stat.color} bg-clip-text text-transparent mb-2 whitespace-nowrap text-center`}>
                       {stat.number}
                     </div>
-                    <div className={`text-[8px] md:text-sm font-semibold text-center ${darkMode ? "text-gray-400" : "text-slate-600"}`}>{stat.label}</div>
+                    <div className={`text-xs md:text-sm font-semibold text-center ${darkMode ? "text-gray-400" : "text-slate-600"}`}>{stat.label}</div>
                   </div>
 
                   {/* Dropdown Menu */}
                   {activeDropdown === i && (
                     <div
-                      className={`absolute top-full mt-2 rounded-xl md:rounded-2xl bg-slate-900/95 backdrop-blur-lg md:backdrop-blur-2xl border border-white/10 shadow-2xl overflow-hidden animate-slideDown z-50 w-48 md:w-64 mx-0 ${i < 2 ? "left-0" : "right-0"} md:left-1/2 md:right-auto md:-translate-x-1/2`}
+                      className={`absolute top-full mt-3 rounded-2xl bg-slate-900/95 backdrop-blur-lg md:backdrop-blur-2xl border border-white/10 shadow-2xl overflow-hidden animate-slideDown z-50 w-72 md:w-64 mx-0 ${i % 2 === 0 ? "left-0" : "right-0"} md:left-1/2 md:right-auto md:-translate-x-1/2`}
                     >
                       <div className="p-2">
                         {stat.items.map((item, idx) => (
