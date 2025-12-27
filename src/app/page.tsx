@@ -730,7 +730,8 @@ export default function Home() {
                   ].map((item, i) => (
                     <div key={i} className="group relative">
                       <span
-                        className={`block text-center px-1.5 py-1 md:px-6 md:py-3 rounded-lg md:rounded-full text-[8px] md:text-base font-medium backdrop-blur-md border transition-all hover:scale-105 cursor-default truncate ${darkMode ? "bg-white/10 text-cyan-300 border-white/10 hover:bg-white/20" : "bg-white/40 text-slate-700 border-white/40 hover:bg-white/60 shadow-sm"}`}
+                        onClick={() => openInfoModal(item.label, 'text', undefined, item.desc)}
+                        className={`block text-center px-1.5 py-1 md:px-6 md:py-3 rounded-lg md:rounded-full text-[8px] md:text-base font-medium backdrop-blur-md border transition-all hover:scale-105 cursor-pointer truncate active:scale-95 ${darkMode ? "bg-white/10 text-cyan-300 border-white/10 hover:bg-white/20" : "bg-white/40 text-slate-700 border-white/40 hover:bg-white/60 shadow-sm"}`}
                       >
                         {item.label}
                       </span>
@@ -759,7 +760,8 @@ export default function Home() {
                   ].map((item, i) => (
                     <div key={i} className="group relative">
                       <span
-                        className={`flex items-center justify-center gap-1 px-1.5 py-1 md:px-6 md:py-3 rounded-lg md:rounded-full text-[8px] md:text-base font-medium backdrop-blur-md border transition-all hover:scale-105 cursor-default truncate ${darkMode ? "bg-white/10 text-gray-200 border-white/10 hover:bg-white/20" : "bg-white/40 text-slate-700 border-white/40 hover:bg-white/60 shadow-sm"}`}
+                        onClick={() => openInfoModal(item.title, 'text', undefined, item.desc)}
+                        className={`flex items-center justify-center gap-1 px-1.5 py-1 md:px-6 md:py-3 rounded-lg md:rounded-full text-[8px] md:text-base font-medium backdrop-blur-md border transition-all hover:scale-105 cursor-pointer truncate active:scale-95 ${darkMode ? "bg-white/10 text-gray-200 border-white/10 hover:bg-white/20" : "bg-white/40 text-slate-700 border-white/40 hover:bg-white/60 shadow-sm"}`}
                       >
                         <span className={item.color}>{item.icon}</span>
                         {item.title}
@@ -789,7 +791,8 @@ export default function Home() {
                   ].map((step, i) => (
                     <div key={i} className="group relative">
                       <span
-                        className={`flex items-center justify-center gap-1 px-1.5 py-1 md:px-6 md:py-3 rounded-lg md:rounded-full text-[8px] md:text-base font-medium backdrop-blur-md border transition-all hover:scale-105 cursor-default truncate ${darkMode ? "bg-white/10 text-gray-200 border-white/10 hover:bg-white/20" : "bg-white/40 text-slate-700 border-white/40 hover:bg-white/60 shadow-sm"}`}
+                        onClick={() => openInfoModal(step.title, 'text', undefined, step.desc)}
+                        className={`flex items-center justify-center gap-1 px-1.5 py-1 md:px-6 md:py-3 rounded-lg md:rounded-full text-[8px] md:text-base font-medium backdrop-blur-md border transition-all hover:scale-105 cursor-pointer truncate active:scale-95 ${darkMode ? "bg-white/10 text-gray-200 border-white/10 hover:bg-white/20" : "bg-white/40 text-slate-700 border-white/40 hover:bg-white/60 shadow-sm"}`}
                       >
                         <span className="text-[10px] md:text-base">{step.icon}</span>
                         {step.title}
