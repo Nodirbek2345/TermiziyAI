@@ -958,7 +958,7 @@ export default function Home() {
                               <span className="w-5 h-5 md:w-6 md:h-6 flex items-center justify-center bg-black/20 rounded-full text-[9px] md:text-xs font-bold text-white/70 flex-shrink-0">
                                 {i + 1}
                               </span>
-                              <span className="font-semibold text-white drop-shadow-md truncate text-[10px] md:text-base max-w-[60px] md:max-w-none">{region.name}</span>
+                              <span className="font-semibold text-white drop-shadow-md text-[10px] md:text-base whitespace-nowrap">{region.name}</span>
                             </div>
                             <span className="font-bold text-white drop-shadow-md bg-black/20 px-1.5 py-0.5 md:px-3 md:py-1 rounded-lg border border-white/10 text-[10px] md:text-base flex-shrink-0">
                               {region.count.toLocaleString()}
