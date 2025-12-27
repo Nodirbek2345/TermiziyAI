@@ -1010,7 +1010,7 @@ export default function Home() {
         {/* CONTACT Section - Hero qismida */}
         {
           view === 'contact' && (
-            <section ref={contactRef} className="container mx-auto px-6 py-20 md:py-40 relative z-10">
+            <section ref={contactRef} className="container mx-auto px-3 md:px-6 py-12 md:py-40 relative z-10">
               <h2 className="text-4xl md:text-8xl font-black text-center mb-12 md:mb-24 bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent leading-tight pb-4">
                 Ro&apos;yhatdan o&apos;tish
               </h2>
@@ -1094,7 +1094,7 @@ export default function Home() {
                 Professional va amaliy ko&apos;nikmalar
               </p>
 
-              <div className="grid md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 max-w-[1600px] mx-auto">
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 md:gap-6 max-w-[1600px] mx-auto px-2 md:px-0">
                 {/* Kurs 1 - Generativ AI */}
                 <a
                   href="https://www.coursera.org/programs/learning-program-h13rq/learn/introduction-to-generative-ai?collectionId=2mufz"
