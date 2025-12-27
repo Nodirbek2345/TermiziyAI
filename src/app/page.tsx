@@ -676,7 +676,9 @@ export default function Home() {
 
                   {/* Dropdown Menu */}
                   {activeDropdown === i && (
-                    <div className="absolute top-full mt-3 left-0 right-0 md:left-1/2 md:right-auto md:-translate-x-1/2 w-auto md:w-64 mx-2 md:mx-0 rounded-2xl bg-slate-900/95 backdrop-blur-lg md:backdrop-blur-2xl border border-white/10 shadow-2xl overflow-hidden animate-slideDown z-50">
+                    <div
+                      className={`absolute top-full mt-3 rounded-2xl bg-slate-900/95 backdrop-blur-lg md:backdrop-blur-2xl border border-white/10 shadow-2xl overflow-hidden animate-slideDown z-50 w-72 md:w-64 mx-0 ${i % 2 === 0 ? "left-0" : "right-0"} md:left-1/2 md:right-auto md:-translate-x-1/2`}
+                    >
                       <div className="p-2">
                         {stat.items.map((item, idx) => (
                           <button
