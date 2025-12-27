@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -15,12 +15,17 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Termiziy AI - Kelajak Kasblari",
   description: "Sun'iy intellekt va zamonaviy kasblarni o'rganing. Termiziy AI - bu sizning kelajagingiz.",
-  viewport: "width=device-width, initial-scale=1, maximum-scale=1",
-  themeColor: "#0f172a",
   manifest: "/manifest.json",
   icons: {
     icon: "/favicon.ico",
   },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  themeColor: "#0f172a",
 };
 
 export default function RootLayout({
