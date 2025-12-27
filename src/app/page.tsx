@@ -713,11 +713,11 @@ export default function Home() {
             </div>
 
             {/* New Info Grid Section */}
-            <div className={`grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8 max-w-6xl mx-auto mb-20 md:mb-40 px-2 md:px-4 relative z-10`}>
+            <div className={`grid grid-cols-3 gap-2 md:gap-8 max-w-6xl mx-auto mb-12 md:mb-40 px-2 md:px-4 relative z-10`}>
 
               {/* Column 1: Kimlar uchun? */}
-              <div className={`p-4 md:p-8 rounded-2xl md:rounded-3xl backdrop-blur-lg md:backdrop-blur-2xl border transition-all duration-300 hover:shadow-2xl ${darkMode ? "bg-white/5 border-white/10" : "bg-white/10 border-white/20 shadow-lg"}`}>
-                <h3 className={`text-xl md:text-3xl font-bold mb-4 md:mb-8 bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent`}>
+              <div className={`p-2 md:p-8 rounded-xl md:rounded-3xl backdrop-blur-lg md:backdrop-blur-2xl border transition-all duration-300 hover:shadow-2xl ${darkMode ? "bg-white/5 border-white/10" : "bg-white/10 border-white/20 shadow-lg"}`}>
+                <h3 className={`text-[10px] md:text-3xl font-bold mb-2 md:mb-8 bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent`}>
                   Kimlar uchun?
                 </h3>
                 <div className="grid grid-cols-2 gap-2 md:flex md:flex-wrap md:gap-4">
@@ -746,8 +746,8 @@ export default function Home() {
               </div>
 
               {/* Column 2: Biz nimani o'rgatamiz? */}
-              <div className={`p-4 md:p-8 rounded-2xl md:rounded-3xl backdrop-blur-lg md:backdrop-blur-2xl border transition-all duration-300 hover:shadow-2xl flex flex-col ${darkMode ? "bg-white/5 border-white/10" : "bg-white/10 border-white/20 shadow-lg"}`}>
-                <h3 className={`text-xl md:text-3xl font-bold mb-4 md:mb-8 bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent`}>
+              <div className={`p-2 md:p-8 rounded-xl md:rounded-3xl backdrop-blur-lg md:backdrop-blur-2xl border transition-all duration-300 hover:shadow-2xl flex flex-col ${darkMode ? "bg-white/5 border-white/10" : "bg-white/10 border-white/20 shadow-lg"}`}>
+                <h3 className={`text-[10px] md:text-3xl font-bold mb-2 md:mb-8 bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent`}>
                   Biz nimani o'rgatamiz?
                 </h3>
                 <div className="grid grid-cols-2 gap-2 md:flex md:flex-wrap md:gap-4">
@@ -776,8 +776,8 @@ export default function Home() {
               </div>
 
               {/* Column 3: Qanday o'qitamiz? */}
-              <div className={`p-4 md:p-8 rounded-2xl md:rounded-3xl backdrop-blur-lg md:backdrop-blur-2xl border transition-all duration-300 hover:shadow-2xl flex flex-col ${darkMode ? "bg-white/5 border-white/10" : "bg-white/10 border-white/20 shadow-lg"}`}>
-                <h3 className={`text-xl md:text-3xl font-bold mb-4 md:mb-8 bg-gradient-to-r from-emerald-400 to-cyan-500 bg-clip-text text-transparent`}>
+              <div className={`p-2 md:p-8 rounded-xl md:rounded-3xl backdrop-blur-lg md:backdrop-blur-2xl border transition-all duration-300 hover:shadow-2xl flex flex-col ${darkMode ? "bg-white/5 border-white/10" : "bg-white/10 border-white/20 shadow-lg"}`}>
+                <h3 className={`text-[10px] md:text-3xl font-bold mb-2 md:mb-8 bg-gradient-to-r from-emerald-400 to-cyan-500 bg-clip-text text-transparent`}>
                   Qanday o'qitamiz?
                 </h3>
                 <div className="grid grid-cols-2 gap-2 md:flex md:flex-wrap md:gap-4">
@@ -929,17 +929,17 @@ export default function Home() {
                 </div>
 
                 {/* Bottom Charts Grid */}
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div className="grid grid-cols-2 gap-3 md:gap-6">
 
                   {/* Left Column: Region Ranking */}
-                  <div className="bg-slate-800/40 rounded-3xl p-8 border border-white/5 backdrop-blur-sm">
-                    <div className="flex justify-between items-center mb-8">
+                  <div className="bg-slate-800/40 rounded-xl md:rounded-3xl p-3 md:p-8 border border-white/5 backdrop-blur-sm">
+                    <div className="flex justify-between items-center mb-3 md:mb-8">
                       <div>
-                        <h4 className="font-bold text-xl text-white">Hududlar reytingi</h4>
-                        <p className="text-sm text-slate-400 mt-1">Platforma orqali kurs bitirganlar soni bo'yicha</p>
+                        <h4 className="font-bold text-xs md:text-xl text-white">Hududlar reytingi</h4>
+                        <p className="text-[8px] md:text-sm text-slate-400 mt-0.5 md:mt-1 hidden md:block">Platforma orqali kurs bitirganlar soni bo'yicha</p>
                       </div>
-                      <div className="p-2 bg-white/5 rounded-xl">
-                        <MapPin className="w-6 h-6 text-slate-400" />
+                      <div className="p-1.5 md:p-2 bg-white/5 rounded-lg md:rounded-xl">
+                        <MapPin className="w-4 h-4 md:w-6 md:h-6 text-slate-400" />
                       </div>
                     </div>
 
@@ -967,14 +967,14 @@ export default function Home() {
                   </div>
 
                   {/* Right Column: Course Ranking */}
-                  <div className="bg-slate-800/40 rounded-3xl p-8 border border-white/5 backdrop-blur-sm">
-                    <div className="flex justify-between items-center mb-8">
+                  <div className="bg-slate-800/40 rounded-xl md:rounded-3xl p-3 md:p-8 border border-white/5 backdrop-blur-sm">
+                    <div className="flex justify-between items-center mb-3 md:mb-8">
                       <div>
-                        <h4 className="font-bold text-xl text-white">Kurslar reytingi</h4>
-                        <p className="text-sm text-slate-400 mt-1">Platforma orqali tugatilgan top 5 kurslar</p>
+                        <h4 className="font-bold text-xs md:text-xl text-white">Kurslar reytingi</h4>
+                        <p className="text-[8px] md:text-sm text-slate-400 mt-0.5 md:mt-1 hidden md:block">Platforma orqali tugatilgan top 5 kurslar</p>
                       </div>
-                      <div className="p-2 bg-amber-500/10 rounded-xl">
-                        <Trophy className="w-6 h-6 text-amber-400" />
+                      <div className="p-1.5 md:p-2 bg-amber-500/10 rounded-lg md:rounded-xl">
+                        <Trophy className="w-4 h-4 md:w-6 md:h-6 text-amber-400" />
                       </div>
                     </div>
 
