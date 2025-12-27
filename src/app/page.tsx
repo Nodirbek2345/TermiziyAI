@@ -1425,47 +1425,47 @@ export default function Home() {
         {/* LEGAL SEARCH SECTION - Android 8 Style UI */}
         {
           view === 'legal' && (
-            <section className="container mx-auto px-6 py-20 md:py-40 relative z-10">
+            <section className="container mx-auto px-3 py-8 md:px-6 md:py-40 relative z-10">
               <div className="max-w-3xl mx-auto">
                 {/* Header with Back Button */}
-                <div className="flex items-center gap-4 mb-8">
+                <div className="flex items-center gap-3 md:gap-4 mb-4 md:mb-8">
                   <button
                     onClick={() => handleViewChange('hero')}
-                    className={`p-2 rounded-full transition-colors ${darkMode ? "hover:bg-white/10" : "hover:bg-black/5"}`}
+                    className={`p-1.5 md:p-2 rounded-full transition-colors ${darkMode ? "hover:bg-white/10" : "hover:bg-black/5"}`}
                   >
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6"><path d="m15 18-6-6 6-6" /></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5 md:w-6 md:h-6"><path d="m15 18-6-6 6-6" /></svg>
                   </button>
                   <div>
-                    <h1 className="text-2xl font-medium tracking-tight">Huquqiy Axborot</h1>
-                    <p className={`text-sm ${darkMode ? "text-white/60" : "text-slate-500"}`}>
+                    <h1 className="text-lg md:text-2xl font-medium tracking-tight">Huquqiy Axborot</h1>
+                    <p className={`text-xs md:text-sm ${darkMode ? "text-white/60" : "text-slate-500"}`}>
                       O'zbekiston Respublikasi Qonunchiligi
                     </p>
                   </div>
                 </div>
 
                 {/* Material Search Bar */}
-                <div className={`relative mb-8 shadow-lg rounded-2xl overflow-hidden transition-all ${darkMode ? "bg-white/5" : "bg-white"}`}>
-                  <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`w-5 h-5 ${darkMode ? "text-white/40" : "text-slate-400"}`}><circle cx="11" cy="11" r="8" /><path d="m21 21-4.3-4.3" /></svg>
+                <div className={`relative mb-4 md:mb-8 shadow-lg rounded-xl md:rounded-2xl overflow-hidden transition-all ${darkMode ? "bg-white/5" : "bg-white"}`}>
+                  <div className="absolute inset-y-0 left-0 pl-3 md:pl-4 flex items-center pointer-events-none">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`w-4 h-4 md:w-5 md:h-5 ${darkMode ? "text-white/40" : "text-slate-400"}`}><circle cx="11" cy="11" r="8" /><path d="m21 21-4.3-4.3" /></svg>
                   </div>
                   <input
                     value={legalQuery}
                     onChange={(e) => setLegalQuery(e.target.value)}
                     placeholder="Qonun yoki qarorni qidiring..."
-                    className={`w-full py-4 pl-12 pr-4 bg-transparent border-none focus:ring-0 focus:outline-none text-base placeholder:text-opacity-50 ${darkMode ? "text-white placeholder:text-white" : "text-slate-900 placeholder:text-slate-500"}`}
+                    className={`w-full py-3 md:py-4 pl-10 md:pl-12 pr-24 md:pr-4 bg-transparent border-none focus:ring-0 focus:outline-none text-sm md:text-base placeholder:text-opacity-50 ${darkMode ? "text-white placeholder:text-white" : "text-slate-900 placeholder:text-slate-500"}`}
                   />
                   <button
                     onClick={handleLegalSearch}
                     disabled={legalLoading}
-                    className="absolute right-2 top-2 bottom-2 px-6 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-medium transition-colors shadow-md disabled:bg-blue-400 disabled:cursor-not-allowed flex items-center gap-2"
+                    className="absolute right-1.5 top-1.5 bottom-1.5 md:right-2 md:top-2 md:bottom-2 px-3 md:px-6 rounded-lg md:rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs md:text-base font-medium transition-colors shadow-md disabled:bg-blue-400 disabled:cursor-not-allowed flex items-center gap-1.5 md:gap-2"
                   >
                     {legalLoading ? (
                       <>
-                        <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <svg className="animate-spin h-4 w-4 md:h-5 md:w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                           <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                           <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                         </svg>
-                        Izlanmoqda...
+                        <span className="hidden md:inline">Izlanmoqda...</span>
                       </>
                     ) : (
                       "Qidirish"
@@ -1499,24 +1499,24 @@ export default function Home() {
                   {legalResults.map((item, index) => (
                     <div
                       key={index}
-                      className={`p-6 rounded-2xl transition-all hover:shadow-lg hover:scale-[1.01] ${darkMode ? "bg-white/5 border border-white/5 hover:bg-white/10" : "bg-white border border-slate-100 shadow-sm hover:shadow-md"}`}
+                      className={`p-3 md:p-6 rounded-xl md:rounded-2xl transition-all hover:shadow-lg hover:scale-[1.01] ${darkMode ? "bg-white/5 border border-white/5 hover:bg-white/10" : "bg-white border border-slate-100 shadow-sm hover:shadow-md"}`}
                     >
-                      <div className="flex items-start gap-4">
-                        <div className={`mt-1 p-2 rounded-lg ${darkMode ? "bg-blue-500/10 text-blue-400" : "bg-blue-50 text-blue-600"}`}>
-                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" /><polyline points="14 2 14 8 20 8" /></svg>
+                      <div className="flex items-start gap-2.5 md:gap-4">
+                        <div className={`mt-0.5 md:mt-1 p-1.5 md:p-2 rounded-lg ${darkMode ? "bg-blue-500/10 text-blue-400" : "bg-blue-50 text-blue-600"}`}>
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 md:w-5 md:h-5"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" /><polyline points="14 2 14 8 20 8" /></svg>
                         </div>
-                        <div>
-                          <h3 className={`text-lg font-semibold mb-2 ${darkMode ? "text-white" : "text-slate-900"}`}>
+                        <div className="flex-1 min-w-0">
+                          <h3 className={`text-sm md:text-lg font-semibold mb-1.5 md:mb-2 ${darkMode ? "text-white" : "text-slate-900"}`}>
                             {item.title}
                           </h3>
-                          <p className={`text-sm leading-relaxed ${darkMode ? "text-white/70" : "text-slate-600"}`}>
+                          <p className={`text-xs md:text-sm leading-relaxed ${darkMode ? "text-white/70" : "text-slate-600"}`}>
                             {item.content}
                           </p>
-                          <div className="flex flex-wrap gap-2 mt-4">
+                          <div className="flex flex-wrap gap-1.5 md:gap-2 mt-2 md:mt-4">
                             {item.keywords.map((k, i) => (
                               <span
                                 key={i}
-                                className={`text-xs px-2 py-1 rounded-md ${darkMode ? "bg-white/5 text-white/40" : "bg-slate-100 text-slate-500"}`}
+                                className={`text-[10px] md:text-xs px-1.5 py-0.5 md:px-2 md:py-1 rounded-md ${darkMode ? "bg-white/5 text-white/40" : "bg-slate-100 text-slate-500"}`}
                               >
                                 #{k}
                               </span>
