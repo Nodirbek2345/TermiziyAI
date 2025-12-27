@@ -588,28 +588,28 @@ export default function Home() {
             {/* 3D Stats Cards */}
 
 
-            <div className="flex flex-col sm:flex-row gap-6 justify-center">
+            <div className="flex flex-row gap-3 md:gap-6 justify-center w-full px-4 md:px-0">
               <button
                 onClick={scrollToContact}
-                className="group relative text-lg md:text-2xl px-8 py-4 md:px-14 md:py-8 rounded-2xl font-bold overflow-hidden hover:scale-105 transition-all duration-300"
+                className="group relative flex-1 md:flex-none text-sm md:text-2xl px-4 py-3 md:px-14 md:py-8 rounded-xl md:rounded-2xl font-bold overflow-hidden hover:scale-105 transition-all duration-300 md:min-w-[200px]"
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 animate-gradient-x" />
                 <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 blur-xl opacity-50 group-hover:opacity-75 transition-opacity" />
-                <span className="relative z-10 flex items-center gap-3">
-                  <Sparkles className="w-6 h-6" />
+                <span className="relative z-10 flex items-center justify-center gap-2">
+                  <Sparkles className="w-4 h-4 md:w-6 md:h-6" />
                   Kursga yozilish
                 </span>
               </button>
               <button
                 onClick={() => handleViewChange('legal')}
-                className="text-lg md:text-2xl px-8 py-4 md:px-14 md:py-8 rounded-2xl border-2 border-cyan-500/30 hover:bg-cyan-500/10 backdrop-blur-xl transition-all font-bold hover:scale-105 hover:border-cyan-500/50 hover:shadow-[0_0_30px_rgba(6,182,212,0.3)]"
+                className="flex-1 md:flex-none text-sm md:text-2xl px-4 py-3 md:px-14 md:py-8 rounded-xl md:rounded-2xl border border-cyan-500/30 hover:bg-cyan-500/10 backdrop-blur-xl transition-all font-bold hover:scale-105 hover:border-cyan-500/50 hover:shadow-[0_0_30px_rgba(6,182,212,0.3)] md:min-w-[200px]"
               >
                 Huquqiy IT
               </button>
             </div>
 
             {/* 3D Stats Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto mt-12 md:mt-24 mb-20 md:mb-60">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-8 max-w-6xl mx-auto mt-12 md:mt-24 mb-20 md:mb-60 px-2 md:px-0">
               {[
                 {
                   icon: <Users className="w-10 h-10" />,
@@ -671,7 +671,7 @@ export default function Home() {
                     <div className={`text-2xl md:text-3xl font-black bg-gradient-to-r ${stat.color} bg-clip-text text-transparent mb-2 whitespace-nowrap text-center`}>
                       {stat.number}
                     </div>
-                    <div className={`text-sm font-semibold ${darkMode ? "text-gray-400" : "text-slate-600"}`}>{stat.label}</div>
+                    <div className={`text-xs md:text-sm font-semibold text-center ${darkMode ? "text-gray-400" : "text-slate-600"}`}>{stat.label}</div>
                   </div>
 
                   {/* Dropdown Menu */}
