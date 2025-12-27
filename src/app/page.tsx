@@ -503,11 +503,11 @@ export default function Home() {
         {view === 'hero' && (
           <button
             onClick={() => setDarkMode(!darkMode)}
-            className={`fixed top-8 right-8 z-50 p-4 rounded-2xl backdrop-blur-lg md:backdrop-blur-2xl transition-all shadow-2xl hover:scale-110 group ${darkMode ? "bg-white/5 border-white/10 hover:bg-white/10" : "bg-white/10 border-white/20 hover:bg-white/30 shadow-lg"}`}
+            className={`fixed top-[5%] right-4 md:right-8 z-50 p-3 md:p-4 rounded-2xl backdrop-blur-lg md:backdrop-blur-2xl transition-all shadow-2xl hover:scale-110 group ${darkMode ? "bg-white/5 border-white/10 hover:bg-white/10" : "bg-white/10 border-white/20 hover:bg-white/30 shadow-lg"}`}
             style={{ borderWidth: 1 }}
           >
             <div className="relative">
-              {darkMode ? <Sun className="w-7 h-7 group-hover:rotate-180 transition-transform duration-500" /> : <Moon className="w-7 h-7" />}
+              {darkMode ? <Sun className="w-6 h-6 md:w-7 md:h-7 group-hover:rotate-180 transition-transform duration-500" /> : <Moon className="w-6 h-6 md:w-7 md:h-7" />}
               <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-full blur-xl opacity-0 group-hover:opacity-50 transition-opacity" />
             </div>
           </button>
@@ -515,7 +515,7 @@ export default function Home() {
 
         {/* Floating Social Icons - Only Visible in Hero */}
         {view === 'hero' && (
-          <div className="fixed top-8 left-8 z-50 flex gap-3">
+          <div className="fixed top-[5%] left-4 md:left-8 z-50 flex gap-2 md:gap-3">
             {[
               { Icon: Instagram, link: 'https://www.instagram.com/', color: 'hover:text-pink-500' },
               { Icon: Youtube, link: 'https://www.youtube.com/', color: 'hover:text-red-500' },
@@ -526,13 +526,13 @@ export default function Home() {
                 href={link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`p-3 rounded-xl backdrop-blur-lg md:backdrop-blur-2xl transition-all hover:scale-110 cursor-pointer group border ${darkMode ? "bg-white/5 border-white/10 hover:bg-white/10 active:bg-white/20" : "bg-white/10 border-white/20 hover:bg-white/30 active:bg-white/50 shadow-lg"}`}
+                className={`p-2.5 md:p-3 rounded-xl backdrop-blur-lg md:backdrop-blur-2xl transition-all hover:scale-110 cursor-pointer group border ${darkMode ? "bg-white/5 border-white/10 hover:bg-white/10 active:bg-white/20" : "bg-white/10 border-white/20 hover:bg-white/30 active:bg-white/50 shadow-lg"}`}
                 style={{
                   animation: `float 3s ease-in-out infinite`,
                   animationDelay: `${i * 0.5}s`
                 }}
               >
-                <Icon className={`w-6 h-6 text-cyan-400 transition-colors ${color}`} />
+                <Icon className={`w-5 h-5 md:w-6 md:h-6 text-cyan-400 transition-colors ${color}`} />
               </a>
             ))}
           </div>
@@ -555,7 +555,7 @@ export default function Home() {
             </div>
 
             <h1
-              className="text-3xl sm:text-5xl md:text-7xl lg:text-[9rem] font-black mb-6 md:mb-10 relative"
+              className="text-4xl sm:text-6xl md:text-7xl lg:text-[9rem] font-black mb-6 md:mb-10 relative"
               style={{
                 transform: `
                   translateY(${scrollY * 0.05}px) 
@@ -953,7 +953,7 @@ export default function Home() {
                               <span className="w-6 h-6 flex items-center justify-center bg-black/20 rounded-full text-xs font-bold text-white/70">
                                 {i + 1}
                               </span>
-                              <span className="font-semibold text-white drop-shadow-md">{region.name}</span>
+                              <span className="font-semibold text-white drop-shadow-md truncate max-w-[120px] md:max-w-none">{region.name}</span>
                             </div>
                             <span className="font-bold text-white drop-shadow-md bg-black/20 px-3 py-1 rounded-lg border border-white/10">
                               {region.count.toLocaleString()}

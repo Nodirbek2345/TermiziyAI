@@ -182,101 +182,95 @@ export default function UsersPage() {
             </div>
 
             {/* Users Table */}
-            <div className="bg-neutral-900/50 backdrop-blur-xl border border-white/5 rounded-2xl overflow-hidden min-h-[300px]">
+            <div className="overflow-x-auto bg-neutral-900 border border-white/10 rounded-xl">
                 {loading ? (
-                    <div className="flex flex-col items-center justify-center py-20 text-white/40 gap-4">
-                        <div className="w-8 h-8 border-2 border-purple-500 border-t-transparent rounded-full animate-spin" />
+                    <div className="flex flex-col items-center justify-center py-12 text-white/40 gap-3">
+                        <RefreshCcw className="animate-spin w-8 h-8 text-purple-500" />
                         <p>Ma'lumotlar yuklanmoqda...</p>
                     </div>
                 ) : (
-                    <div className="overflow-x-auto">
-                        <table className="w-full text-left">
-                            <thead>
-                                <tr className="border-b border-white/5 bg-white/5">
-                                    <th className="p-4 text-xs font-medium text-white/40 uppercase tracking-wider">Foydalanuvchi</th>
-                                    <th className="p-4 text-xs font-medium text-white/40 uppercase tracking-wider hidden md:table-cell">Rol</th>
-                                    <th className="p-4 text-xs font-medium text-white/40 uppercase tracking-wider hidden md:table-cell">Status</th>
-                                    <th className="p-4 text-xs font-medium text-white/40 uppercase tracking-wider hidden lg:table-cell">Sana</th>
-                                    <th className="p-4 text-xs font-medium text-white/40 uppercase tracking-wider text-right">Amallar</th>
+                    <table className="w-full">
+                        <thead className="bg-white/5 border-b border-white/5">
+                            <tr>
+                                <th className="text-left py-4 px-6 text-xs font-semibold text-white/40 uppercase tracking-wider">Foydalanuvchi</th>
+                                <th className="hidden md:table-cell text-left py-4 px-6 text-xs font-semibold text-white/40 uppercase tracking-wider">Rol</th>
+                                <th className="hidden md:table-cell text-left py-4 px-6 text-xs font-semibold text-white/40 uppercase tracking-wider">Status</th>
+                                <th className="hidden lg:table-cell text-left py-4 px-6 text-xs font-semibold text-white/40 uppercase tracking-wider">Sana</th>
+                                <th className="text-right py-4 px-6 text-xs font-semibold text-white/40 uppercase tracking-wider">Amallar</th>
+                            </tr>
+                        </thead>
+                        <tbody className="divide-y divide-white/5">
+                            {users.map((user) => (
+                                <tr key={user.id} className="hover:bg-white/5 transition-colors">
+                                    <td className="py-4 px-6">
+                                        <div className="flex items-center gap-3">
+                                            <div className="flex items-center justify-center w-10 h-10 rounded-full bg-purple-500/20 text-purple-400 font-bold border border-purple-500/20">
+                                                {user.name.charAt(0)}
+                                            </div>
+                                            <div>
+                                                <div className="font-medium text-white">{user.name}</div>
+                                                <div className="text-white/40 text-xs truncate max-w-[150px]">
+                                                    {user.email || user.phoneNumber || 'Bog\'lanish yo\'q'}
+                                                </div>
+                                                {/* Mobile Role/Status */}
+                                                <div className="md:hidden flex items-center gap-2 mt-1">
+                                                    <span className={`px-2 py-0.5 rounded text-[10px] font-medium ${user.role === 'Admin' ? 'bg-purple-500/20 text-purple-400' : 'bg-blue-500/20 text-blue-400'}`}>{user.role}</span>
+                                                    <span className={`w-1.5 h-1.5 rounded-full ${user.status === 'Active' ? 'bg-green-500' : 'bg-gray-500'}`}></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {/* Show Message on Mobile if exists */}
+                                        {user.message && (
+                                            <div className="mt-2 text-xs text-white/40 bg-white/5 p-2 rounded md:hidden">
+                                                <span className="text-white/60 mr-1">Xabar:</span>
+                                                {user.message}
+                                            </div>
+                                        )}
+                                    </td>
+                                    <td className="hidden md:table-cell py-4 px-6">
+                                        <span className={`px-2.5 py-1 rounded-full text-xs font-medium ${user.role === 'Admin' || user.role === 'Teacher'
+                                            ? 'bg-purple-500/10 text-purple-400 border border-purple-500/20'
+                                            : 'bg-blue-500/10 text-blue-400 border border-blue-500/20'
+                                            }`}>
+                                            {user.role}
+                                        </span>
+                                    </td>
+                                    <td className="hidden md:table-cell py-4 px-6">
+                                        <div className="flex items-center gap-2">
+                                            <div className={`w-1.5 h-1.5 rounded-full ${user.status === 'Active' ? 'bg-green-500' : 'bg-gray-500'}`}></div>
+                                            <span className={`text-sm ${user.status === 'Active' ? 'text-green-400' : 'text-gray-400'}`}>{user.status}</span>
+                                        </div>
+                                    </td>
+                                    <td className="hidden lg:table-cell py-4 px-6 text-white/40 text-sm">
+                                        {user.date}
+                                        {user.message && (
+                                            <div className="mt-1 text-xs truncate max-w-[200px]" title={user.message}>
+                                                Msg: {user.message}
+                                            </div>
+                                        )}
+                                    </td>
+                                    <td className="py-4 px-6 text-right">
+                                        <div className="flex items-center justify-end gap-2">
+                                            <button
+                                                onClick={() => handleEditClick(user)}
+                                                className="p-1.5 rounded-lg text-white/60 hover:text-white hover:bg-white/10 transition-colors"
+                                                title="Tahrirlash"
+                                            >
+                                                <Edit size={16} />
+                                            </button>
+                                            <button
+                                                onClick={() => deleteUser(user.id)}
+                                                className="p-1.5 rounded-lg text-red-400/80 hover:text-red-400 hover:bg-red-400/10 transition-colors"
+                                                title="O'chirish"
+                                            >
+                                                <Trash2 size={16} />
+                                            </button>
+                                        </div>
+                                    </td>
                                 </tr>
-                            </thead>
-                            <tbody className="divide-y divide-white/5">
-                                {users.map((user) => (
-                                    <tr key={user.id} className="group hover:bg-white/5 transition-colors">
-                                        <td className="p-4">
-                                            <div className="flex items-center gap-3">
-                                                <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-br from-purple-500/20 to-blue-500/20 flex items-center justify-center text-xs md:text-sm font-bold text-white uppercase border border-white/10 shrink-0">
-                                                    {user.name.charAt(0)}
-                                                </div>
-                                                <div className="min-w-0">
-                                                    <div className="font-medium text-white truncate">{user.name}</div>
-                                                    <div className="text-xs text-white/40 truncate max-w-[150px] md:max-w-none">
-                                                        {user.email || user.phoneNumber || 'Bog\'lanish yo\'q'}
-                                                    </div>
-                                                    {/* Mobile Role/Status */}
-                                                    <div className="flex md:hidden items-center gap-2 mt-1">
-                                                        <span className={`text-[10px] px-1.5 py-0.5 rounded ${user.role === 'Admin' ? 'bg-purple-500/10 text-purple-400' : 'bg-blue-500/10 text-blue-400'}`}>{user.role}</span>
-                                                        <span className={`w-1.5 h-1.5 rounded-full ${user.status === 'Active' ? 'bg-emerald-400' : 'bg-neutral-400'}`} />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            {/* Show Message on Mobile if exists */}
-                                            {user.message && (
-                                                <div className="mt-2 text-xs text-white/60 bg-white/5 p-2 rounded-lg md:hidden">
-                                                    <span className="text-white/40 mr-1">Xabar:</span>
-                                                    {user.message}
-                                                </div>
-                                            )}
-                                        </td>
-                                        <td className="p-4 hidden md:table-cell">
-                                            <span className={`inline-flex items-center px-2 py-1 rounded-md text-xs font-medium ring-1 ring-inset ${user.role === 'Admin' || user.role === 'Teacher'
-                                                ? 'bg-purple-400/10 text-purple-400 ring-purple-400/20'
-                                                : 'bg-blue-400/10 text-blue-400 ring-blue-400/20'
-                                                }`}>
-                                                {user.role}
-                                            </span>
-                                        </td>
-                                        <td className="p-4 hidden md:table-cell">
-                                            <span className={`inline-flex items-center gap-1.5 px-2 py-1 rounded-md text-xs font-medium ${user.status === 'Active'
-                                                ? 'text-emerald-400'
-                                                : 'text-neutral-400'
-                                                }`}>
-                                                <div className={`w-1.5 h-1.5 rounded-full ${user.status === 'Active' ? 'bg-emerald-400' : 'bg-neutral-400'
-                                                    }`} />
-                                                {user.status}
-                                            </span>
-                                        </td>
-                                        <td className="p-4 text-sm text-white/60 hidden lg:table-cell">
-                                            {user.date}
-                                            {user.message && (
-                                                <div className="mt-1 text-xs text-white/40 truncate max-w-[200px]" title={user.message}>
-                                                    Example: {user.message}
-                                                </div>
-                                            )}
-                                        </td>
-                                        <td className="p-4 text-right">
-                                            <div className="flex items-center justify-end gap-2 text-white opacity-100">
-                                                <button
-                                                    onClick={() => handleEditClick(user)}
-                                                    className="p-2 rounded-lg text-white/60 hover:text-white hover:bg-white/10 transition-colors"
-                                                    title="Tahrirlash"
-                                                >
-                                                    <Edit size={16} />
-                                                </button>
-                                                <button
-                                                    onClick={() => deleteUser(user.id)}
-                                                    className="p-2 rounded-lg text-white/60 hover:text-red-400 hover:bg-red-500/10 transition-colors"
-                                                    title="O'chirish"
-                                                >
-                                                    <Trash2 size={16} />
-                                                </button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                    </div>
+                            ))}
+                        </tbody>
+                    </table>
                 )}
 
                 {/* Pagination */}
@@ -293,7 +287,7 @@ export default function UsersPage() {
             {/* Add User Modal */}
             {isAddingUser && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
-                    <div className="bg-neutral-900 border border-white/10 rounded-2xl p-6 w-full max-w-md shadow-2xl">
+                    <div className="bg-neutral-900 border border-white/10 rounded-2xl p-6 w-full max-w-md shadow-2xl mx-4">
                         <h2 className="text-xl font-bold text-white mb-4">Yangi foydalanuvchi qo'shish</h2>
                         <form onSubmit={handleAddUser} className="space-y-4">
                             <div>
@@ -373,7 +367,7 @@ export default function UsersPage() {
             {/* Edit Modal */}
             {editingUser && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
-                    <div className="bg-neutral-900 border border-white/10 rounded-2xl p-6 w-full max-w-md shadow-2xl">
+                    <div className="bg-neutral-900 border border-white/10 rounded-2xl p-6 w-full max-w-md shadow-2xl mx-4">
                         <h2 className="text-xl font-bold text-white mb-4">Foydalanuvchini tahrirlash</h2>
                         <form onSubmit={handleSaveUser} className="space-y-4">
                             <div>
