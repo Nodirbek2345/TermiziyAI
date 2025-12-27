@@ -64,14 +64,14 @@ export default function UniversalAgent() {
             {/* Floating Button - Softer Design */}
             <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="fixed bottom-8 right-8 z-[100] w-16 h-16 rounded-3xl text-white shadow-xl hover:scale-105 active:scale-95 transition-all duration-300 flex items-center justify-center group overflow-hidden"
+                className="fixed bottom-4 right-4 md:bottom-8 md:right-8 z-[100] w-14 h-14 md:w-16 md:h-16 rounded-3xl text-white shadow-xl hover:scale-105 active:scale-95 transition-all duration-300 flex items-center justify-center group overflow-hidden"
                 style={{
                     background: 'linear-gradient(135deg, rgba(99, 102, 241, 0.9) 0%, rgba(168, 85, 247, 0.9) 50%, rgba(236, 72, 153, 0.9) 100%)',
                     boxShadow: '0 8px 32px rgba(139, 92, 246, 0.4), 0 0 0 1px rgba(255,255,255,0.1) inset'
                 }}
             >
                 <div className="absolute inset-0 bg-gradient-to-t from-white/10 to-transparent" />
-                <span className="text-2xl relative z-10 transition-transform duration-300 group-hover:scale-110">
+                <span className="text-xl md:text-2xl relative z-10 transition-transform duration-300 group-hover:scale-110">
                     {isOpen ? '✕' : '🤖'}
                 </span>
                 <div className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
@@ -81,7 +81,7 @@ export default function UniversalAgent() {
             {/* Agent Panel - Premium Glassmorphism */}
             {isOpen && (
                 <div
-                    className="fixed bottom-28 right-8 z-[100] w-[400px] rounded-3xl overflow-hidden animate-slideUp"
+                    className="fixed bottom-20 right-4 left-4 md:left-auto md:bottom-28 md:right-8 z-[100] md:w-[400px] rounded-3xl overflow-hidden animate-slideUp shadow-2xl"
                     style={{
                         background: 'linear-gradient(145deg, rgba(30, 27, 75, 0.95) 0%, rgba(20, 20, 40, 0.98) 100%)',
                         boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255,255,255,0.05) inset, 0 0 80px -20px rgba(139, 92, 246, 0.3)',
@@ -89,18 +89,18 @@ export default function UniversalAgent() {
                     }}
                 >
                     {/* Header - Soft Gradient */}
-                    <div className="relative px-6 py-5 overflow-hidden">
+                    <div className="relative px-5 py-4 md:px-6 md:py-5 overflow-hidden">
                         <div className="absolute inset-0 bg-gradient-to-r from-indigo-500/20 via-purple-500/20 to-pink-500/20" />
                         <div className="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent" />
                         <div className="relative flex items-center justify-between">
                             <div className="flex items-center gap-3">
-                                <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shadow-lg"
+                                <div className="w-10 h-10 md:w-12 md:h-12 rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shadow-lg"
                                     style={{ boxShadow: '0 8px 20px rgba(139, 92, 246, 0.4)' }}>
-                                    <span className="text-2xl">🤖</span>
+                                    <span className="text-xl md:text-2xl">🤖</span>
                                 </div>
                                 <div>
-                                    <h2 className="text-lg font-bold text-white tracking-tight">Termiziy AI</h2>
-                                    <p className="text-xs text-gray-400">Gemini bilan ishlaydi</p>
+                                    <h2 className="text-base md:text-lg font-bold text-white tracking-tight">Termiziy AI</h2>
+                                    <p className="text-[10px] md:text-xs text-gray-400">Gemini bilan ishlaydi</p>
                                 </div>
                             </div>
                             {messages.length > 0 && (
@@ -115,7 +115,7 @@ export default function UniversalAgent() {
                     </div>
 
                     {/* Messages Area */}
-                    <div className="p-5 space-y-4 max-h-[350px] overflow-y-auto"
+                    <div className="p-4 md:p-5 space-y-4 max-h-[50vh] md:max-h-[350px] overflow-y-auto"
                         style={{ scrollbarWidth: 'thin', scrollbarColor: 'rgba(139, 92, 246, 0.3) transparent' }}>
 
                         {messages.length === 0 && !isLoading && (
