@@ -945,19 +945,19 @@ export default function Home() {
 
                     <div className="space-y-4 max-h-[400px] overflow-y-auto pr-2 custom-scrollbar">
                       {currentStats.regionRanking.map((region, i) => (
-                        <div key={i} className="relative h-14 rounded-xl overflow-hidden group bg-slate-900/50 border border-white/5">
+                        <div key={i} className="relative h-10 md:h-14 rounded-xl overflow-hidden group bg-slate-900/50 border border-white/5">
                           <div
                             className={`absolute inset-y-0 left-0 bg-gradient-to-r ${region.color} transition-all duration-1000 group-hover:brightness-110 opacity-80`}
                             style={{ width: `${(region.count / 350000) * 100}%` }}
                           />
-                          <div className="absolute inset-0 flex items-center justify-between px-6 z-10">
-                            <div className="flex items-center gap-3">
-                              <span className="w-6 h-6 flex items-center justify-center bg-black/20 rounded-full text-xs font-bold text-white/70">
+                          <div className="absolute inset-0 flex items-center justify-between px-3 md:px-6 z-10">
+                            <div className="flex items-center gap-2 md:gap-3 flex-1 min-w-0 mr-2">
+                              <span className="w-5 h-5 md:w-6 md:h-6 flex items-center justify-center bg-black/20 rounded-full text-[10px] md:text-xs font-bold text-white/70 flex-shrink-0">
                                 {i + 1}
                               </span>
-                              <span className="font-semibold text-white drop-shadow-md truncate max-w-[120px] md:max-w-none">{region.name}</span>
+                              <span className="font-semibold text-white drop-shadow-md truncate text-xs md:text-base flex-1">{region.name}</span>
                             </div>
-                            <span className="font-bold text-white drop-shadow-md bg-black/20 px-3 py-1 rounded-lg border border-white/10">
+                            <span className="font-bold text-white drop-shadow-md bg-black/20 px-2 py-0.5 md:px-3 md:py-1 rounded-lg border border-white/10 text-xs md:text-base flex-shrink-0">
                               {region.count.toLocaleString()}
                             </span>
                           </div>
@@ -980,19 +980,19 @@ export default function Home() {
 
                     <div className="space-y-4">
                       {currentStats.courseRanking.map((course, i) => (
-                        <div key={i} className="relative h-16 rounded-xl overflow-hidden group bg-slate-900/50 border border-white/5">
+                        <div key={i} className="relative h-12 md:h-16 rounded-xl overflow-hidden group bg-slate-900/50 border border-white/5">
                           <div
                             className={`absolute inset-y-0 left-0 bg-gradient-to-r ${course.color} transition-all duration-1000 group-hover:brightness-110 opacity-80`}
                             style={{ width: `${(course.count / 350000) * 100}%` }}
                           />
-                          <div className="absolute inset-0 flex items-center justify-between px-6 z-10">
-                            <div className="flex items-center gap-3 overflow-hidden">
-                              <span className="flex-shrink-0 w-6 h-6 flex items-center justify-center bg-black/20 rounded-full text-xs font-bold text-white/70">
+                          <div className="absolute inset-0 flex items-center justify-between px-3 md:px-6 z-10">
+                            <div className="flex items-center gap-2 md:gap-3 overflow-hidden flex-1 min-w-0 mr-2">
+                              <span className="flex-shrink-0 w-5 h-5 md:w-6 md:h-6 flex items-center justify-center bg-black/20 rounded-full text-[10px] md:text-xs font-bold text-white/70">
                                 {i + 1}
                               </span>
-                              <span className="font-semibold text-white truncate drop-shadow-md text-sm md:text-base">{course.name}</span>
+                              <span className="font-semibold text-white truncate drop-shadow-md text-xs md:text-sm lg:text-base flex-1">{course.name}</span>
                             </div>
-                            <span className="flex-shrink-0 font-bold text-white drop-shadow-md bg-black/20 px-3 py-1 rounded-lg border border-white/10 ml-4">
+                            <span className="flex-shrink-0 font-bold text-white drop-shadow-md bg-black/20 px-2 py-0.5 md:px-3 md:py-1 rounded-lg border border-white/10 ml-2 md:ml-4 text-xs md:text-base">
                               {course.count.toLocaleString()}
                             </span>
                           </div>
