@@ -720,17 +720,17 @@ export default function Home() {
                 <h3 className={`text-[10px] md:text-3xl font-bold mb-2 md:mb-8 bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent`}>
                   Kimlar uchun?
                 </h3>
-                <div className="grid grid-cols-2 gap-2 md:flex md:flex-wrap md:gap-4">
+                <div className="flex flex-col gap-1 md:flex-row md:flex-wrap md:gap-4">
                   {[
                     { label: "Talabalar", desc: "AI yordamida yangi bilim va kasb o‘rganish" },
-                    { label: "Biznes egalari", desc: "Ishni tezlashtirish va xarajatni kamaytirish" },
-                    { label: "Dasturchilar", desc: "Kod yozishni oson va tez qilish" },
-                    { label: "Dizaynerlar", desc: "Rasmlar va dizaynni AI bilan yaratish" },
-                    { label: "Freelancerlar", desc: "Buyurtmalarni tez bajarish va ko‘proq daromad" }
+                    { label: "Biznes e.", desc: "Ishni tezlashtirish va xarajatni kamaytirish" },
+                    { label: "Dasturchi", desc: "Kod yozishni oson va tez qilish" },
+                    { label: "Dizayner", desc: "Rasmlar va dizaynni AI bilan yaratish" },
+                    { label: "Freelancer", desc: "Buyurtmalarni tez bajarish va ko‘proq daromad" }
                   ].map((item, i) => (
-                    <div key={i} className="group relative w-full">
+                    <div key={i} className="group relative">
                       <span
-                        className={`w-full text-center px-2 py-2 md:px-6 md:py-3 rounded-xl md:rounded-full text-xs md:text-base font-medium backdrop-blur-md border transition-all hover:scale-105 cursor-default inline-block whitespace-nowrap ${darkMode ? "bg-white/10 text-cyan-300 border-white/10 hover:bg-white/20" : "bg-white/40 text-slate-700 border-white/40 hover:bg-white/60 shadow-sm"}`}
+                        className={`block text-center px-1.5 py-1 md:px-6 md:py-3 rounded-lg md:rounded-full text-[8px] md:text-base font-medium backdrop-blur-md border transition-all hover:scale-105 cursor-default truncate ${darkMode ? "bg-white/10 text-cyan-300 border-white/10 hover:bg-white/20" : "bg-white/40 text-slate-700 border-white/40 hover:bg-white/60 shadow-sm"}`}
                       >
                         {item.label}
                       </span>
@@ -750,16 +750,16 @@ export default function Home() {
                 <h3 className={`text-[10px] md:text-3xl font-bold mb-2 md:mb-8 bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent`}>
                   Biz nimani o'rgatamiz?
                 </h3>
-                <div className="grid grid-cols-2 gap-2 md:flex md:flex-wrap md:gap-4">
+                <div className="flex flex-col gap-1 md:flex-row md:flex-wrap md:gap-4">
                   {[
-                    { title: "AI asoslari", icon: <Brain className="w-3 h-3 md:w-4 md:h-4" />, color: "text-purple-400", desc: "ChatGPT’dan to‘g‘ri foydalanish" },
-                    { title: "Midjourney", icon: <ImageIcon className="w-3 h-3 md:w-4 md:h-4" />, color: "text-pink-400", desc: "Matndan rasm yaratish" },
-                    { title: "AI biznesda", icon: <Briefcase className="w-3 h-3 md:w-4 md:h-4" />, color: "text-blue-400", desc: "Kundalik ishlarni avtomatlashtirish" },
-                    { title: "Amaliyot", icon: <Code className="w-3 h-3 md:w-4 md:h-4" />, color: "text-emerald-400", desc: "O‘rganib darhol sinab ko‘rish" }
+                    { title: "AI asos", icon: <Brain className="w-2.5 h-2.5 md:w-4 md:h-4" />, color: "text-purple-400", desc: "ChatGPT’dan to‘g‘ri foydalanish" },
+                    { title: "Midjrny", icon: <ImageIcon className="w-2.5 h-2.5 md:w-4 md:h-4" />, color: "text-pink-400", desc: "Matndan rasm yaratish" },
+                    { title: "AI biz", icon: <Briefcase className="w-2.5 h-2.5 md:w-4 md:h-4" />, color: "text-blue-400", desc: "Kundalik ishlarni avtomatlashtirish" },
+                    { title: "Amaliy", icon: <Code className="w-2.5 h-2.5 md:w-4 md:h-4" />, color: "text-emerald-400", desc: "O‘rganib darhol sinab ko‘rish" }
                   ].map((item, i) => (
-                    <div key={i} className="group relative w-full">
+                    <div key={i} className="group relative">
                       <span
-                        className={`w-full text-center px-2 py-2 md:px-6 md:py-3 rounded-xl md:rounded-full text-xs md:text-base font-medium backdrop-blur-md border transition-all hover:scale-105 cursor-default flex items-center justify-center gap-1.5 md:gap-2 whitespace-nowrap ${darkMode ? "bg-white/10 text-gray-200 border-white/10 hover:bg-white/20" : "bg-white/40 text-slate-700 border-white/40 hover:bg-white/60 shadow-sm"}`}
+                        className={`flex items-center justify-center gap-1 px-1.5 py-1 md:px-6 md:py-3 rounded-lg md:rounded-full text-[8px] md:text-base font-medium backdrop-blur-md border transition-all hover:scale-105 cursor-default truncate ${darkMode ? "bg-white/10 text-gray-200 border-white/10 hover:bg-white/20" : "bg-white/40 text-slate-700 border-white/40 hover:bg-white/60 shadow-sm"}`}
                       >
                         <span className={item.color}>{item.icon}</span>
                         {item.title}
@@ -780,18 +780,18 @@ export default function Home() {
                 <h3 className={`text-[10px] md:text-3xl font-bold mb-2 md:mb-8 bg-gradient-to-r from-emerald-400 to-cyan-500 bg-clip-text text-transparent`}>
                   Qanday o'qitamiz?
                 </h3>
-                <div className="grid grid-cols-2 gap-2 md:flex md:flex-wrap md:gap-4">
+                <div className="flex flex-col gap-1 md:flex-row md:flex-wrap md:gap-4">
                   {[
-                    { title: "Yozilasiz", icon: "📝", desc: "Bir necha daqiqada boshlaysiz" },
-                    { title: "Ko'rasiz", icon: "📺", desc: "Video va jonli tushuntirish" },
+                    { title: "Yozilish", icon: "📝", desc: "Bir necha daqiqada boshlaysiz" },
+                    { title: "Darslar", icon: "📺", desc: "Video va jonli tushuntirish" },
                     { title: "Mashq", icon: "💻", desc: "Real misollar bilan" },
                     { title: "Natija", icon: "🚀", desc: "Bilim, tajriba va sertifikat" }
                   ].map((step, i) => (
-                    <div key={i} className="group relative w-full">
+                    <div key={i} className="group relative">
                       <span
-                        className={`w-full text-center px-2 py-2 md:px-6 md:py-3 rounded-xl md:rounded-full text-xs md:text-base font-medium backdrop-blur-md border transition-all hover:scale-105 cursor-default flex items-center justify-center gap-1.5 md:gap-2 whitespace-nowrap ${darkMode ? "bg-white/10 text-gray-200 border-white/10 hover:bg-white/20" : "bg-white/40 text-slate-700 border-white/40 hover:bg-white/60 shadow-sm"}`}
+                        className={`flex items-center justify-center gap-1 px-1.5 py-1 md:px-6 md:py-3 rounded-lg md:rounded-full text-[8px] md:text-base font-medium backdrop-blur-md border transition-all hover:scale-105 cursor-default truncate ${darkMode ? "bg-white/10 text-gray-200 border-white/10 hover:bg-white/20" : "bg-white/40 text-slate-700 border-white/40 hover:bg-white/60 shadow-sm"}`}
                       >
-                        <span>{step.icon}</span>
+                        <span className="text-[10px] md:text-base">{step.icon}</span>
                         {step.title}
                       </span>
 
