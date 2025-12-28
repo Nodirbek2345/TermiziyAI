@@ -1149,40 +1149,40 @@ export default function Home() {
                 BEPUL KURSLARIMIZ
               </h2>
               {/* New Course Banner Style */}
-              <div className={`w-full max-w-4xl mx-auto mb-4 p-6 md:p-12 rounded-3xl relative overflow-hidden transition-all duration-500 hover:scale-[1.01] shadow-2xl ${darkMode ? 'bg-gradient-to-r from-emerald-950/80 to-slate-950/80 border border-emerald-500/20' : 'bg-gradient-to-r from-emerald-50 to-teal-50 border border-emerald-100'}`}>
+              <div className={`w-full max-w-4xl mx-auto mb-4 p-4 md:p-12 rounded-3xl relative overflow-hidden transition-all duration-500 hover:scale-[1.01] shadow-2xl ${darkMode ? 'bg-gradient-to-r from-emerald-950/80 to-slate-950/80 border border-emerald-500/20' : 'bg-gradient-to-r from-emerald-50 to-teal-50 border border-emerald-100'}`}>
 
-                <div className="flex flex-col md:flex-row items-center gap-8 md:gap-8">
+                <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8">
                   {/* Left: Robot Icon */}
-                  <div className={`relative w-40 h-40 md:w-56 md:h-56 flex-shrink-0 flex items-center justify-center rounded-[2.5rem] border-4 ${darkMode ? 'bg-emerald-900/20 border-emerald-500 text-emerald-400' : 'bg-white border-emerald-800 text-emerald-800 shadow-xl'}`}>
-                    <Bot className="w-24 h-24 md:w-32 md:h-32" strokeWidth={1.5} />
-                    <div className="absolute inset-0 bg-emerald-500/10 rounded-[2.5rem] blur-xl -z-10" />
+                  <div className={`relative w-24 h-24 md:w-56 md:h-56 flex-shrink-0 flex items-center justify-center rounded-[2rem] md:rounded-[2.5rem] border-4 ${darkMode ? 'bg-emerald-900/20 border-emerald-500 text-emerald-400' : 'bg-white border-emerald-800 text-emerald-800 shadow-xl'}`}>
+                    <Bot className="w-12 h-12 md:w-32 md:h-32" strokeWidth={1.5} />
+                    <div className="absolute inset-0 bg-emerald-500/10 rounded-[2rem] md:rounded-[2.5rem] blur-xl -z-10" />
                   </div>
 
                   {/* Right: Content */}
                   <div className="flex-1 text-center md:text-left">
-                    <p className={`text-sm md:text-lg font-medium mb-2 ${darkMode ? 'text-emerald-200' : 'text-emerald-900'}`}>
+                    <p className={`text-sm md:text-lg font-medium mb-1 md:mb-2 ${darkMode ? 'text-emerald-200' : 'text-emerald-900'}`}>
                       TERMIZIY AI bepul kurslari orqali sun’iy intellekt asoslarini o‘rganing
                     </p>
 
-                    <h3 className={`text-4xl md:text-6xl font-black mb-6 leading-tight tracking-tight ${darkMode ? 'text-white' : 'text-emerald-900'}`}>
+                    <h3 className={`text-2xl md:text-6xl font-black mb-3 md:mb-6 leading-tight tracking-tight ${darkMode ? 'text-white' : 'text-emerald-900'}`}>
                       ChatGPT <br className="hidden md:block" /> Asoslari
                     </h3>
 
-                    <div className="space-y-4">
-                      <div className="flex items-start gap-3 justify-center md:justify-start">
-                        <div className={`p-1 rounded-full mt-1 ${darkMode ? 'bg-emerald-500/20' : 'bg-emerald-100'}`}>
-                          <Check className={`w-4 h-4 md:w-5 md:h-5 ${darkMode ? 'text-emerald-400' : 'text-emerald-800'}`} />
+                    <div className="space-y-2 md:space-y-4">
+                      <div className="flex items-start gap-2 md:gap-3 justify-center md:justify-start">
+                        <div className={`p-1 rounded-full mt-0.5 md:mt-1 ${darkMode ? 'bg-emerald-500/20' : 'bg-emerald-100'}`}>
+                          <Check className={`w-3 h-3 md:w-5 md:h-5 ${darkMode ? 'text-emerald-400' : 'text-emerald-800'}`} />
                         </div>
-                        <p className={`text-sm md:text-xl font-medium ${darkMode ? 'text-emerald-100/80' : 'text-emerald-900/80'}`}>
+                        <p className={`text-xs md:text-xl font-medium ${darkMode ? 'text-emerald-100/80' : 'text-emerald-900/80'}`}>
                           ChatGPT, prompt yozish va AI vositalari bilan ishlashni bepul o‘rganing
                         </p>
                       </div>
 
-                      <div className="flex items-center gap-3 justify-center md:justify-start">
+                      <div className="flex items-center gap-2 md:gap-3 justify-center md:justify-start">
                         <div className={`p-1 rounded-full ${darkMode ? 'bg-emerald-500/20' : 'bg-emerald-100'}`}>
-                          <Check className={`w-4 h-4 md:w-5 md:h-5 ${darkMode ? 'text-emerald-400' : 'text-emerald-800'}`} />
+                          <Check className={`w-3 h-3 md:w-5 md:h-5 ${darkMode ? 'text-emerald-400' : 'text-emerald-800'}`} />
                         </div>
-                        <p className={`text-sm md:text-xl font-bold ${darkMode ? 'text-white' : 'text-emerald-900'}`}>
+                        <p className={`text-xs md:text-xl font-bold ${darkMode ? 'text-white' : 'text-emerald-900'}`}>
                           Kurs yakunida sertifikat beriladi
                         </p>
                       </div>
