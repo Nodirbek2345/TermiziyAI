@@ -269,6 +269,27 @@ export default function Home() {
   const [language, setLanguage] = useState<"UZ" | "RU" | "EN">("UZ");
   const [langDropdownOpen, setLangDropdownOpen] = useState(false);
 
+  const translations = {
+    UZ: {
+      bannerSubtitle: "TERMIZIY AI bepul kurslari orqali sun’iy intellekt asoslarini o‘rganing",
+      bannerTitle: "ChatGPT Asoslari",
+      bannerCheck1: "ChatGPT, prompt yozish va AI vositalari bilan ishlashni bepul o‘rganing",
+      bannerCheck2: "Kurs yakunida sertifikat beriladi"
+    },
+    RU: {
+      bannerSubtitle: "Изучите основы искусственного интеллекта с бесплатными курсами TERMIZIY AI",
+      bannerTitle: "Основы ChatGPT",
+      bannerCheck1: "Бесплатно изучите ChatGPT, написание промптов и работу с AI инструментами",
+      bannerCheck2: "Выдается сертификат по окончании курса"
+    },
+    EN: {
+      bannerSubtitle: "Learn Artificial Intelligence basics with TERMIZIY AI free courses",
+      bannerTitle: "ChatGPT Basics",
+      bannerCheck1: "Learn usage of ChatGPT, prompt engineering and AI tools for free",
+      bannerCheck2: "Certificate upon course completion"
+    }
+  };
+
   const freeCourses = [
     {
       id: 1,
@@ -1161,11 +1182,11 @@ export default function Home() {
                   {/* Right: Content */}
                   <div className="flex-1 text-center md:text-left">
                     <p className={`text-sm md:text-lg font-medium mb-1 md:mb-2 ${darkMode ? 'text-emerald-200' : 'text-emerald-900'}`}>
-                      TERMIZIY AI bepul kurslari orqali sun’iy intellekt asoslarini o‘rganing
+                      {translations[language].bannerSubtitle}
                     </p>
 
                     <h3 className={`text-2xl md:text-6xl font-black mb-3 md:mb-6 leading-tight tracking-tight ${darkMode ? 'text-white' : 'text-emerald-900'}`}>
-                      ChatGPT <br className="hidden md:block" /> Asoslari
+                      {translations[language].bannerTitle}
                     </h3>
 
                     <div className="space-y-2 md:space-y-4">
@@ -1174,7 +1195,7 @@ export default function Home() {
                           <Check className={`w-3 h-3 md:w-5 md:h-5 ${darkMode ? 'text-emerald-400' : 'text-emerald-800'}`} />
                         </div>
                         <p className={`text-xs md:text-xl font-medium ${darkMode ? 'text-emerald-100/80' : 'text-emerald-900/80'}`}>
-                          ChatGPT, prompt yozish va AI vositalari bilan ishlashni bepul o‘rganing
+                          {translations[language].bannerCheck1}
                         </p>
                       </div>
 
@@ -1183,7 +1204,7 @@ export default function Home() {
                           <Check className={`w-3 h-3 md:w-5 md:h-5 ${darkMode ? 'text-emerald-400' : 'text-emerald-800'}`} />
                         </div>
                         <p className={`text-xs md:text-xl font-bold ${darkMode ? 'text-white' : 'text-emerald-900'}`}>
-                          Kurs yakunida sertifikat beriladi
+                          {translations[language].bannerCheck2}
                         </p>
                       </div>
                     </div>
