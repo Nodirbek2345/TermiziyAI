@@ -948,18 +948,18 @@ export default function Home() {
 
                     <div className="space-y-2 md:space-y-4 max-h-[400px] overflow-y-auto pr-1 md:pr-2 custom-scrollbar">
                       {currentStats.regionRanking.map((region, i) => (
-                        <div key={i} className="flex items-center gap-2 md:gap-4">
+                        <div key={i} className="flex items-center gap-1.5 md:gap-4">
                           {/* Gradient bar with number and name */}
-                          <div className={`relative flex-1 h-9 md:h-12 rounded-lg md:rounded-xl overflow-hidden bg-gradient-to-r ${region.color}`}>
-                            <div className="absolute inset-0 flex items-center px-2 md:px-4">
-                              <span className="w-5 h-5 md:w-7 md:h-7 flex items-center justify-center bg-black/30 rounded-full text-[9px] md:text-sm font-bold text-white mr-1.5 md:mr-3 flex-shrink-0">
+                          <div className={`relative h-8 md:h-12 rounded-lg md:rounded-xl overflow-hidden bg-gradient-to-r ${region.color} flex-grow min-w-0`}>
+                            <div className="absolute inset-0 flex items-center px-1.5 md:px-4">
+                              <span className="w-4 h-4 md:w-7 md:h-7 flex items-center justify-center bg-black/30 rounded-full text-[8px] md:text-sm font-bold text-white mr-1 md:mr-3 flex-shrink-0">
                                 {i + 1}
                               </span>
-                              <span className="font-semibold text-white text-[9px] md:text-base truncate">{region.name}</span>
+                              <span className="font-medium text-white text-[8px] md:text-base truncate flex-1">{region.name}</span>
                             </div>
                           </div>
                           {/* Count badge */}
-                          <span className="font-bold text-white bg-slate-800/80 px-2 py-1.5 md:px-4 md:py-2 rounded-lg md:rounded-xl text-[10px] md:text-base min-w-[55px] md:min-w-[80px] text-center border border-white/10">
+                          <span className="font-bold text-white bg-slate-800/80 px-1.5 py-1 md:px-4 md:py-2 rounded-md md:rounded-xl text-[9px] md:text-base text-center border border-white/10 flex-shrink-0">
                             {region.count.toLocaleString()}
                           </span>
                         </div>
@@ -981,18 +981,18 @@ export default function Home() {
 
                     <div className="space-y-2 md:space-y-4">
                       {currentStats.courseRanking.map((course, i) => (
-                        <div key={i} className="flex items-center gap-2 md:gap-4">
+                        <div key={i} className="flex items-center gap-1.5 md:gap-4">
                           {/* Gradient bar with number and name */}
-                          <div className={`relative flex-1 h-9 md:h-12 rounded-lg md:rounded-xl overflow-hidden bg-gradient-to-r ${course.color}`}>
-                            <div className="absolute inset-0 flex items-center px-2 md:px-4">
-                              <span className="w-5 h-5 md:w-7 md:h-7 flex items-center justify-center bg-black/30 rounded-full text-[9px] md:text-sm font-bold text-white mr-1.5 md:mr-3 flex-shrink-0">
+                          <div className={`relative h-8 md:h-12 rounded-lg md:rounded-xl overflow-hidden bg-gradient-to-r ${course.color} flex-grow min-w-0`}>
+                            <div className="absolute inset-0 flex items-center px-1.5 md:px-4">
+                              <span className="w-4 h-4 md:w-7 md:h-7 flex items-center justify-center bg-black/30 rounded-full text-[8px] md:text-sm font-bold text-white mr-1 md:mr-3 flex-shrink-0">
                                 {i + 1}
                               </span>
-                              <span className="font-semibold text-white text-[9px] md:text-base truncate">{course.name}</span>
+                              <span className="font-medium text-white text-[8px] md:text-base truncate flex-1">{course.name}</span>
                             </div>
                           </div>
                           {/* Count badge */}
-                          <span className="font-bold text-white bg-slate-800/80 px-2 py-1.5 md:px-4 md:py-2 rounded-lg md:rounded-xl text-[10px] md:text-base min-w-[55px] md:min-w-[80px] text-center border border-white/10">
+                          <span className="font-bold text-white bg-slate-800/80 px-1.5 py-1 md:px-4 md:py-2 rounded-md md:rounded-xl text-[9px] md:text-base text-center border border-white/10 flex-shrink-0">
                             {course.count.toLocaleString()}
                           </span>
                         </div>
