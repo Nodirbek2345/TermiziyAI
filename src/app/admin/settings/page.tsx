@@ -8,8 +8,47 @@ export default function SettingsPage() {
     const [activeTab, setActiveTab] = useState<'profile' | 'ai' | 'ai-tech'>('profile');
 
     // AI Tech State
+    // AI Tech State
     const [frontendMode, setFrontendMode] = useState(false);
     const [layoutLock, setLayoutLock] = useState(false);
+
+    // Fetch Settings on Load
+    useEffect(() => {
+        fetch('/api/settings')
+            .then(res => res.json())
+            .then(data => {
+                if (data) {
+                    setFrontendMode(data.frontendMode);
+                    setLayoutLock(data.layoutLock);
+                }
+            })
+            .catch(err => console.error("Settings load error", err));
+    }, []);
+
+    const toggleSetting = async (key: 'frontendMode' | 'layoutLock', value: boolean, label: string) => {
+        try {
+            const res = await fetch('/api/settings', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ [key]: value })
+            });
+            const data = await res.json();
+            if (data.success) {
+                if (key === 'frontendMode') setFrontendMode(value);
+                if (key === 'layoutLock') setLayoutLock(value);
+
+                // Log to terminal
+                setCommandHistory(prev => [...prev, {
+                    type: 'output',
+                    content: `> ${label}: ${value ? 'ACTIVATED [ON]' : 'DEACTIVATED [OFF]'}`
+                }]);
+            }
+        } catch (error) {
+            console.error(error);
+            setCommandHistory(prev => [...prev, { type: 'output', content: `> Xatolik: Sozlama saqlanmadi.` }]);
+        }
+    };
+
     const [commandInput, setCommandInput] = useState("");
     const [commandHistory, setCommandHistory] = useState<{ type: 'input' | 'output', content: string }[]>([
         { type: 'output', content: '> Tizim diagnostikasi... OK' },
@@ -568,7 +607,7 @@ export default function SettingsPage() {
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
                                     <div
                                         className={`p-4 bg-white/5 rounded-xl border transition-colors cursor-pointer ${frontendMode ? 'border-purple-500 bg-purple-500/10' : 'border-white/5 hover:border-purple-500/30'}`}
-                                        onClick={() => setFrontendMode(!frontendMode)}
+                                        onClick={() => toggleSetting('frontendMode', !frontendMode, 'Frontend Rejimi')}
                                     >
                                         <div className="flex justify-between items-start mb-2">
                                             <Monitor className={frontendMode ? "text-purple-400" : "text-blue-400"} size={24} />
@@ -582,7 +621,7 @@ export default function SettingsPage() {
 
                                     <div
                                         className={`p-4 bg-white/5 rounded-xl border transition-colors cursor-pointer ${layoutLock ? 'border-green-500 bg-green-500/10' : 'border-white/5 hover:border-green-500/30'}`}
-                                        onClick={() => setLayoutLock(!layoutLock)}
+                                        onClick={() => toggleSetting('layoutLock', !layoutLock, 'Layout Qulflash')}
                                     >
                                         <div className="flex justify-between items-start mb-2">
                                             <Layout className={layoutLock ? "text-green-400" : "text-white/40"} size={24} />
