@@ -411,11 +411,29 @@ export default function Home() {
     }, 100)
   }
 
+  const [isSubmitting, setIsSubmitting] = useState(false)
+
   const sendToTelegram = async () => {
-    if (!name || !phone) {
-      alert("Iltimos, ism va telefon raqamini to'ldiring!")
+    if (isSubmitting) return
+
+    const cleanName = name.trim()
+    const cleanPhone = phone.trim()
+    const cleanEmail = email.trim()
+    const cleanMessage = message.trim()
+
+    if (!cleanName || !cleanPhone) {
+      alert("⚠️ Iltimos, ism va telefon raqamni to'liq kiriting!")
       return
     }
+
+    // Telefon raqam validatsiyasi (O'zbekiston standarti)
+    const phoneRegex = /^(\+998|998|)\d{9}$/
+    if (!phoneRegex.test(cleanPhone.replace(/\s+/g, ''))) {
+      alert("⚠️ Iltimos, to'g'ri telefon raqam kiriting! (Masalan: +998901234567)")
+      return
+    }
+
+    setIsSubmitting(true)
 
     try {
       // Foydalanuvchini bazaga saqlash
@@ -423,31 +441,32 @@ export default function Home() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          name: name,
-          email: email || null,
-          phoneNumber: phone,
+          name: cleanName,
+          email: cleanEmail || null,
+          phoneNumber: cleanPhone,
           role: 'Student',
           status: 'Active',
-          message: message || null
+          message: cleanMessage || null
         })
       })
 
       if (res.ok) {
-        alert("✅ Siz muvaffaqiyatli ro'yxatdan o'tdingiz!")
+        alert("✅ Siz muvaffaqiyatli ro'yxatdan o'tdingiz! Tez orada aloqaga chiqamiz.")
         setName("")
         setPhone("")
         setEmail("")
         setMessage("")
-        handleViewChange('paid-courses')
       } else {
-        const data = await res.json()
-        alert("❌ Xatolik: " + (data.error || "Noma'lum xato") + (data.details ? `\n\nTafsilot: ${data.details}` : ""))
+        alert("❌ Xatolik yuz berdi. Iltimos qayta urinib ko'ring.")
       }
     } catch (error) {
-      console.error("Registration error:", error)
-      alert("❌ Serverga ulanishda xatolik! Internet aloqasini tekshiring.")
+      console.error(error)
+      alert("❌ Internet bilan aloqa yo'q.")
+    } finally {
+      setIsSubmitting(false)
     }
   }
+
 
 
   // History API - Browser Back Button Support
