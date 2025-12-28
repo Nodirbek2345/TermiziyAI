@@ -1095,7 +1095,7 @@ export default function Home() {
                     <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 animate-gradient-x" />
                     <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 blur-xl opacity-50 group-hover:opacity-75 transition-opacity" />
                     <Send className="w-6 h-6 relative z-10" />
-                    <span className="relative z-10">Kurslarga o&apos;tish</span>
+                    <span className="relative z-10">Ro&apos;yxatdan o&apos;tish</span>
                   </button>
                 </div>
               </div>
