@@ -450,11 +450,12 @@ export default function Home() {
       })
 
       if (res.ok) {
-        alert("✅ Siz muvaffaqiyatli ro'yxatdan o'tdingiz! Tez orada aloqaga chiqamiz.")
+        alert("✅ Siz muvaffaqiyatli ro'yxatdan o'tdingiz! Kurslar sahifasiga yo'naltirilmoqdasiz...")
         setName("")
         setPhone("")
         setEmail("")
         setMessage("")
+        handleViewChange('courses')
       } else {
         alert("❌ Xatolik yuz berdi. Iltimos qayta urinib ko'ring.")
       }
