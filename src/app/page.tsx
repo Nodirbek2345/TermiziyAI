@@ -932,7 +932,7 @@ export default function Home() {
                 </div>
 
                 {/* Bottom Charts Grid */}
-                <div className="grid grid-cols-2 gap-1.5 md:gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-6">
 
                   {/* Left Column: Region Ranking */}
                   <div className="bg-slate-800/40 rounded-xl md:rounded-3xl p-1.5 md:p-8 border border-white/5 backdrop-blur-sm">
