@@ -1304,6 +1304,54 @@ export default function Home() {
               </div>
 
             </div>
+
+            {/* About Termiziy AI Section - Dark Premium Design */}
+            <div className={`mt-24 md:mt-40 mb-20 relative px-4 md:px-0`}>
+              {/* Background Glows */}
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[250px] md:w-[700px] h-[250px] md:h-[700px] bg-purple-600/10 rounded-full blur-[90px] md:blur-[140px] pointer-events-none" />
+              <div className="absolute top-0 right-0 w-[200px] md:w-[500px] h-[200px] md:h-[500px] bg-cyan-600/10 rounded-full blur-[70px] md:blur-[120px] pointer-events-none" />
+
+              <div className="relative z-10 text-center max-w-5xl mx-auto">
+                <h2 className="text-5xl md:text-9xl font-black mb-4 md:mb-8 tracking-tighter bg-gradient-to-br from-white via-slate-200 to-slate-400 bg-clip-text text-transparent drop-shadow-[0_0_30px_rgba(255,255,255,0.2)] selection:bg-purple-500/30">
+                  TERMIZIY AI
+                </h2>
+                <p className="text-sm md:text-2xl font-light text-cyan-400 mb-6 md:mb-10 tracking-[0.2em] uppercase">
+                  Sun’iy intellekt asosida zamonaviy kasblarni o‘rgatuvchi onlayn ta’lim platformasi
+                </p>
+                <p className={`text-sm md:text-xl leading-relaxed mb-10 md:mb-16 max-w-3xl mx-auto font-light ${darkMode ? 'text-gray-300' : 'text-slate-600'}`}>
+                  TERMIZIY AI — <span className="text-purple-400 font-semibold">ChatGPT</span>, <span className="text-pink-400 font-semibold">Midjourney</span>, sun’iy intellekt, prompt engineering va real loyihalar orqali amaliy bilim beruvchi professional platforma.
+                </p>
+
+                <div className="flex flex-col md:flex-row gap-4 justify-center mb-16 md:mb-28">
+                  <button onClick={() => handleViewChange('courses')} className="group relative px-8 py-4 bg-white/5 backdrop-blur-md rounded-2xl border border-white/10 overflow-hidden transition-all hover:scale-105 active:scale-95 hover:border-white/20">
+                    <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-blue-500 opacity-0 group-hover:opacity-10 transition-opacity duration-500" />
+                    <span className="relative z-10 font-bold text-white flex items-center justify-center gap-3 text-lg">
+                      <Sparkles className="w-5 h-5 text-cyan-400" /> Kurslarni ko‘rish
+                    </span>
+                  </button>
+                  <button onClick={scrollToContact} className="group relative px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-600 rounded-2xl overflow-hidden transition-all hover:scale-105 active:scale-95 shadow-[0_0_40px_rgba(168,85,247,0.4)] hover:shadow-[0_0_60px_rgba(168,85,247,0.6)]">
+                    <span className="relative z-10 font-bold text-white flex items-center justify-center gap-3 text-lg">
+                      <Zap className="w-5 h-5 text-yellow-300 fill-yellow-300" /> Ro‘yxatdan o‘tish
+                    </span>
+                  </button>
+                </div>
+
+                {/* Features Grid */}
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-6">
+                  {[
+                    { title: "Kimlar uchun?", icon: <Users className="w-6 h-6 md:w-8 md:h-8" />, color: "text-cyan-400", border: "group-hover:border-cyan-500/50" },
+                    { title: "Nimalarni o‘rganasiz?", icon: <Brain className="w-6 h-6 md:w-8 md:h-8" />, color: "text-purple-400", border: "group-hover:border-purple-500/50" },
+                    { title: "Real keyslar", icon: <Briefcase className="w-6 h-6 md:w-8 md:h-8" />, color: "text-pink-400", border: "group-hover:border-pink-500/50" },
+                    { title: "Natijalar", icon: <Trophy className="w-6 h-6 md:w-8 md:h-8" />, color: "text-emerald-400", border: "group-hover:border-emerald-500/50" }
+                  ].map((item, i) => (
+                    <div key={i} className={`group p-4 md:p-8 rounded-3xl backdrop-blur-md border border-white/5 bg-white/[0.02] hover:bg-white/[0.05] transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl ${item.border}`}>
+                      <div className={`mb-4 md:mb-6 ${item.color} p-3 rounded-2xl bg-white/5 inline-block group-hover:scale-110 transition-transform duration-300`}>{item.icon}</div>
+                      <h4 className="text-[10px] md:text-sm font-bold uppercase tracking-wider text-white/60 group-hover:text-white transition-colors">{item.title}</h4>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
           </section>
         )
         }
