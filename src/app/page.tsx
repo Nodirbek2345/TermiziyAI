@@ -911,12 +911,11 @@ export default function Home() {
               </span>
             </h1>
 
-            <p className={`text-base md:text-2xl mb-8 md:mb-16 max-w-5xl mx-auto font-light leading-relaxed ${darkMode ? "text-gray-300" : "text-slate-600"}`}>
-              TERMIZIY AI bepul kurslari orqali sun’iy intellekt asoslarini o‘rganing.
-              <br className="hidden md:block" />
-              ChatGPT, prompt yozish va AI vositalari bilan ishlashni bepul o‘rganing.
-              <br className="hidden md:block" />
-              <span className="text-cyan-400 font-medium">Kurs yakunida sertifikat beriladi.</span>
+            <p className={`text-base md:text-4xl mb-8 md:mb-16 max-w-5xl mx-auto font-light leading-relaxed ${darkMode ? "text-gray-300" : "text-slate-600"}`}>
+              <span className="text-cyan-400 font-semibold">Sun&apos;iy intellekt</span> •{' '}
+              <span className="text-purple-400 font-semibold">ChatGPT</span> •{' '}
+              <span className="text-pink-400 font-semibold">Midjourney</span> •{' '}
+              <span className="text-emerald-400 font-semibold">Professional</span> kurslar
             </p>
 
             {/* 3D Stats Cards */}
@@ -1153,7 +1152,54 @@ export default function Home() {
                 Bepul kurslar orqali AI dunyosiga birinchi qadamingizni qo'ying
               </p>
 
+              {/* NEW BANNER LOCATION: Hurmatli Aksiyador */}
+              <div className={`w-full max-w-5xl mx-auto mb-16 p-6 md:p-10 rounded-3xl relative overflow-hidden text-left group transition-all hover:scale-[1.01] duration-500 shadow-2xl ${darkMode ? 'bg-gradient-to-r from-blue-900/40 to-slate-900/40 border border-blue-500/20' : 'bg-gradient-to-r from-blue-600 to-indigo-700 text-white shadow-blue-300'}`}>
+                <div className="absolute inset-0 bg-grid-white/[0.05] bg-[size:20px_20px]" />
+                <div className="absolute top-0 right-0 w-64 h-64 bg-cyan-500/20 rounded-full blur-[80px]" />
 
+                <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6 md:gap-10">
+                  <div className="flex-1 space-y-4 md:space-y-6">
+                    <h2 className="text-2xl md:text-4xl font-extrabold tracking-tight">Hurmatli Aksiyador!</h2>
+                    <p className={`text-sm md:text-lg leading-relaxed max-w-lg ${darkMode ? 'text-blue-100/80' : 'text-blue-50'}`}>
+                      "O&apos;zbektelekom" AK aksiyalari bo&apos;yicha 2024-yil uchun hisoblangan dividendlarni UZCSD dasturi orqali olishingiz mumkin.
+                    </p>
+                    <button className="px-6 py-2.5 rounded-xl border border-white/20 hover:bg-white/10 transition-all font-medium active:scale-95">
+                      Batafsil
+                    </button>
+                  </div>
+
+                  {/* Illustrations */}
+                  <div className="relative w-full md:w-1/3 h-48 md:h-56 flex items-center justify-end perspective-1000">
+                    {/* Smartphone */}
+                    <div className="relative z-20 transform rotate-[-5deg] md:rotate-[-10deg] translate-y-2 bg-slate-900 rounded-[2rem] border-4 border-slate-700 p-2 shadow-2xl w-28 h-48 md:w-32 md:h-52 overflow-hidden flex flex-col items-center">
+                      <div className="w-12 h-1 bg-slate-800 rounded-full mb-2" />
+                      <div className="flex-1 w-full bg-slate-800/50 rounded-xl relative overflow-hidden">
+                        <div className="absolute top-4 left-2 right-2 h-16 bg-blue-500/20 rounded-lg animate-pulse" />
+                        <div className="absolute bottom-4 left-2 right-2 h-20 bg-cyan-500/10 rounded-lg" />
+                      </div>
+                    </div>
+
+                    {/* Credit Card */}
+                    <div className="absolute bottom-4 right-12 md:right-16 z-30 transform rotate-[15deg] translate-x-4 bg-gradient-to-br from-cyan-600 to-blue-700 w-32 h-20 md:w-40 md:h-24 rounded-xl border border-white/10 shadow-xl p-3 flex flex-col justify-between animate-float">
+                      <div className="w-8 h-5 bg-yellow-400/80 rounded" />
+                      <div className="space-y-1">
+                        <div className="w-20 h-1.5 bg-white/30 rounded" />
+                        <div className="w-12 h-1.5 bg-white/30 rounded" />
+                      </div>
+                    </div>
+
+                    {/* Coins */}
+                    <div className="absolute bottom-0 right-0 z-40 flex flex-col items-center animate-bounce-slow">
+                      <Coins className="w-12 h-12 text-yellow-400 drop-shadow-[0_4px_10px_rgba(250,204,21,0.5)]" />
+                    </div>
+
+                    {/* Floating Cloud */}
+                    <div className="absolute top-4 right-4 animate-float animation-delay-2000 opacity-50">
+                      <div className="w-16 h-6 bg-white/10 rounded-full blur-sm" />
+                    </div>
+                  </div>
+                </div>
+              </div>
 
               {/* Carousel Container - 3D Effect */}
               {/* Carousel Container - 3D Cover Flow */}
