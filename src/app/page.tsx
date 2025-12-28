@@ -2,7 +2,6 @@
 
 import { Moon, Sun, Send, Sparkles, Zap, Trophy, Users, Brain, Cpu, Network, Bot, Instagram, Youtube, Facebook, Briefcase, Code, Image as ImageIcon, TrendingUp, GraduationCap, MapPin } from "lucide-react"
 import { useState, useEffect, useRef } from "react"
-import UniversalAgent from "@/components/UniversalAgent"
 
 /* =========================
    PROMPT ANALYZER (FREE)
@@ -742,7 +741,7 @@ export default function Home() {
                 <div className="flex flex-col gap-1 md:flex-row md:flex-wrap md:gap-4">
                   {[
                     { label: "Talabalar", desc: "AI yordamida yangi bilim va kasb o‘rganish" },
-                    { label: "Biznes e.", desc: "Ishni tezlashtirish va xarajatni kamaytirish" },
+                    { label: "Biznes", desc: "Ishni tezlashtirish va xarajatni kamaytirish" },
                     { label: "Dasturchi", desc: "Kod yozishni oson va tez qilish" },
                     { label: "Dizayner", desc: "Rasmlar va dizaynni AI bilan yaratish" },
                     { label: "Freelancer", desc: "Buyurtmalarni tez bajarish va ko‘proq daromad" }
@@ -1686,7 +1685,6 @@ export default function Home() {
         }
 
         {/* Universal AI Agent - Bottom Right */}
-        <UniversalAgent />
       </main >
     </div >
   )

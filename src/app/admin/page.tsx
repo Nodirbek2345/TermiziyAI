@@ -42,12 +42,12 @@ export default function AdminPage() {
     return (
         <div className="space-y-8">
             {/* Header */}
-            <div className="flex items-center justify-between">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                 <div>
-                    <h1 className="text-3xl font-bold text-white mb-2">Boshqaruv Paneli</h1>
-                    <p className="text-white/40">Loyihangizning umumiy holati va statistikasi</p>
+                    <h1 className="text-2xl md:text-3xl font-bold text-white mb-1 md:mb-2">Boshqaruv Paneli</h1>
+                    <p className="text-white/40 text-sm md:text-base">Loyihangizning umumiy holati va statistikasi</p>
                 </div>
-                <div className="flex gap-3">
+                <div className="flex flex-wrap gap-2 md:gap-3 w-full md:w-auto">
                     <button
                         onClick={fetchStats}
                         disabled={loading}
@@ -55,12 +55,12 @@ export default function AdminPage() {
                     >
                         <RefreshCcw size={18} className={loading ? "animate-spin" : ""} />
                     </button>
-                    <select className="bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white/80 focus:outline-none focus:border-purple-500/50">
+                    <select className="flex-1 md:flex-none bg-white/5 border border-white/10 rounded-lg px-3 py-2 md:px-4 text-sm md:text-base text-white/80 focus:outline-none focus:border-purple-500/50">
                         <option>Bugun</option>
                         <option>Bu hafta</option>
                         <option>Bu oy</option>
                     </select>
-                    <button className="bg-purple-600 hover:bg-purple-500 text-white px-4 py-2 rounded-lg font-medium transition-colors">
+                    <button className="flex-1 md:flex-none bg-purple-600 hover:bg-purple-500 text-white px-3 py-2 md:px-4 rounded-lg text-sm md:text-base font-medium transition-colors whitespace-nowrap">
                         Hisobotni yuklash
                     </button>
                 </div>
@@ -194,7 +194,7 @@ function StatCard({ title, value, trend, icon, color }: { title: string; value: 
     };
 
     return (
-        <div className="bg-neutral-900/50 backdrop-blur-xl border border-white/5 rounded-2xl p-6 relative overflow-hidden group hover:border-white/10 transition-all duration-500">
+        <div className="bg-neutral-900/50 backdrop-blur-xl border border-white/5 rounded-2xl p-4 md:p-6 relative overflow-hidden group hover:border-white/10 transition-all duration-500">
             <div className={`absolute top-0 right-0 p-3 opacity-10 group-hover:opacity-20 transition-opacity`}>
                 <div className={`w-24 h-24 rounded-full blur-2xl bg-gradient-to-br ${colors[color]}`} />
             </div>

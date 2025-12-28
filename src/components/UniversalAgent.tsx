@@ -100,7 +100,10 @@ export default function UniversalAgent() {
                                 </div>
                                 <div>
                                     <h2 className="text-base md:text-lg font-bold text-white tracking-tight">Termiziy AI</h2>
-                                    <p className="text-[10px] md:text-xs text-gray-400">Gemini bilan ishlaydi</p>
+                                    <p className="text-[10px] md:text-xs text-emerald-400 flex items-center gap-1">
+                                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                                        Online
+                                    </p>
                                 </div>
                             </div>
                             {messages.length > 0 && (
@@ -123,8 +126,18 @@ export default function UniversalAgent() {
                                 <div className="w-16 h-16 rounded-full bg-gradient-to-br from-indigo-500/20 to-purple-500/20 flex items-center justify-center mx-auto mb-4">
                                     <span className="text-3xl">💬</span>
                                 </div>
-                                <p className="text-gray-400 text-sm">Savolingizni yozing</p>
-                                <p className="text-gray-500 text-xs mt-2">Men sizga yordam berishga tayyorman!</p>
+                                <p className="text-gray-400 text-sm mb-4">Savolingizni yozing yoki tanlang:</p>
+                                <div className="flex flex-wrap gap-2 justify-center px-4">
+                                    {["AI kurslari qanaqa?", "Narxlar qancha?", "Sertifikat beriladimi?", "Ro'yxatdan o'tish"].map((q, i) => (
+                                        <button
+                                            key={i}
+                                            onClick={() => { setQuestion(q); handleAsk() }}
+                                            className="text-xs bg-white/5 hover:bg-white/10 border border-white/10 rounded-full px-3 py-1.5 text-gray-300 transition-colors"
+                                        >
+                                            {q}
+                                        </button>
+                                    ))}
+                                </div>
                             </div>
                         )}
 
@@ -172,10 +185,10 @@ export default function UniversalAgent() {
                                 value={question}
                                 onChange={(e) => setQuestion(e.target.value)}
                                 placeholder="Savolingizni yozing..."
-                                className="flex-1 px-4 py-3.5 rounded-2xl text-white placeholder:text-gray-500 text-sm focus:outline-none transition-all duration-300"
+                                className="flex-1 px-4 py-3.5 rounded-2xl text-white placeholder:text-gray-400 text-sm focus:outline-none transition-all duration-300"
                                 style={{
-                                    background: 'rgba(255,255,255,0.05)',
-                                    border: '1px solid rgba(255,255,255,0.08)',
+                                    background: 'rgba(255,255,255,0.08)',
+                                    border: '1px solid rgba(255,255,255,0.1)',
                                     boxShadow: '0 2px 10px rgba(0,0,0,0.1) inset'
                                 }}
                                 onFocus={(e) => {
