@@ -274,19 +274,178 @@ export default function Home() {
       bannerSubtitle: "TERMIZIY AI bepul kurslari orqali sun’iy intellekt asoslarini o‘rganing",
       bannerTitle: "ChatGPT Asoslari",
       bannerCheck1: "ChatGPT, prompt yozish va AI vositalari bilan ishlashni bepul o‘rganing",
-      bannerCheck2: "Kurs yakunida sertifikat beriladi"
+      bannerCheck2: "Kurs yakunida sertifikat beriladi",
+      heroTagline: "AIni biz bilan o'rganing",
+      heroTitle1: "TERMIZIY",
+      heroTitle2: "AI",
+      heroSubtitle: {
+        ai: "Sun'iy intellekt",
+        professional: "Professional"
+      },
+      heroButtons: {
+        enroll: "Kursga yozilish",
+        legal: "Huquqiy IT"
+      },
+      stats: {
+        community: "Hamjamiyat",
+        cases: "Real Caselar",
+        courses: "Kurslar",
+        results: "Natijalar",
+        details: "Batafsil",
+        items: {
+          graduates: "Bitiruvchilarimiz",
+          reviews: "Talabalar fikrlari",
+          community_join: "Guruhga qo'shiling",
+          chatgpt_projects: "ChatGPT loyihalari",
+          midjourney_works: "Midjourney ishlar",
+          ai_bots: "AI botlar & agentlar",
+          ai_courses: "AI kurslar",
+          ai_library: "AI kutubxona",
+          useful_ai: "Foydali AI",
+          practice: "100% amaliyot",
+          job_ready: "Ishga tayyor bilim",
+          mentor_support: "Mentor yordami"
+        }
+      },
+      infoGrid: {
+        whoFor: "Kimlar uchun?",
+        whatWeTeach: "Biz nimani o'rgatamiz?",
+        howWeTeach: "Qanday o'qitamiz?",
+        items: {
+          students: "Talabalar",
+          business: "Biznes",
+          developers: "Dasturchi",
+          designers: "Dizayner",
+          freelancers: "Freelancer",
+          ai_basics: "AI asos",
+          midjourney: "Midjrny",
+          ai_biz: "AI biz",
+          practical: "Amaliy",
+          enroll: "Yozilish",
+          lessons: "Darslar",
+          exercise: "Mashq",
+          result: "Natija"
+        }
+      },
+      bepulKurslarTitle: "BEPUL KURSLARIMIZ"
     },
     RU: {
       bannerSubtitle: "Изучите основы искусственного интеллекта с бесплатными курсами TERMIZIY AI",
       bannerTitle: "Основы ChatGPT",
       bannerCheck1: "Бесплатно изучите ChatGPT, написание промптов и работу с AI инструментами",
-      bannerCheck2: "Выдается сертификат по окончании курса"
+      bannerCheck2: "Выдается сертификат по окончании курса",
+      heroTagline: "Изучайте AI с нами",
+      heroTitle1: "TERMIZIY",
+      heroTitle2: "AI",
+      heroSubtitle: {
+        ai: "Искусственный интеллект",
+        professional: "Профессиональные"
+      },
+      heroButtons: {
+        enroll: "Записаться",
+        legal: "Правовой IT"
+      },
+      stats: {
+        community: "Сообщество",
+        cases: "Реальные кейсы",
+        courses: "Курсы",
+        results: "Результаты",
+        details: "Подробнее",
+        items: {
+          graduates: "Наши выпускники",
+          reviews: "Отзывы студентов",
+          community_join: "Вступить в группу",
+          chatgpt_projects: "Проекты ChatGPT",
+          midjourney_works: "Работы Midjourney",
+          ai_bots: "AI боты и агенты",
+          ai_courses: "AI курсы",
+          ai_library: "AI библиотека",
+          useful_ai: "Полезный AI",
+          practice: "100% практика",
+          job_ready: "Готовые знания",
+          mentor_support: "Помощь ментора"
+        }
+      },
+      infoGrid: {
+        whoFor: "Для кого?",
+        whatWeTeach: "Чему учим?",
+        howWeTeach: "Как обучаем?",
+        items: {
+          students: "Студенты",
+          business: "Бизнес",
+          developers: "Разработчики",
+          designers: "Дизайнеры",
+          freelancers: "Фрилансеры",
+          ai_basics: "Основы AI",
+          midjourney: "Midjourney",
+          ai_biz: "AI бизнес",
+          practical: "Практика",
+          enroll: "Запись",
+          lessons: "Уроки",
+          exercise: "Задачи",
+          result: "Результат"
+        }
+      },
+      bepulKurslarTitle: "НАШИ БЕСПЛАТНЫЕ КУРСЫ"
     },
     EN: {
       bannerSubtitle: "Learn Artificial Intelligence basics with TERMIZIY AI free courses",
       bannerTitle: "ChatGPT Basics",
       bannerCheck1: "Learn usage of ChatGPT, prompt engineering and AI tools for free",
-      bannerCheck2: "Certificate upon course completion"
+      bannerCheck2: "Certificate upon course completion",
+      heroTagline: "Learn AI with us",
+      heroTitle1: "TERMIZIY",
+      heroTitle2: "AI",
+      heroSubtitle: {
+        ai: "Artificial Intelligence",
+        professional: "Professional"
+      },
+      heroButtons: {
+        enroll: "Enroll Now",
+        legal: "Legal IT"
+      },
+      stats: {
+        community: "Community",
+        cases: "Real Cases",
+        courses: "Courses",
+        results: "Results",
+        details: "Details",
+        items: {
+          graduates: "Our Graduates",
+          reviews: "Student Reviews",
+          community_join: "Join Group",
+          chatgpt_projects: "ChatGPT Projects",
+          midjourney_works: "Midjourney Works",
+          ai_bots: "AI Bots & Agents",
+          ai_courses: "AI Courses",
+          ai_library: "AI Library",
+          useful_ai: "Useful AI",
+          practice: "100% Practice",
+          job_ready: "Job Ready",
+          mentor_support: "Mentor Support"
+        }
+      },
+      infoGrid: {
+        whoFor: "Who is it for?",
+        whatWeTeach: "What we teach?",
+        howWeTeach: "How we teach?",
+        items: {
+          students: "Students",
+          business: "Business",
+          developers: "Developers",
+          designers: "Designers",
+          freelancers: "Freelancers",
+          ai_basics: "AI Basics",
+          midjourney: "Midjourney",
+          ai_biz: "AI Biz",
+          practical: "Practical",
+          enroll: "Enroll",
+          lessons: "Lessons",
+          exercise: "Exercise",
+          result: "Result"
+        }
+      },
+      bepulKurslarTitle: "OUR FREE COURSES"
     }
   };
 
@@ -904,7 +1063,7 @@ export default function Home() {
             >
               <Sparkles className="w-4 h-4 md:w-6 md:h-6 text-cyan-400 animate-pulse" />
               <span className="text-sm md:text-xl font-semibold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
-                AIni biz bilan o&apos;rganing
+                {translations[language].heroTagline}
               </span>
             </div>
 
@@ -933,10 +1092,10 @@ export default function Home() {
             </h1>
 
             <p className={`text-base md:text-4xl mb-8 md:mb-16 max-w-5xl mx-auto font-light leading-relaxed ${darkMode ? "text-gray-300" : "text-slate-600"}`}>
-              <span className="text-cyan-400 font-semibold">Sun&apos;iy intellekt</span> •{' '}
+              <span className="text-cyan-400 font-semibold">{translations[language].heroSubtitle.ai}</span> •{' '}
               <span className="text-purple-400 font-semibold">ChatGPT</span> •{' '}
               <span className="text-pink-400 font-semibold">Midjourney</span> •{' '}
-              <span className="text-emerald-400 font-semibold">Professional</span> kurslar
+              <span className="text-emerald-400 font-semibold">{translations[language].heroSubtitle.professional}</span> kurslar
             </p>
 
             {/* 3D Stats Cards */}
@@ -951,14 +1110,14 @@ export default function Home() {
                 <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 blur-xl opacity-50 group-hover:opacity-75 transition-opacity" />
                 <span className="relative z-10 flex items-center justify-center gap-2">
                   <Sparkles className="w-4 h-4 md:w-6 md:h-6" />
-                  Kursga yozilish
+                  {translations[language].heroButtons.enroll}
                 </span>
               </button>
               <button
                 onClick={() => handleViewChange('legal')}
                 className="flex-1 md:flex-none text-sm md:text-2xl px-4 py-3 md:px-14 md:py-8 rounded-xl md:rounded-2xl border border-cyan-500/30 hover:bg-cyan-500/10 backdrop-blur-xl transition-all font-bold hover:scale-105 hover:border-cyan-500/50 hover:shadow-[0_0_30px_rgba(6,182,212,0.3)] md:min-w-[200px]"
               >
-                Huquqiy IT
+                {translations[language].heroButtons.legal}
               </button>
             </div>
 
@@ -967,46 +1126,46 @@ export default function Home() {
               {[
                 {
                   icon: <Users className="w-10 h-10" />,
-                  number: "Hamjamiyat",
-                  label: "Batafsil", // O'zgartirildi
+                  number: translations[language].stats.community,
+                  label: translations[language].stats.details,
                   color: "from-cyan-500 to-blue-500",
                   items: [
-                    { label: "Bitiruvchilarimiz", subLabel: "Muvaffaqiyat hikoyalari", icon: "👨‍🎓", onClick: () => openInfoModal("Bizning Bitiruvchilar", "graduate") },
-                    { label: "Talabalar fikrlari", subLabel: "Reviews", icon: "⭐", onClick: () => openInfoModal("Talabalar Fikrlari", "review") },
-                    { label: "Telegram / Discord", subLabel: "Guruhga qo'shiling", icon: "💬", onClick: () => window.open("https://t.me/termiziy_ai", "_blank") }
+                    { label: translations[language].stats.items.graduates, subLabel: "Muvaffaqiyat hikoyalari", icon: "👨‍🎓", onClick: () => openInfoModal("Bizning Bitiruvchilar", "graduate") },
+                    { label: translations[language].stats.items.reviews, subLabel: "Reviews", icon: "⭐", onClick: () => openInfoModal("Talabalar Fikrlari", "review") },
+                    { label: "Telegram / Discord", subLabel: translations[language].stats.items.community_join, icon: "💬", onClick: () => window.open("https://t.me/termiziy_ai", "_blank") }
                   ]
                 },
                 {
                   icon: <Trophy className="w-10 h-10" />,
-                  number: "Real Caselar",
-                  label: "Batafsil", // O'zgartirildi
+                  number: translations[language].stats.cases,
+                  label: translations[language].stats.details,
                   color: "from-purple-500 to-pink-500",
                   items: [
-                    { label: "ChatGPT loyihalari", subLabel: "Matn va kod", icon: "🤖", onClick: () => openInfoModal("ChatGPT Loyihalari", "project", "ChatGPT") },
-                    { label: "Midjourney ishlar", subLabel: "Dizayn va san'at", icon: "🎨", onClick: () => openInfoModal("Midjourney Ishlar", "project", "Midjourney") },
-                    { label: "AI botlar & agentlar", subLabel: "Avtomatlashtirish", icon: "🧠", onClick: () => openInfoModal("AI Botlar", "project", "Bot") }
+                    { label: translations[language].stats.items.chatgpt_projects, subLabel: "Matn va kod", icon: "🤖", onClick: () => openInfoModal("ChatGPT Loyihalari", "project", "ChatGPT") },
+                    { label: translations[language].stats.items.midjourney_works, subLabel: "Dizayn va san'at", icon: "🎨", onClick: () => openInfoModal("Midjourney Ishlar", "project", "Midjourney") },
+                    { label: translations[language].stats.items.ai_bots, subLabel: "Avtomatlashtirish", icon: "🧠", onClick: () => openInfoModal("AI Botlar", "project", "Bot") }
                   ]
                 },
                 {
                   icon: <Sun className="w-10 h-10" />,
-                  number: "Kurslar",
-                  label: "Batafsil",
+                  number: translations[language].stats.courses,
+                  label: translations[language].stats.details,
                   color: "from-purple-500 to-pink-500",
                   items: [
-                    { label: "AI kurslar", subLabel: "Professional ta'lim", icon: "🎓", onClick: () => handleViewChange('courses') },
-                    { label: "AI kutubxona", subLabel: "Resurslar to'plami", icon: "📚", onClick: () => openInfoModal('AI kutubxona', 'text', undefined, 'Sun\'iy intellekt bo\'yicha eng so\'nggi kitoblar va qo\'llanmalar tez orada shu yerda bo\'ladi.') },
-                    { label: "Foydali AI", subLabel: "AI vositalar", icon: "⚡", onClick: () => openInfoModal('Foydali AI', 'text', undefined, 'Ishingizni osonlashtiruvchi eng sara AI vositalar ro\'yxati shakllantirilmoqda.') }
+                    { label: translations[language].stats.items.ai_courses, subLabel: "Professional ta'lim", icon: "🎓", onClick: () => handleViewChange('courses') },
+                    { label: translations[language].stats.items.ai_library, subLabel: "Resurslar to'plami", icon: "📚", onClick: () => openInfoModal('AI kutubxona', 'text', undefined, 'Sun\'iy intellekt bo\'yicha eng so\'nggi kitoblar va qo\'llanmalar tez orada shu yerda bo\'ladi.') },
+                    { label: translations[language].stats.items.useful_ai, subLabel: "AI vositalar", icon: "⚡", onClick: () => openInfoModal('Foydali AI', 'text', undefined, 'Ishingizni osonlashtiruvchi eng sara AI vositalar ro\'yxati shakllantirilmoqda.') }
                   ]
                 },
                 {
                   icon: <Zap className="w-10 h-10" />,
-                  number: "Natijalar",
-                  label: "Batafsil", // O'zgartirildi
+                  number: translations[language].stats.results,
+                  label: translations[language].stats.details,
                   color: "from-emerald-500 to-cyan-500",
                   items: [
-                    { label: "100% amaliyot", subLabel: "Real loyihalar", icon: "✅", onClick: () => openInfoModal('100% Amaliyot', 'text', undefined, "Bizning barcha kurslarimiz real keyslar va amaliyotga asoslangan. Siz shunchaki nazariyani emas, balki haqiqiy loyihalarni qanday qilishni o'rganasiz.") },
-                    { label: "Ishga tayyor bilim", subLabel: "Karyera", icon: "🎯", onClick: () => openInfoModal('Ishga tayyor', 'text', undefined, "Bitiruvchilarimiz ishga joylashishda ko'mak oladilar. Biz eng yaxshi talabalarni hamkor kompaniyalarga tavsiya qilamiz.") },
-                    { label: "Mentor yordami", subLabel: "24/7 qo'llab-quvvatlash", icon: "🧠", onClick: () => openInfoModal('Mentor yordami', 'text', undefined, "Sizga shaxsiy mentor biriktiriladi. O'qish davomida yuzaga kelgan har qanday savollaringizga javob olishingiz mumkin.") }
+                    { label: translations[language].stats.items.practice, subLabel: "Real loyihalar", icon: "✅", onClick: () => openInfoModal('100% Amaliyot', 'text', undefined, "Bizning barcha kurslarimiz real keyslar va amaliyotga asoslangan. Siz shunchaki nazariyani emas, balki haqiqiy loyihalarni qanday qilishni o'rganasiz.") },
+                    { label: translations[language].stats.items.job_ready, subLabel: "Karyera", icon: "🎯", onClick: () => openInfoModal('Ishga tayyor', 'text', undefined, "Bitiruvchilarimiz ishga joylashishda ko'mak oladilar. Biz eng yaxshi talabalarni hamkor kompaniyalarga tavsiya qilamiz.") },
+                    { label: translations[language].stats.items.mentor_support, subLabel: "24/7 qo'llab-quvvatlash", icon: "🧠", onClick: () => openInfoModal('Mentor yordami', 'text', undefined, "Sizga shaxsiy mentor biriktiriladi. O'qish davomida yuzaga kelgan har qanday savollaringizga javob olishingiz mumkin.") }
                   ]
                 }
               ].map((stat, i) => (
@@ -1072,15 +1231,15 @@ export default function Home() {
               {/* Column 1: Kimlar uchun? */}
               <div className={`p-2 md:p-8 rounded-xl md:rounded-3xl backdrop-blur-lg md:backdrop-blur-2xl border transition-all duration-300 hover:shadow-2xl ${darkMode ? "bg-white/5 border-white/10" : "bg-white/10 border-white/20 shadow-lg"}`}>
                 <h3 className={`text-[10px] md:text-3xl font-bold mb-2 md:mb-8 bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent`}>
-                  Kimlar uchun?
+                  {translations[language].infoGrid.whoFor}
                 </h3>
                 <div className="flex flex-col gap-1 md:flex-row md:flex-wrap md:gap-4">
                   {[
-                    { label: "Talabalar", desc: "AI yordamida yangi bilim va kasb o‘rganish" },
-                    { label: "Biznes", desc: "Ishni tezlashtirish va xarajatni kamaytirish" },
-                    { label: "Dasturchi", desc: "Kod yozishni oson va tez qilish" },
-                    { label: "Dizayner", desc: "Rasmlar va dizaynni AI bilan yaratish" },
-                    { label: "Freelancer", desc: "Buyurtmalarni tez bajarish va ko‘proq daromad" }
+                    { label: translations[language].infoGrid.items.students, desc: "AI yordamida yangi bilim va kasb o‘rganish" },
+                    { label: translations[language].infoGrid.items.business, desc: "Ishni tezlashtirish va xarajatni kamaytirish" },
+                    { label: translations[language].infoGrid.items.developers, desc: "Kod yozishni oson va tez qilish" },
+                    { label: translations[language].infoGrid.items.designers, desc: "Rasmlar va dizaynni AI bilan yaratish" },
+                    { label: translations[language].infoGrid.items.freelancers, desc: "Buyurtmalarni tez bajarish va ko‘proq daromad" }
                   ].map((item, i) => (
                     <div key={i} className="group relative">
                       <span
@@ -1103,14 +1262,14 @@ export default function Home() {
               {/* Column 2: Biz nimani o'rgatamiz? */}
               <div className={`p-2 md:p-8 rounded-xl md:rounded-3xl backdrop-blur-lg md:backdrop-blur-2xl border transition-all duration-300 hover:shadow-2xl flex flex-col ${darkMode ? "bg-white/5 border-white/10" : "bg-white/10 border-white/20 shadow-lg"}`}>
                 <h3 className={`text-[10px] md:text-3xl font-bold mb-2 md:mb-8 bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent`}>
-                  Biz nimani o'rgatamiz?
+                  {translations[language].infoGrid.whatWeTeach}
                 </h3>
                 <div className="flex flex-col gap-1 md:flex-row md:flex-wrap md:gap-4">
                   {[
-                    { title: "AI asos", icon: <Brain className="w-2.5 h-2.5 md:w-4 md:h-4" />, color: "text-purple-400", desc: "ChatGPT’dan to‘g‘ri foydalanish" },
-                    { title: "Midjrny", icon: <ImageIcon className="w-2.5 h-2.5 md:w-4 md:h-4" />, color: "text-pink-400", desc: "Matndan rasm yaratish" },
-                    { title: "AI biz", icon: <Briefcase className="w-2.5 h-2.5 md:w-4 md:h-4" />, color: "text-blue-400", desc: "Kundalik ishlarni avtomatlashtirish" },
-                    { title: "Amaliy", icon: <Code className="w-2.5 h-2.5 md:w-4 md:h-4" />, color: "text-emerald-400", desc: "O‘rganib darhol sinab ko‘rish" }
+                    { title: translations[language].infoGrid.items.ai_basics, icon: <Brain className="w-2.5 h-2.5 md:w-4 md:h-4" />, color: "text-purple-400", desc: "ChatGPT’dan to‘g‘ri foydalanish" },
+                    { title: translations[language].infoGrid.items.midjourney, icon: <ImageIcon className="w-2.5 h-2.5 md:w-4 md:h-4" />, color: "text-pink-400", desc: "Matndan rasm yaratish" },
+                    { title: translations[language].infoGrid.items.ai_biz, icon: <Briefcase className="w-2.5 h-2.5 md:w-4 md:h-4" />, color: "text-blue-400", desc: "Kundalik ishlarni avtomatlashtirish" },
+                    { title: translations[language].infoGrid.items.practical, icon: <Code className="w-2.5 h-2.5 md:w-4 md:h-4" />, color: "text-emerald-400", desc: "O‘rganib darhol sinab ko‘rish" }
                   ].map((item, i) => (
                     <div key={i} className="group relative">
                       <span
@@ -1134,14 +1293,14 @@ export default function Home() {
               {/* Column 3: Qanday o'qitamiz? */}
               <div className={`p-2 md:p-8 rounded-xl md:rounded-3xl backdrop-blur-lg md:backdrop-blur-2xl border transition-all duration-300 hover:shadow-2xl flex flex-col ${darkMode ? "bg-white/5 border-white/10" : "bg-white/10 border-white/20 shadow-lg"}`}>
                 <h3 className={`text-[10px] md:text-3xl font-bold mb-2 md:mb-8 bg-gradient-to-r from-emerald-400 to-cyan-500 bg-clip-text text-transparent`}>
-                  Qanday o'qitamiz?
+                  {translations[language].infoGrid.howWeTeach}
                 </h3>
                 <div className="flex flex-col gap-1 md:flex-row md:flex-wrap md:gap-4">
                   {[
-                    { title: "Yozilish", icon: "📝", desc: "Bir necha daqiqada boshlaysiz" },
-                    { title: "Darslar", icon: "📺", desc: "Video va jonli tushuntirish" },
-                    { title: "Mashq", icon: "💻", desc: "Real misollar bilan" },
-                    { title: "Natija", icon: "🚀", desc: "Bilim, tajriba va sertifikat" }
+                    { title: translations[language].infoGrid.items.enroll, icon: "📝", desc: "Bir necha daqiqada boshlaysiz" },
+                    { title: translations[language].infoGrid.items.lessons, icon: "📺", desc: "Video va jonli tushuntirish" },
+                    { title: translations[language].infoGrid.items.exercise, icon: "💻", desc: "Real misollar bilan" },
+                    { title: translations[language].infoGrid.items.result, icon: "🚀", desc: "Bilim, tajriba va sertifikat" }
                   ].map((step, i) => (
                     <div key={i} className="group relative">
                       <span
@@ -1167,7 +1326,7 @@ export default function Home() {
             {/* BEPUL KURSLARIMIZ - Carousel Style */}
             <div className="max-w-7xl mx-auto mb-20 md:mb-40 px-3 md:px-4 relative z-10">
               <h2 className={`text-3xl md:text-5xl font-black text-center mb-4 tracking-tight ${darkMode ? 'text-white' : 'text-slate-800'}`}>
-                BEPUL KURSLARIMIZ
+                {translations[language].bepulKurslarTitle}
               </h2>
               {/* New Course Banner Style */}
               <div className={`w-full max-w-4xl mx-auto mb-4 p-4 md:p-12 rounded-3xl relative overflow-hidden transition-all duration-500 hover:scale-[1.01] shadow-2xl ${darkMode ? 'bg-gradient-to-r from-emerald-950/80 to-slate-950/80 border border-emerald-500/20' : 'bg-gradient-to-r from-emerald-50 to-teal-50 border border-emerald-100'}`}>
