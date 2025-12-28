@@ -1046,18 +1046,18 @@ export default function Home() {
 
               {/* Carousel Container - 3D Effect */}
               {/* Carousel Container - 3D Cover Flow */}
-              <div className="relative h-[450px] md:h-[500px] flex items-center justify-center perspective-1000 overflow-hidden group" onMouseEnter={() => setIsPaused(true)} onMouseLeave={() => setIsPaused(false)}>
+              <div className="relative h-[450px] md:h-[500px] flex items-center justify-center perspective-1000 overflow-visible group" onMouseEnter={() => setIsPaused(true)} onMouseLeave={() => setIsPaused(false)}>
 
                 {/* Navigation Arrows */}
                 <button
                   onClick={handlePrevSlide}
-                  className="absolute left-1 md:left-10 top-1/2 -translate-y-1/2 z-50 p-2 md:p-4 bg-slate-900/80 hover:bg-slate-800 backdrop-blur-xl border border-white/20 rounded-full text-white transition-all hover:scale-110 active:scale-95 opacity-70 hover:opacity-100 duration-300"
+                  className="absolute -left-3 md:-left-16 top-1/2 -translate-y-1/2 z-50 p-2 md:p-4 bg-slate-900/90 hover:bg-slate-800 backdrop-blur-xl border border-white/20 rounded-full text-white transition-all hover:scale-110 active:scale-95 shadow-xl"
                 >
                   <ChevronLeft className="w-5 h-5 md:w-8 md:h-8" />
                 </button>
                 <button
                   onClick={handleNextSlide}
-                  className="absolute right-1 md:right-10 top-1/2 -translate-y-1/2 z-50 p-2 md:p-4 bg-slate-900/80 hover:bg-slate-800 backdrop-blur-xl border border-white/20 rounded-full text-white transition-all hover:scale-110 active:scale-95 opacity-70 hover:opacity-100 duration-300"
+                  className="absolute -right-3 md:-right-16 top-1/2 -translate-y-1/2 z-50 p-2 md:p-4 bg-slate-900/90 hover:bg-slate-800 backdrop-blur-xl border border-white/20 rounded-full text-white transition-all hover:scale-110 active:scale-95 shadow-xl"
                 >
                   <ChevronRight className="w-5 h-5 md:w-8 md:h-8" />
                 </button>
