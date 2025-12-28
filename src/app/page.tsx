@@ -1149,9 +1149,9 @@ export default function Home() {
                 BEPUL KURSLARIMIZ
               </h2>
               {/* New Course Banner Style */}
-              <div className={`w-full max-w-4xl mx-auto mb-16 p-6 md:p-12 rounded-3xl relative overflow-hidden transition-all duration-500 hover:scale-[1.01] shadow-2xl ${darkMode ? 'bg-gradient-to-r from-emerald-950/80 to-slate-950/80 border border-emerald-500/20' : 'bg-gradient-to-r from-emerald-50 to-teal-50 border border-emerald-100'}`}>
+              <div className={`w-full max-w-4xl mx-auto mb-8 p-6 md:p-12 rounded-3xl relative overflow-hidden transition-all duration-500 hover:scale-[1.01] shadow-2xl ${darkMode ? 'bg-gradient-to-r from-emerald-950/80 to-slate-950/80 border border-emerald-500/20' : 'bg-gradient-to-r from-emerald-50 to-teal-50 border border-emerald-100'}`}>
 
-                <div className="flex flex-col md:flex-row items-center gap-8 md:gap-16">
+                <div className="flex flex-col md:flex-row items-center gap-8 md:gap-8">
                   {/* Left: Robot Icon */}
                   <div className={`relative w-40 h-40 md:w-56 md:h-56 flex-shrink-0 flex items-center justify-center rounded-[2.5rem] border-4 ${darkMode ? 'bg-emerald-900/20 border-emerald-500 text-emerald-400' : 'bg-white border-emerald-800 text-emerald-800 shadow-xl'}`}>
                     <Bot className="w-24 h-24 md:w-32 md:h-32" strokeWidth={1.5} />
