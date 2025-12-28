@@ -1048,16 +1048,16 @@ export default function Home() {
               {/* Carousel Container - 3D Cover Flow */}
               <div className="relative h-[450px] md:h-[500px] flex items-center justify-center perspective-1000 overflow-hidden group" onMouseEnter={() => setIsPaused(true)} onMouseLeave={() => setIsPaused(false)}>
 
-                {/* Navigation Arrows */}
+                {/* Navigation Arrows - Hidden on Mobile */}
                 <button
                   onClick={handlePrevSlide}
-                  className="absolute left-2 md:left-10 z-50 p-3 md:p-4 bg-white/10 hover:bg-white/20 backdrop-blur-xl border border-white/20 rounded-full text-white transition-all hover:scale-110 active:scale-95 opacity-30 hover:opacity-100 duration-300"
+                  className="absolute left-2 md:left-10 z-50 p-3 md:p-4 bg-white/10 hover:bg-white/20 backdrop-blur-xl border border-white/20 rounded-full text-white transition-all hover:scale-110 active:scale-95 opacity-30 hover:opacity-100 duration-300 hidden md:flex"
                 >
                   <ChevronLeft size={32} />
                 </button>
                 <button
                   onClick={handleNextSlide}
-                  className="absolute right-2 md:right-10 z-50 p-3 md:p-4 bg-white/10 hover:bg-white/20 backdrop-blur-xl border border-white/20 rounded-full text-white transition-all hover:scale-110 active:scale-95 opacity-30 hover:opacity-100 duration-300"
+                  className="absolute right-2 md:right-10 z-50 p-3 md:p-4 bg-white/10 hover:bg-white/20 backdrop-blur-xl border border-white/20 rounded-full text-white transition-all hover:scale-110 active:scale-95 opacity-30 hover:opacity-100 duration-300 hidden md:flex"
                 >
                   <ChevronRight size={32} />
                 </button>
@@ -1072,18 +1072,18 @@ export default function Home() {
                       <div
                         key={course.id}
                         onClick={() => setActiveCarouselIndex(index)}
-                        className={`absolute transition-all duration-700 ease-[cubic-bezier(0.25,0.1,0.25,1.0)] cursor-pointer w-[280px] md:w-[380px]`}
+                        className={`absolute transition-all duration-700 ease-[cubic-bezier(0.25,0.1,0.25,1.0)] cursor-pointer w-[85vw] max-w-[340px] md:w-[380px]`}
                         style={{
                           transform: `
-                          translateX(${offset * (isMobile ? 50 : 360)}px) 
-                          scale(${isActive ? 1.05 : 0.85}) 
+                          translateX(${offset * (isMobile ? 400 : 360)}px) 
+                          scale(${isActive ? 1 : 0.85}) 
                           perspective(1000px) 
-                          rotateY(${offset * (isMobile ? -10 : -20)}deg) 
+                          rotateY(${offset * (isMobile ? 0 : -20)}deg) 
                           translateZ(${isActive ? 0 : -100}px)
                         `,
                           zIndex: 20 - Math.abs(offset),
-                          opacity: Math.abs(offset) >= 2 ? 0 : (isActive ? 1 : 0.6),
-                          pointerEvents: Math.abs(offset) >= 2 ? 'none' : 'auto',
+                          opacity: isMobile ? (isActive ? 1 : 0) : (Math.abs(offset) >= 2 ? 0 : (isActive ? 1 : 0.6)),
+                          pointerEvents: isActive ? 'auto' : 'none',
                           filter: isActive ? 'none' : 'blur(1px) grayscale(30%)'
                         }}
                       >
@@ -1135,6 +1135,19 @@ export default function Home() {
                 </div>
               </div>
 
+              {/* Dot Indicators for Mobile */}
+              <div className="flex justify-center gap-3 mt-6">
+                {freeCourses.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setActiveCarouselIndex(index)}
+                    className={`w-3 h-3 rounded-full transition-all duration-300 ${index === activeCarouselIndex
+                        ? 'bg-cyan-500 scale-125'
+                        : 'bg-white/30 hover:bg-white/50'
+                      }`}
+                  />
+                ))}
+              </div>
 
             </div>
           </section>
