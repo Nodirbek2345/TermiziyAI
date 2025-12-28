@@ -909,35 +909,33 @@ export default function Home() {
               </span>
             </h1>
 
-            <div className={`max-w-5xl mx-auto mb-10 md:mb-16 space-y-6 ${darkMode ? "text-gray-300" : "text-slate-600"}`}>
-              <h3 className="text-xl md:text-3xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent leading-tight">
-                Sun&apos;iy intellekt asosida zamonaviy kasblarni o&apos;rgatuvchi onlayn ta&apos;lim platformasi
-              </h3>
-              <p className="text-base md:text-xl font-light leading-relaxed opacity-90 max-w-4xl mx-auto">
-                TERMIZIY AI — ChatGPT, Midjourney, sun&apos;iy intellekt, prompt engineering va real loyihalar orqali amaliy bilim beruvchi professional platforma.
-              </p>
-            </div>
+            <p className={`text-base md:text-4xl mb-8 md:mb-16 max-w-5xl mx-auto font-light leading-relaxed ${darkMode ? "text-gray-300" : "text-slate-600"}`}>
+              <span className="text-cyan-400 font-semibold">Sun&apos;iy intellekt</span> •{' '}
+              <span className="text-purple-400 font-semibold">ChatGPT</span> •{' '}
+              <span className="text-pink-400 font-semibold">Midjourney</span> •{' '}
+              <span className="text-emerald-400 font-semibold">Professional</span> kurslar
+            </p>
 
             {/* 3D Stats Cards */}
 
 
-            <div className="flex flex-col md:flex-row gap-4 md:gap-6 justify-center w-full px-8 md:px-0">
+            <div className="flex flex-row gap-3 md:gap-6 justify-center w-full px-4 md:px-0">
               <button
-                onClick={() => handleViewChange('courses')}
-                className="group relative flex-1 md:flex-none text-lg md:text-2xl px-8 py-4 md:px-14 md:py-6 rounded-xl md:rounded-2xl font-bold overflow-hidden hover:scale-105 transition-all duration-300 md:min-w-[240px]"
+                onClick={scrollToContact}
+                className="group relative flex-1 md:flex-none text-sm md:text-2xl px-4 py-3 md:px-14 md:py-8 rounded-xl md:rounded-2xl font-bold overflow-hidden hover:scale-105 transition-all duration-300 md:min-w-[200px]"
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 animate-gradient-x" />
                 <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 blur-xl opacity-50 group-hover:opacity-75 transition-opacity" />
                 <span className="relative z-10 flex items-center justify-center gap-2">
-                  <Play className="w-5 h-5 md:w-6 md:h-6 fill-current" />
-                  Kurslarni ko&apos;rish
+                  <Sparkles className="w-4 h-4 md:w-6 md:h-6" />
+                  Kursga yozilish
                 </span>
               </button>
               <button
-                onClick={scrollToContact}
-                className="flex-1 md:flex-none text-lg md:text-2xl px-8 py-4 md:px-14 md:py-6 rounded-xl md:rounded-2xl border border-cyan-500/30 hover:bg-cyan-500/10 backdrop-blur-xl transition-all font-bold hover:scale-105 hover:border-cyan-500/50 hover:shadow-[0_0_30px_rgba(6,182,212,0.3)] md:min-w-[240px]"
+                onClick={() => handleViewChange('legal')}
+                className="flex-1 md:flex-none text-sm md:text-2xl px-4 py-3 md:px-14 md:py-8 rounded-xl md:rounded-2xl border border-cyan-500/30 hover:bg-cyan-500/10 backdrop-blur-xl transition-all font-bold hover:scale-105 hover:border-cyan-500/50 hover:shadow-[0_0_30px_rgba(6,182,212,0.3)] md:min-w-[200px]"
               >
-                Ro&apos;yxatdan o&apos;tish
+                Huquqiy IT
               </button>
             </div>
 
