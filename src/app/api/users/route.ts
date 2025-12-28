@@ -54,7 +54,7 @@ export async function POST(request: Request) {
     } catch (error: unknown) {
         console.error("Error creating user:", error);
 
-        const err = error as { code?: string; meta?: { target?: string[] } };
+        const err = error as { code?: string; meta?: { target?: string[] }; message?: string };
 
         // Check for unique constraint violation
         if (err?.code === 'P2002') {
@@ -62,6 +62,14 @@ export async function POST(request: Request) {
             return NextResponse.json({
                 error: `Bu ${field === 'email' ? 'email' : 'telefon raqam'} allaqachon ro'yxatdan o'tgan`,
             }, { status: 409 });
+        }
+
+        // Database connection error
+        if (err?.code === 'P1001' || err?.code === 'P1002') {
+            return NextResponse.json({
+                error: 'Database bilan aloqa yo\'q. Iltimos keyinroq urinib ko\'ring.',
+                details: err?.message,
+            }, { status: 503 });
         }
 
         return NextResponse.json({

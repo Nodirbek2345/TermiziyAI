@@ -28,8 +28,6 @@ export const viewport: Viewport = {
   themeColor: "#0f172a",
 };
 
-import UniversalAgent from "@/components/UniversalAgent";
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -41,7 +39,6 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {children}
-        <UniversalAgent />
       </body>
     </html>
   );

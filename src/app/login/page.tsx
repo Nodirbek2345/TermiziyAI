@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Lock, Mail, Eye, EyeOff, LogIn, KeyRound, ArrowLeft, Check } from "lucide-react";
+import { Lock, Mail, Eye, EyeOff, LogIn, KeyRound, ArrowLeft, Check, ShieldCheck } from "lucide-react";
 
 export default function LoginPage() {
     const [email, setEmail] = useState("");
@@ -89,58 +89,66 @@ export default function LoginPage() {
                 {/* Logo */}
                 <div className="text-center mb-8">
                     <div className="inline-flex items-center gap-2 mb-4">
-                        <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center text-white font-bold text-2xl shadow-lg shadow-purple-500/30">
-                            T
+                        <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center text-white font-bold text-2xl shadow-lg shadow-purple-500/30 relative overflow-hidden group">
+                            <ShieldCheck size={32} className="relative z-10" />
+                            <div className="absolute inset-0 bg-white/20 blur-xl group-hover:blur-2xl transition-all" />
                         </div>
                     </div>
-                    <h1 className="text-3xl font-bold text-white mb-2">Admin Panel</h1>
-                    <p className="text-white/40">{showResetForm ? "Parolni tiklash" : "Tizimga kirish"}</p>
+                    <h1 className="text-3xl font-bold text-white mb-2">Termiziy AI</h1>
                 </div>
 
                 {/* Login Form */}
                 {!showResetForm ? (
-                    <div className="bg-neutral-900/50 backdrop-blur-xl border border-white/10 rounded-2xl p-8">
-                        <form onSubmit={handleSubmit} className="space-y-6">
+                    <div className="bg-neutral-900/50 backdrop-blur-xl border border-white/10 rounded-2xl p-8 shadow-2xl">
+                        <form onSubmit={handleSubmit} className="space-y-6" autoComplete="off">
                             {error && (
-                                <div className="bg-red-500/10 border border-red-500/20 rounded-xl p-4 text-red-400 text-sm text-center">
+                                <div className="bg-red-500/10 border border-red-500/20 rounded-xl p-4 text-red-400 text-sm text-center animate-shake">
                                     {error}
                                 </div>
                             )}
 
                             <div>
-                                <label className="block text-sm text-white/60 mb-2">Email yoki Telefon</label>
-                                <div className="relative">
-                                    <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-white/40" size={20} />
-                                    <input
-                                        type="text"
-                                        value={email}
-                                        onChange={(e) => setEmail(e.target.value)}
-                                        placeholder="admin@termiziy.uz yoki +998..."
-                                        className="w-full bg-white/5 border border-white/10 rounded-xl pl-12 pr-4 py-3 text-white placeholder:text-white/20 focus:outline-none focus:border-purple-500 transition-colors"
-                                        required
-                                    />
+                                <label className="block text-sm text-white/60 mb-2 font-medium">Email manzil</label>
+                                <div className="relative group">
+                                    <div className="absolute -inset-0.5 bg-gradient-to-r from-purple-500 to-blue-500 rounded-xl opacity-0 group-focus-within:opacity-50 transition-opacity blur" />
+                                    <div className="relative">
+                                        <input
+                                            type="text"
+                                            value={email}
+                                            onChange={(e) => setEmail(e.target.value)}
+                                            placeholder="Email manzilingiz"
+                                            className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-white/20 focus:outline-none focus:border-transparent transition-colors relative z-10 [&:-webkit-autofill]:shadow-[0_0_0_100px_#171717_inset] [&:-webkit-autofill]:text-white [&:-webkit-autofill]:[-webkit-text-fill-color:white]"
+                                            required
+                                            autoComplete="off"
+                                            name="email_field_random"
+                                        />
+                                    </div>
                                 </div>
                             </div>
 
                             <div>
-                                <label className="block text-sm text-white/60 mb-2">Parol</label>
-                                <div className="relative">
-                                    <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-white/40" size={20} />
-                                    <input
-                                        type={showPassword ? "text" : "password"}
-                                        value={password}
-                                        onChange={(e) => setPassword(e.target.value)}
-                                        placeholder="••••••••"
-                                        className="w-full bg-white/5 border border-white/10 rounded-xl pl-12 pr-12 py-3 text-white placeholder:text-white/20 focus:outline-none focus:border-purple-500 transition-colors"
-                                        required
-                                    />
-                                    <button
-                                        type="button"
-                                        onClick={() => setShowPassword(!showPassword)}
-                                        className="absolute right-4 top-1/2 -translate-y-1/2 text-white/40 hover:text-white transition-colors"
-                                    >
-                                        {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
-                                    </button>
+                                <label className="block text-sm text-white/60 mb-2 font-medium">Parol</label>
+                                <div className="relative group">
+                                    <div className="absolute -inset-0.5 bg-gradient-to-r from-purple-500 to-blue-500 rounded-xl opacity-0 group-focus-within:opacity-50 transition-opacity blur" />
+                                    <div className="relative">
+                                        <input
+                                            type={showPassword ? "text" : "password"}
+                                            value={password}
+                                            onChange={(e) => setPassword(e.target.value)}
+                                            placeholder="Himoyalangan parolingiz"
+                                            className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-white/20 focus:outline-none focus:border-transparent transition-colors relative z-10 [&:-webkit-autofill]:shadow-[0_0_0_100px_#171717_inset] [&:-webkit-autofill]:text-white [&:-webkit-autofill]:[-webkit-text-fill-color:white]"
+                                            required
+                                            autoComplete="new-password"
+                                            name="password_field_random"
+                                        />
+                                        <button
+                                            type="button"
+                                            onClick={() => setShowPassword(!showPassword)}
+                                            className="absolute right-4 top-1/2 -translate-y-1/2 text-white/40 hover:text-white transition-colors z-20"
+                                        >
+                                            {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
 
@@ -182,7 +190,7 @@ export default function LoginPage() {
                                 <p className="text-white/40 text-sm">Kirish sahifasiga qaytish...</p>
                             </div>
                         ) : (
-                            <form onSubmit={handleResetPassword} className="space-y-6">
+                            <form onSubmit={handleResetPassword} className="space-y-6" autoComplete="off">
                                 {resetError && (
                                     <div className="bg-red-500/10 border border-red-500/20 rounded-xl p-4 text-red-400 text-sm text-center">
                                         {resetError}
@@ -190,33 +198,41 @@ export default function LoginPage() {
                                 )}
 
                                 <div>
-                                    <label className="block text-sm text-white/60 mb-2">Email</label>
-                                    <div className="relative">
-                                        <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-white/40" size={20} />
-                                        <input
-                                            type="email"
-                                            value={resetEmail}
-                                            onChange={(e) => setResetEmail(e.target.value)}
-                                            placeholder="admin@termiziy.uz"
-                                            className="w-full bg-white/5 border border-white/10 rounded-xl pl-12 pr-4 py-3 text-white placeholder:text-white/20 focus:outline-none focus:border-purple-500 transition-colors"
-                                            required
-                                        />
+                                    <label className="block text-sm text-white/60 mb-2 font-medium">Email manzil</label>
+                                    <div className="relative group">
+                                        <div className="absolute -inset-0.5 bg-gradient-to-r from-purple-500 to-blue-500 rounded-xl opacity-0 group-focus-within:opacity-50 transition-opacity blur" />
+                                        <div className="relative">
+                                            <input
+                                                type="email"
+                                                value={resetEmail}
+                                                onChange={(e) => setResetEmail(e.target.value)}
+                                                placeholder="Email manzilingiz"
+                                                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-white/20 focus:outline-none focus:border-transparent transition-colors relative z-10 [&:-webkit-autofill]:shadow-[0_0_0_100px_#171717_inset] [&:-webkit-autofill]:text-white [&:-webkit-autofill]:[-webkit-text-fill-color:white]"
+                                                required
+                                                autoComplete="off"
+                                                name="reset_email_random"
+                                            />
+                                        </div>
                                     </div>
                                 </div>
 
                                 <div>
-                                    <label className="block text-sm text-white/60 mb-2">Yangi parol</label>
-                                    <div className="relative">
-                                        <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-white/40" size={20} />
-                                        <input
-                                            type="text"
-                                            value={newPassword}
-                                            onChange={(e) => setNewPassword(e.target.value)}
-                                            placeholder="Yangi parolni kiriting"
-                                            className="w-full bg-white/5 border border-white/10 rounded-xl pl-12 pr-4 py-3 text-white placeholder:text-white/20 focus:outline-none focus:border-purple-500 transition-colors"
-                                            required
-                                            minLength={6}
-                                        />
+                                    <label className="block text-sm text-white/60 mb-2 font-medium">Yangi parol</label>
+                                    <div className="relative group">
+                                        <div className="absolute -inset-0.5 bg-gradient-to-r from-purple-500 to-blue-500 rounded-xl opacity-0 group-focus-within:opacity-50 transition-opacity blur" />
+                                        <div className="relative">
+                                            <input
+                                                type="text"
+                                                value={newPassword}
+                                                onChange={(e) => setNewPassword(e.target.value)}
+                                                placeholder="Yangi parolni kiriting"
+                                                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-white/20 focus:outline-none focus:border-transparent transition-colors relative z-10 [&:-webkit-autofill]:shadow-[0_0_0_100px_#171717_inset] [&:-webkit-autofill]:text-white [&:-webkit-autofill]:[-webkit-text-fill-color:white]"
+                                                required
+                                                minLength={6}
+                                                autoComplete="new-password"
+                                                name="new_password_random"
+                                            />
+                                        </div>
                                     </div>
                                 </div>
 

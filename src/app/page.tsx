@@ -1,7 +1,8 @@
 'use client'
 
-import { Moon, Sun, Send, Sparkles, Zap, Trophy, Users, Brain, Cpu, Network, Bot, Instagram, Youtube, Facebook, Briefcase, Code, Image as ImageIcon, TrendingUp, GraduationCap, MapPin } from "lucide-react"
+import { Moon, Sun, Send, Sparkles, Zap, Trophy, Users, Brain, Cpu, Network, Bot, Instagram, Youtube, Facebook, Briefcase, Code, Image as ImageIcon, TrendingUp, GraduationCap, MapPin, Video, Smartphone, Globe, Lock, Play, ArrowLeft, ChevronLeft, ChevronRight } from "lucide-react"
 import { useState, useEffect, useRef } from "react"
+import UniversalAgent from "@/components/UniversalAgent"
 
 /* =========================
    PROMPT ANALYZER (FREE)
@@ -87,6 +88,85 @@ const legalData: LegalItem[] = [
   },
 ]
 
+// --- Course Data Types & Constants ---
+interface Lesson {
+  id: number;
+  title: string;
+  duration: string;
+  videoUrl: string; // YouTube or placeholder
+}
+
+const PAID_COURSES = [
+  {
+    id: 1,
+    title: "AI orqali 300 ta video yaratish",
+    price: "300 000 so'm",
+    desc: "Siz bitta prompt bilan 300 ta shortslar va instagram reelslar yaratishni o'rganasiz. Kontent yaratishni avtomatlashtiring.",
+    features: ["Avtomatik montaj", "Subtitrlar", "AI Ovoz", "Trend videolar"],
+    icon: <Video className="w-8 h-8 text-white" />,
+    color: "from-red-500 to-pink-600",
+    shadow: "shadow-red-500/20",
+    badge: "HIT",
+    lessons: [
+      { id: 1, title: "Kirish. AI Video Nima?", duration: "12:30", videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ" },
+      { id: 2, title: "Prompt Yozish Sirlari", duration: "18:45", videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ" },
+      { id: 3, title: "Avtomatik Montaj Qilish", duration: "25:10", videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ" },
+      { id: 4, title: "Trendlarni Aniqlash", duration: "15:00", videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ" }
+    ]
+  },
+  {
+    id: 2,
+    title: "AI orqali rasmlarni 3D / 4D / 7D / 8D qilish",
+    price: "290 000 so'm",
+    desc: "Oddiy rasmlarni jonlantirish va ularni yuqori sifatli 3D va 8D formatlarga o'tkazish. Midjourney va RunwayML sirlari.",
+    features: ["3D Modellashtirish", "4D Animatsiya", "Ultra HD Sifat", "AI Art"],
+    icon: <ImageIcon className="w-8 h-8 text-white" />,
+    color: "from-purple-500 to-indigo-600",
+    shadow: "shadow-purple-500/20",
+    badge: "BESTSELLER",
+    lessons: [
+      { id: 1, title: "AI Rasmlar Dunyosi", duration: "10:15", videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ" },
+      { id: 2, title: "Midjourney Asoslari", duration: "22:00", videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ" },
+      { id: 3, title: "RunwayML bilan Animatsiya", duration: "30:00", videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ" },
+      { id: 4, title: "8D Formatga O'tish", duration: "28:15", videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ" }
+    ]
+  },
+  {
+    id: 3,
+    title: "No-Coding orqali APK yaratish",
+    price: "1 000 000 so'm",
+    desc: "Dasturlash tillarisiz (Java/Kotlin) o'z mobil ilovangizni yarating. 100% natija va Play Marketga yuklash.",
+    features: ["Kod yozmasdan", "Android & iOS", "Play Market", "Monetizatsiya"],
+    icon: <Smartphone className="w-8 h-8 text-white" />,
+    color: "from-green-500 to-emerald-600",
+    shadow: "shadow-green-500/20",
+    badge: "PRO",
+    lessons: [
+      { id: 1, title: "No-Code Platformalar", duration: "14:20", videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ" },
+      { id: 2, title: "Birinchi Ilovani Yaratish", duration: "35:00", videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ" },
+      { id: 3, title: "Play Marketga Yuklash", duration: "20:00", videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ" },
+      { id: 4, title: "Reklama Qo'shish", duration: "18:30", videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ" }
+    ]
+  },
+  {
+    id: 4,
+    title: "No-Coding orqali Veb-sayt yaratish",
+    price: "1 500 000 so'm",
+    desc: "Zamonaviy, tez va xavfsiz saytlarni kod yozmasdan yarating. Landing page, internet do'kon va portallar.",
+    features: ["Responsive Dizayn", "SEO Optimizatsiya", "E-commerce", "Hosting & Domen"],
+    icon: <Globe className="w-8 h-8 text-white" />,
+    color: "from-blue-500 to-cyan-600",
+    shadow: "shadow-blue-500/20",
+    badge: "PREMIUM",
+    lessons: [
+      { id: 1, title: "Websayt Turlari", duration: "11:00", videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ" },
+      { id: 2, title: "Landing Page Yaratish", duration: "40:00", videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ" },
+      { id: 3, title: "Domen va Xosting", duration: "15:45", videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ" },
+      { id: 4, title: "Internet Do'kon Ochish", duration: "50:00", videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ" }
+    ]
+  }
+];
+
 export default function Home() {
   const [darkMode, setDarkMode] = useState(true)
   const [name, setName] = useState("")
@@ -95,8 +175,11 @@ export default function Home() {
   const [message, setMessage] = useState("")
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 })
   const [scrollY, setScrollY] = useState(0)
-  const [view, setView] = useState<'hero' | 'contact' | 'courses' | 'paid-courses' | 'legal'>('hero')
+  const [view, setView] = useState<'hero' | 'contact' | 'courses' | 'paid-courses' | 'legal' | 'lesson-view'>('hero')
+  const [activeCourse, setActiveCourse] = useState<typeof PAID_COURSES[0] | null>(null)
+  const [activeLesson, setActiveLesson] = useState<Lesson | null>(null)
   const [activeDropdown, setActiveDropdown] = useState<number | null>(null) // Dropdown holati (index yoki null)
+  const [purchasedCourses, setPurchasedCourses] = useState<number[]>([]) // Sotib olingan kurslar ID lari
 
   // PromptTry State
   const [prompt, setPrompt] = useState("")
@@ -180,6 +263,92 @@ export default function Home() {
   const [modalContent, setModalContent] = useState<any[]>([])
   const [modalType, setModalType] = useState<"project" | "review" | "graduate" | "text">("project")
   const [activeYear, setActiveYear] = useState<2025 | 2026>(2025);
+  const [activeCarouselIndex, setActiveCarouselIndex] = useState(2);
+  const [isPaused, setIsPaused] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  const freeCourses = [
+    {
+      id: 1,
+      title: "ChatGPT Asoslari",
+      description: "Sun'iy intellekt bilan ishlashning eng oddiy usullari",
+      duration: "2 soat",
+      lessons: 8,
+      image: "🤖",
+      color: "from-blue-600 to-cyan-500",
+      shadow: "shadow-cyan-500/40",
+      students: "12,450+"
+    },
+    {
+      id: 2,
+      title: "Prompt Engineering 101",
+      description: "AI'ga to'g'ri savol berish san'ati",
+      duration: "1.5 soat",
+      lessons: 6,
+      image: "✨",
+      color: "from-purple-600 to-pink-500",
+      shadow: "shadow-purple-500/40",
+      students: "8,320+"
+    },
+    {
+      id: 3,
+      title: "AI Tools Masterclass",
+      description: "Eng foydali AI vositalar bilan tanishish",
+      duration: "3 soat",
+      lessons: 12,
+      image: "🛠️",
+      color: "from-amber-500 to-orange-600",
+      shadow: "shadow-orange-500/40",
+      students: "15,890+"
+    },
+    {
+      id: 4,
+      title: "Midjourney Kirish",
+      description: "AI bilan rasm yaratishga kirish",
+      duration: "2 soat",
+      lessons: 7,
+      image: "🎨",
+      color: "from-emerald-500 to-teal-600",
+      shadow: "shadow-emerald-500/40",
+      students: "9,200+"
+    },
+    {
+      id: 5,
+      title: "AI in Business",
+      description: "Biznesingizda AI'dan foydalanish",
+      duration: "2.5 soat",
+      lessons: 10,
+      image: "💼",
+      color: "from-rose-500 to-red-600",
+      shadow: "shadow-rose-500/40",
+      students: "6,750+"
+    }
+  ];
+
+  const handleNextSlide = () => {
+    setActiveCarouselIndex((prev) => (prev + 1) % freeCourses.length)
+  }
+
+  const handlePrevSlide = () => {
+    setActiveCarouselIndex((prev) => (prev - 1 + freeCourses.length) % freeCourses.length)
+  }
+
+  // Auto-play effect
+  useEffect(() => {
+    if (isPaused) return;
+    const interval = setInterval(() => {
+      setActiveCarouselIndex((prev) => (prev + 1) % freeCourses.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [isPaused]);
+
+  // Mobile detection
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   // Dashboard Data
   const statsData = {
@@ -232,6 +401,35 @@ export default function Home() {
     fetch('/api/graduates').then(res => res.json()).then(data => Array.isArray(data) && setGraduates(data)).catch(console.error)
   }, [])
 
+  const handlePayment = (courseId: number, courseName: string, price: string) => {
+    if (purchasedCourses.includes(courseId)) {
+      alert("✅ Siz bu kursni sotibolgansiz. Darslarni ko'rish tugmasini bosing.")
+      return
+    }
+
+    const confirmPayment = confirm(`"${courseName}" kursi narxi: ${price}\n\nXaridni tasdiqlaysizmi?`)
+
+    if (confirmPayment) {
+      alert("✅ To'lov muvaffaqiyatli amalga oshirildi!\n\nKurs siz uchun ochildi. 'Darslarni ko'rish' tugmasi orqali kirishingiz mumkin.")
+      setPurchasedCourses([...purchasedCourses, courseId])
+    } else {
+      alert("❌ To'lov bekor qilindi. Kursga kirish uchun to'lov qilish shart.")
+    }
+  }
+
+  const handleAccessCourse = (courseId: number) => {
+    if (purchasedCourses.includes(courseId)) {
+      const course = PAID_COURSES.find(c => c.id === courseId)
+      if (course) {
+        setActiveCourse(course)
+        setActiveLesson(course.lessons[0])
+        handleViewChange('lesson-view')
+      }
+    } else {
+      alert("⛔ Kursga kirish uchun avval to'lovni amalga oshiring!")
+    }
+  }
+
   const openInfoModal = (title: string, type: "project" | "review" | "graduate" | "text", filter?: string, text?: string) => {
     setModalTitle(title)
     setModalType(type)
@@ -249,6 +447,8 @@ export default function Home() {
       setModalContent([])
     }
   }
+
+
 
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const contactRef = useRef<HTMLDivElement>(null)
@@ -455,13 +655,16 @@ export default function Home() {
         setPhone("")
         setEmail("")
         setMessage("")
-        handleViewChange('courses')
+        handleViewChange('paid-courses')
       } else {
-        alert("❌ Xatolik yuz berdi. Iltimos qayta urinib ko'ring.")
+        // API xatosini batafsil ko'rsatish
+        const errorData = await res.json().catch(() => null)
+        const errorMessage = errorData?.error || errorData?.details || `Server xatosi (${res.status})`
+        alert(`❌ Xatolik: ${errorMessage}`)
       }
     } catch (error) {
       console.error(error)
-      alert("❌ Internet bilan aloqa yo'q.")
+      alert("❌ Internet bilan aloqa yo'q. Iltimos internetingizni tekshiring.")
     } finally {
       setIsSubmitting(false)
     }
@@ -488,7 +691,7 @@ export default function Home() {
   }, [])
 
   // Custom navigation function that pushes state to history
-  const handleViewChange = (newView: 'hero' | 'contact' | 'courses' | 'paid-courses' | 'legal') => {
+  const handleViewChange = (newView: 'hero' | 'contact' | 'courses' | 'paid-courses' | 'legal' | 'lesson-view') => {
     setView(newView)
     window.history.pushState({ view: newView }, '', window.location.pathname)
     window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -505,6 +708,9 @@ export default function Home() {
           <div className="absolute top-0 -right-1/4 w-1/2 h-1/2 bg-cyan-500 rounded-full mix-blend-multiply filter blur-[128px] opacity-20 animate-blob animation-delay-2000 will-change-transform" />
           <div className="absolute -bottom-1/4 left-1/3 w-1/2 h-1/2 bg-pink-500 rounded-full mix-blend-multiply filter blur-[128px] opacity-20 animate-blob animation-delay-4000 will-change-transform" />
         </div>
+
+        {/* Universal Chatbot - Only visible in Hero */}
+        {view === 'hero' && <UniversalAgent />}
 
         {/* Neural network grid */}
         <div className="fixed inset-0 pointer-events-none opacity-10">
@@ -829,201 +1035,109 @@ export default function Home() {
               </div>
             </div>
 
-            {/* DASHBOARD SECTION - STATIC RESULTS */}
+            {/* BEPUL KURSLARIMIZ - Carousel Style */}
             <div className="max-w-7xl mx-auto mb-20 md:mb-40 px-3 md:px-4 relative z-10">
-              <h2 className="text-2xl md:text-4xl font-bold text-center mb-8 md:mb-10 text-white leading-tight">
-                <span className="bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">Yillar kesimida</span>
-                <br className="md:hidden" /> erishilgan natijalar
+              <h2 className="text-3xl md:text-5xl font-black text-center mb-4 text-white tracking-tight">
+                BEPUL KURSLARIMIZ
               </h2>
+              <p className="text-center text-white/50 mb-10 md:mb-16 text-sm md:text-lg">
+                Bepul kurslar orqali AI dunyosiga birinchi qadamingizni qo'ying
+              </p>
 
-              {/* Year Toggle - Premium Style */}
-              <div className="flex justify-center mb-10">
-                <div className="bg-slate-900/80 backdrop-blur-xl p-1.5 rounded-2xl border border-white/10 flex gap-1 shadow-2xl relative overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10 opacity-50" />
-                  {[2025, 2026].map((year) => (
-                    <button
-                      key={year}
-                      onClick={() => setActiveYear(year as 2025 | 2026)}
-                      className={`relative z-10 px-8 py-3 rounded-xl text-base font-bold transition-all duration-300 ${activeYear === year ? "bg-gradient-to-r from-blue-600 to-blue-500 text-white shadow-lg shadow-blue-500/25 scale-[1.02]" : "text-slate-400 hover:text-white hover:bg-white/5"}`}
-                    >
-                      {year}
-                    </button>
-                  ))}
+              {/* Carousel Container - 3D Effect */}
+              {/* Carousel Container - 3D Cover Flow */}
+              <div className="relative h-[450px] md:h-[500px] flex items-center justify-center perspective-1000 overflow-hidden group" onMouseEnter={() => setIsPaused(true)} onMouseLeave={() => setIsPaused(false)}>
+
+                {/* Navigation Arrows */}
+                <button
+                  onClick={handlePrevSlide}
+                  className="absolute left-2 md:left-10 z-50 p-3 md:p-4 bg-white/10 hover:bg-white/20 backdrop-blur-xl border border-white/20 rounded-full text-white transition-all hover:scale-110 active:scale-95 opacity-30 hover:opacity-100 duration-300"
+                >
+                  <ChevronLeft size={32} />
+                </button>
+                <button
+                  onClick={handleNextSlide}
+                  className="absolute right-2 md:right-10 z-50 p-3 md:p-4 bg-white/10 hover:bg-white/20 backdrop-blur-xl border border-white/20 rounded-full text-white transition-all hover:scale-110 active:scale-95 opacity-30 hover:opacity-100 duration-300"
+                >
+                  <ChevronRight size={32} />
+                </button>
+
+                {/* Cards */}
+                <div className="relative w-full h-full flex items-center justify-center">
+                  {freeCourses.map((course, index) => {
+                    let offset = index - activeCarouselIndex;
+                    const isActive = index === activeCarouselIndex;
+
+                    return (
+                      <div
+                        key={course.id}
+                        onClick={() => setActiveCarouselIndex(index)}
+                        className={`absolute transition-all duration-700 ease-[cubic-bezier(0.25,0.1,0.25,1.0)] cursor-pointer w-[280px] md:w-[380px]`}
+                        style={{
+                          transform: `
+                          translateX(${offset * (isMobile ? 50 : 360)}px) 
+                          scale(${isActive ? 1.05 : 0.85}) 
+                          perspective(1000px) 
+                          rotateY(${offset * (isMobile ? -10 : -20)}deg) 
+                          translateZ(${isActive ? 0 : -100}px)
+                        `,
+                          zIndex: 20 - Math.abs(offset),
+                          opacity: Math.abs(offset) >= 2 ? 0 : (isActive ? 1 : 0.6),
+                          pointerEvents: Math.abs(offset) >= 2 ? 'none' : 'auto',
+                          filter: isActive ? 'none' : 'blur(1px) grayscale(30%)'
+                        }}
+                      >
+                        <div className={`
+                        relative bg-slate-900/80 backdrop-blur-xl border border-white/10 rounded-3xl p-6 md:p-8 
+                        shadow-2xl ${isActive ? (darkMode ? 'shadow-cyan-500/20' : 'shadow-blue-500/30') : ''}
+                        h-[350px] md:h-[400px] flex flex-col justify-between
+                      `}>
+                          {/* 3D Depth Layers for Floating Elements */}
+                          <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent rounded-3xl pointer-events-none" style={{ transform: 'translateZ(20px)' }} />
+
+                          {/* Course Icon - Floating 3D */}
+                          <div className={`w-20 h-20 md:w-24 md:h-24 rounded-3xl bg-gradient-to-br ${course.color} flex items-center justify-center text-4xl md:text-5xl mb-4 shadow-lg ${course.shadow} transform transition-transform duration-500 group-hover:scale-110 group-hover:translate-z-10`} style={{ transform: 'translateZ(40px)' }}>
+                            <span className="drop-shadow-md">{course.image}</span>
+                          </div>
+
+                          {/* Course Info - Floating */}
+                          <div style={{ transform: 'translateZ(30px)' }}>
+                            <h3 className="text-2xl md:text-3xl font-black text-white mb-2 leading-tight tracking-tight">{course.title}</h3>
+                            <p className="text-white/60 text-sm md:text-base line-clamp-2 font-medium">{course.description}</p>
+                          </div>
+
+                          {/* Stats - Floating */}
+                          <div className="flex items-center gap-4 text-xs md:text-sm text-white/50 font-semibold mt-4" style={{ transform: 'translateZ(25px)' }}>
+                            <span className="flex items-center gap-1.5 bg-white/5 px-2 py-1 rounded-lg">
+                              <span>📚</span> {course.lessons} dars
+                            </span>
+                            <span className="flex items-center gap-1.5 bg-white/5 px-2 py-1 rounded-lg">
+                              <span>⏱️</span> {course.duration}
+                            </span>
+                          </div>
+
+                          {/* Button & Badge - Highest Layer */}
+                          <div className="flex items-center justify-between mt-6" style={{ transform: 'translateZ(50px)' }}>
+                            <span className={`text-transparent bg-clip-text bg-gradient-to-r ${course.color} font-black text-lg`}>
+                              {course.students}
+                            </span>
+                            <span className={`px-5 py-2.5 bg-gradient-to-r ${course.color} text-white rounded-xl text-sm font-bold shadow-lg transform active:scale-95 transition-transform`}>
+                              BEPUL
+                            </span>
+                          </div>
+                        </div>
+
+                        {/* Reflection/Shadow beneath */}
+                        <div className={`absolute -bottom-6 left-4 right-4 h-4 bg-gradient-to-r ${course.color} blur-xl opacity-0 group-hover:opacity-40 transition-opacity duration-500 rounded-full`} />
+                      </div>
+                    )
+                  })}
                 </div>
               </div>
 
-              <div className="bg-slate-900/40 backdrop-blur-lg md:backdrop-blur-2xl border border-white/10 rounded-3xl p-4 md:p-8">
 
-                {/* Top Statistics Cards - Mobile Grid v2 (2 columns) */}
-                <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6 mb-8">
-                  {/* Card 1 */}
-                  <div className="bg-gradient-to-br from-slate-800/80 to-slate-900/80 p-4 md:p-5 rounded-2xl border border-white/5 relative overflow-hidden group hover:border-blue-500/50 hover:shadow-[0_0_20px_rgba(59,130,246,0.15)] transition-all duration-300">
-                    <div className="absolute inset-0 bg-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity" />
-                    <div className="relative z-10">
-                      <div className="flex justify-between items-start mb-3">
-                        <span className="text-slate-400 text-xs md:text-sm font-medium leading-tight">Ro'yxatdan<br />o'tganlar</span>
-                        <div className="p-1.5 md:p-2 rounded-lg bg-blue-500/10 group-hover:bg-blue-500/20 transition-colors">
-                          <Users className="w-4 h-4 md:w-5 md:h-5 text-blue-400" />
-                        </div>
-                      </div>
-                      <div className="mb-2">
-                        <span className="text-xl md:text-3xl font-black text-white block tracking-tight group-hover:scale-105 transition-transform origin-left">
-                          {currentStats.registered.toLocaleString()}
-                        </span>
-                        <span className="text-slate-500 text-[10px] md:text-xs font-medium">nafar</span>
-                      </div>
-                      <div className="flex items-center gap-1 mt-2 bg-emerald-500/10 px-1.5 py-0.5 md:px-2 md:py-1 rounded-md w-fit">
-                        <TrendingUp className="w-2.5 h-2.5 md:w-3 md:h-3 text-emerald-400" />
-                        <span className="text-emerald-400 text-[10px] md:text-xs font-bold">{currentStats.growth}%</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Card 2 */}
-                  <div className="bg-gradient-to-br from-slate-800/80 to-slate-900/80 p-4 md:p-5 rounded-2xl border border-white/5 relative overflow-hidden group hover:border-purple-500/50 hover:shadow-[0_0_20px_rgba(168,85,247,0.15)] transition-all duration-300">
-                    <div className="absolute inset-0 bg-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity" />
-                    <div className="relative z-10">
-                      <div className="flex justify-between items-start mb-3">
-                        <span className="text-slate-400 text-xs md:text-sm font-medium leading-tight">Bitirganlar<br />soni</span>
-                        <div className="p-1.5 md:p-2 rounded-lg bg-purple-500/10 group-hover:bg-purple-500/20 transition-colors">
-                          <GraduationCap className="w-4 h-4 md:w-5 md:h-5 text-purple-400" />
-                        </div>
-                      </div>
-                      <div className="mb-2">
-                        <span className="text-xl md:text-3xl font-black text-white block tracking-tight group-hover:scale-105 transition-transform origin-left">
-                          {currentStats.graduates.toLocaleString()}
-                        </span>
-                        <span className="text-slate-500 text-[10px] md:text-xs font-medium">nafar</span>
-                      </div>
-                      <div className="flex items-center gap-1 mt-2 bg-emerald-500/10 px-1.5 py-0.5 md:px-2 md:py-1 rounded-md w-fit">
-                        <TrendingUp className="w-2.5 h-2.5 md:w-3 md:h-3 text-emerald-400" />
-                        <span className="text-emerald-400 text-[10px] md:text-xs font-bold">17%</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Card 3 */}
-                  <div className="bg-gradient-to-br from-slate-800/80 to-slate-900/80 p-4 md:p-5 rounded-2xl border border-white/5 relative overflow-hidden group hover:border-pink-500/50 hover:shadow-[0_0_20px_rgba(236,72,153,0.15)] transition-all duration-300">
-                    <div className="absolute inset-0 bg-pink-500/5 opacity-0 group-hover:opacity-100 transition-opacity" />
-                    <div className="relative z-10">
-                      <div className="flex justify-between items-start mb-3">
-                        <span className="text-slate-400 text-xs md:text-sm font-medium leading-tight">Erkak/Ayol<br />nisbati</span>
-                        <div className="flex -space-x-1">
-                          <div className="w-5 h-5 md:w-7 md:h-7 rounded-full bg-blue-500/20 border-2 border-slate-800 flex items-center justify-center text-[8px] md:text-[10px] text-blue-400 font-bold">M</div>
-                          <div className="w-5 h-5 md:w-7 md:h-7 rounded-full bg-pink-500/20 border-2 border-slate-800 flex items-center justify-center text-[8px] md:text-[10px] text-pink-400 font-bold">F</div>
-                        </div>
-                      </div>
-                      <div className="mb-2">
-                        <div className="flex items-baseline gap-1 md:gap-2 group-hover:scale-105 transition-transform origin-left">
-                          <span className="text-xl md:text-3xl font-black text-blue-400 tracking-tight">{currentStats.genderRatio.m}</span>
-                          <span className="text-slate-500 text-[10px] md:text-sm font-medium">:</span>
-                          <span className="text-xl md:text-3xl font-black text-pink-400 tracking-tight">{currentStats.genderRatio.f}</span>
-                        </div>
-                        <span className="text-slate-500 text-[10px] md:text-xs font-medium">har 100 tadan</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Card 4 */}
-                  <div className="bg-gradient-to-br from-slate-800/80 to-slate-900/80 p-4 md:p-5 rounded-2xl border border-white/5 relative overflow-hidden group hover:border-cyan-500/50 hover:shadow-[0_0_20px_rgba(6,182,212,0.15)] transition-all duration-300">
-                    <div className="absolute inset-0 bg-cyan-500/5 opacity-0 group-hover:opacity-100 transition-opacity" />
-                    <div className="relative z-10">
-                      <div className="flex justify-between items-start mb-3">
-                        <span className="text-slate-400 text-xs md:text-sm font-medium leading-tight">Top<br />hudud</span>
-                        <div className="p-1.5 md:p-2 rounded-lg bg-cyan-500/10 group-hover:bg-cyan-500/20 transition-colors">
-                          <MapPin className="w-4 h-4 md:w-5 md:h-5 text-cyan-400" />
-                        </div>
-                      </div>
-                      <div className="mb-2">
-                        <span className="text-lg md:text-3xl font-black text-white block tracking-tight group-hover:scale-105 transition-transform origin-left truncate">
-                          {currentStats.fastestRegion}
-                        </span>
-                        <span className="text-slate-500 text-[10px] md:text-xs font-medium">
-                          {currentStats.fastestRegion === "Andijon" ? "viloyati" : "shahri"}
-                        </span>
-                      </div>
-                      <div className="flex items-center gap-1 mt-2 bg-emerald-500/10 px-1.5 py-0.5 md:px-2 md:py-1 rounded-md w-fit">
-                        <TrendingUp className="w-2.5 h-2.5 md:w-3 md:h-3 text-emerald-400" />
-                        <span className="text-emerald-400 text-[10px] md:text-xs font-bold">{currentStats.growth}%</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Bottom Charts Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-6">
-
-                  {/* Left Column: Region Ranking */}
-                  <div className="bg-slate-800/40 rounded-xl md:rounded-3xl p-1.5 md:p-8 border border-white/5 backdrop-blur-sm">
-                    <div className="flex justify-between items-center mb-3 md:mb-8">
-                      <div>
-                        <h4 className="font-bold text-xs md:text-xl text-white">Hududlar reytingi</h4>
-                        <p className="text-[8px] md:text-sm text-slate-400 mt-0.5 md:mt-1 hidden md:block">Platforma orqali kurs bitirganlar soni bo'yicha</p>
-                      </div>
-                      <div className="p-1.5 md:p-2 bg-white/5 rounded-lg md:rounded-xl">
-                        <MapPin className="w-4 h-4 md:w-6 md:h-6 text-slate-400" />
-                      </div>
-                    </div>
-
-                    <div className="space-y-2 md:space-y-4 max-h-[400px] overflow-y-auto pr-1 md:pr-2 custom-scrollbar">
-                      {currentStats.regionRanking.map((region, i) => (
-                        <div key={i} className="flex items-center gap-1.5 md:gap-4">
-                          {/* Gradient bar with number and name */}
-                          <div className={`relative h-8 md:h-12 rounded-lg md:rounded-xl overflow-hidden bg-gradient-to-r ${region.color} flex-grow min-w-0`}>
-                            <div className="absolute inset-0 flex items-center px-1.5 md:px-4">
-                              <span className="w-4 h-4 md:w-7 md:h-7 flex items-center justify-center bg-black/30 rounded-full text-[8px] md:text-sm font-bold text-white mr-1 md:mr-3 flex-shrink-0">
-                                {i + 1}
-                              </span>
-                              <span className="font-medium text-white text-[8px] md:text-base truncate flex-1">{region.name}</span>
-                            </div>
-                          </div>
-                          {/* Count badge */}
-                          <span className="font-bold text-white bg-slate-800/80 px-1.5 py-1 md:px-4 md:py-2 rounded-md md:rounded-xl text-[9px] md:text-base text-center border border-white/10 flex-shrink-0">
-                            {region.count.toLocaleString()}
-                          </span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Right Column: Course Ranking */}
-                  <div className="bg-slate-800/40 rounded-xl md:rounded-3xl p-1.5 md:p-8 border border-white/5 backdrop-blur-sm">
-                    <div className="flex justify-between items-center mb-3 md:mb-8">
-                      <div>
-                        <h4 className="font-bold text-xs md:text-xl text-white">Kurslar reytingi</h4>
-                        <p className="text-[8px] md:text-sm text-slate-400 mt-0.5 md:mt-1 hidden md:block">Platforma orqali tugatilgan top 5 kurslar</p>
-                      </div>
-                      <div className="p-1.5 md:p-2 bg-amber-500/10 rounded-lg md:rounded-xl">
-                        <Trophy className="w-4 h-4 md:w-6 md:h-6 text-amber-400" />
-                      </div>
-                    </div>
-
-                    <div className="space-y-2 md:space-y-4">
-                      {currentStats.courseRanking.map((course, i) => (
-                        <div key={i} className="flex items-center gap-1.5 md:gap-4">
-                          {/* Gradient bar with number and name */}
-                          <div className={`relative h-8 md:h-12 rounded-lg md:rounded-xl overflow-hidden bg-gradient-to-r ${course.color} flex-grow min-w-0`}>
-                            <div className="absolute inset-0 flex items-center px-1.5 md:px-4">
-                              <span className="w-4 h-4 md:w-7 md:h-7 flex items-center justify-center bg-black/30 rounded-full text-[8px] md:text-sm font-bold text-white mr-1 md:mr-3 flex-shrink-0">
-                                {i + 1}
-                              </span>
-                              <span className="font-medium text-white text-[8px] md:text-base truncate flex-1">{course.name}</span>
-                            </div>
-                          </div>
-                          {/* Count badge */}
-                          <span className="font-bold text-white bg-slate-800/80 px-1.5 py-1 md:px-4 md:py-2 rounded-md md:rounded-xl text-[9px] md:text-base text-center border border-white/10 flex-shrink-0">
-                            {course.count.toLocaleString()}
-                          </span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-
-              </div>
             </div>
-
-          </section >
+          </section>
         )
         }
 
@@ -1365,78 +1479,151 @@ export default function Home() {
           view === 'paid-courses' && (
             <section className="container mx-auto px-6 py-20 md:py-40 relative z-10">
               <h2 className="text-3xl md:text-7xl font-black text-center mb-6 bg-gradient-to-r from-amber-400 via-orange-500 to-yellow-400 bg-clip-text text-transparent">
-                Pullik kurslar
+                Professional Pullik Kurslar
               </h2>
-              <p className={`text-center mb-16 text-xl ${darkMode ? "text-gray-400" : "text-slate-600"}`}>
-                Chuqurlashtirilgan professional ta&apos;lim
+              <p className={`text-center mb-16 text-xl max-w-3xl mx-auto ${darkMode ? "text-gray-400" : "text-slate-600"}`}>
+                <span className="text-red-500 font-bold">DIQQAT:</span> Barcha kurslar pullik. Darslarni ko'rish uchun to'lovni to'liq amalga oshirish shart. To'lov bir martalik.
               </p>
 
-              <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-                {/* Kurs 1 - AI Engineering */}
-                <div className={`p-8 rounded-3xl backdrop-blur-lg md:backdrop-blur-2xl border transition-all duration-300 hover:scale-105 group relative overflow-hidden ${darkMode ? "bg-white/5 border-white/10 hover:border-amber-500/50" : "bg-white/10 border-white/20 hover:border-amber-500/50 shadow-xl"}`}>
-                  <div className="absolute top-0 right-0 p-4">
-                    <span className="px-4 py-1 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold border border-amber-500/50">
-                      PREMIUM
-                    </span>
-                  </div>
-                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center mb-6 shadow-lg shadow-orange-500/20">
-                    <Cpu className="w-8 h-8 text-white" />
-                  </div>
-                  <h3 className="text-3xl font-bold mb-4 text-white">AI Engineering Masterclass</h3>
-                  <p className={`mb-6 ${darkMode ? "text-gray-400" : "text-slate-600"}`}>
-                    Katta tillar modellari (LLMs), RAG tizimlari va AI agentlarini noldan ishlab chiqishni o'rganing.
-                  </p>
-                  <ul className="space-y-3 mb-8">
-                    <li className="flex items-center gap-2 text-sm text-gray-400">
-                      <span className="text-amber-500">✓</span> Python & PyTorch
-                    </li>
-                    <li className="flex items-center gap-2 text-sm text-gray-400">
-                      <span className="text-amber-500">✓</span> OpenAI & LangChain
-                    </li>
-                    <li className="flex items-center gap-2 text-sm text-gray-400">
-                      <span className="text-amber-500">✓</span> Real loyihalar portfolioga
-                    </li>
-                  </ul>
-                  <button className="w-full py-4 rounded-xl font-bold bg-gradient-to-r from-amber-500 to-orange-600 text-white hover:opacity-90 transition-opacity flex items-center justify-center gap-2">
-                    <span>Kursga yozilish</span>
-                    <span className="text-white/70 text-sm line-through">$400</span>
-                    <span>$199</span>
-                  </button>
-                </div>
+              <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+                {PAID_COURSES.map((course) => {
+                  const isPurchased = purchasedCourses.includes(course.id)
 
-                {/* Kurs 2 - Data Science & AI */}
-                <div className={`p-8 rounded-3xl backdrop-blur-lg md:backdrop-blur-2xl border transition-all duration-300 hover:scale-105 group relative overflow-hidden ${darkMode ? "bg-white/5 border-white/10 hover:border-blue-500/50" : "bg-white/10 border-white/20 hover:border-blue-500/50 shadow-xl"}`}>
-                  <div className="absolute top-0 right-0 p-4">
-                    <span className="px-4 py-1 rounded-full bg-blue-500/20 text-blue-400 text-sm font-bold border border-blue-500/50">
-                      BUSINESS
-                    </span>
-                  </div>
-                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-500 to-cyan-600 flex items-center justify-center mb-6 shadow-lg shadow-blue-500/20">
-                    <Network className="w-8 h-8 text-white" />
-                  </div>
-                  <h3 className="text-3xl font-bold mb-4 text-white">Data Science & AI for Business</h3>
-                  <p className={`mb-6 ${darkMode ? "text-gray-400" : "text-slate-600"}`}>
-                    Biznes ma'lumotlarini tahlil qilish, bashorat qilish va AI strategiyalarini joriy etish.
-                  </p>
-                  <ul className="space-y-3 mb-8">
-                    <li className="flex items-center gap-2 text-sm text-gray-400">
-                      <span className="text-blue-500">✓</span> Data Analysis & Vizualizatsiya
-                    </li>
-                    <li className="flex items-center gap-2 text-sm text-gray-400">
-                      <span className="text-blue-500">✓</span> Machine Learning asoslari
-                    </li>
-                    <li className="flex items-center gap-2 text-sm text-gray-400">
-                      <span className="text-blue-500">✓</span> Biznes keyslar
-                    </li>
-                  </ul>
-                  <button className="w-full py-4 rounded-xl font-bold bg-gradient-to-r from-blue-500 to-cyan-600 text-white hover:opacity-90 transition-opacity flex items-center justify-center gap-2">
-                    <span>Kursga yozilish</span>
-                    <span className="text-white/70 text-sm line-through">$350</span>
-                    <span>$149</span>
-                  </button>
-                </div>
+                  return (
+                    <div key={course.id} className={`p-8 rounded-3xl backdrop-blur-lg md:backdrop-blur-2xl border transition-all duration-300 hover:scale-[1.02] group relative overflow-hidden flex flex-col ${darkMode ? "bg-white/5 border-white/10" : "bg-white/10 border-white/20 shadow-xl"}`}>
+                      {/* Badge */}
+                      <div className="absolute top-0 right-0 p-4">
+                        <span className={`px-4 py-1 rounded-full text-xs font-bold border bg-white/10 text-white border-white/20`}>
+                          {course.badge}
+                        </span>
+                      </div>
+
+                      <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${course.color} flex items-center justify-center mb-6 shadow-lg ${course.shadow}`}>
+                        {course.icon}
+                      </div>
+
+                      <h3 className={`text-2xl md:text-3xl font-bold mb-2 ${darkMode ? "text-white" : "text-slate-800"}`}>{course.title}</h3>
+                      <div className="text-xl font-bold text-amber-500 mb-4">{course.price}</div>
+
+                      <p className={`mb-6 text-sm md:text-base flex-grow ${darkMode ? "text-gray-400" : "text-slate-600"}`}>
+                        {course.desc}
+                      </p>
+
+                      <ul className="space-y-3 mb-8">
+                        {course.features.map((feature, i) => (
+                          <li key={i} className="flex items-center gap-2 text-sm text-gray-500">
+                            <span className={`text-transparent bg-clip-text bg-gradient-to-r ${course.color} font-bold`}>✓</span> {feature}
+                          </li>
+                        ))}
+                      </ul>
+
+                      <div className="mt-auto space-y-3">
+                        {isPurchased ? (
+                          <button
+                            onClick={() => handleAccessCourse(course.id)}
+                            className="w-full py-4 rounded-xl font-bold bg-gradient-to-r from-emerald-500 to-green-600 text-white hover:opacity-90 transition-all shadow-lg shadow-emerald-500/20 flex items-center justify-center gap-2"
+                          >
+                            <span>Darslarni ko'rish</span>
+                            <span className="bg-white/20 px-2 py-0.5 rounded text-xs">Aktiv</span>
+                          </button>
+                        ) : (
+                          <button
+                            onClick={() => handlePayment(course.id, course.title, course.price)}
+                            className={`w-full py-4 rounded-xl font-bold bg-gradient-to-r ${course.color} text-white hover:opacity-90 transition-all shadow-lg flex items-center justify-center gap-2`}
+                          >
+                            <span>To'lov qilish</span>
+                          </button>
+                        )}
+
+                        {!isPurchased && (
+                          <div className="text-center">
+                            <span className="text-xs text-red-400/80 flex items-center justify-center gap-1">
+                              <Lock className="w-3 h-3" /> To'lovsiz ko'rish imkonsiz
+                            </span>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  )
+                })}
               </div>
             </section>
+          )
+        }
+
+        {/* LESSON PLAYER VIEW - Faqat to'lov qilganlar uchun */}
+        {
+          view === 'lesson-view' && activeCourse && activeLesson && (
+            <div className="fixed inset-0 z-50 flex flex-col md:flex-row bg-slate-950 text-white overflow-hidden">
+              {/* Sidebar - Lesson List */}
+              <div className={`w-full md:w-80 border-r border-white/10 flex flex-col ${darkMode ? "bg-slate-900" : "bg-slate-800"}`}>
+                <div className="p-4 border-b border-white/10 flex items-center gap-3">
+                  <button onClick={() => handleViewChange('paid-courses')} className="p-2 hover:bg-white/10 rounded-lg transition-colors">
+                    <ArrowLeft size={20} />
+                  </button>
+                  <div>
+                    <h3 className="font-bold text-sm truncate w-48">{activeCourse.title}</h3>
+                    <p className="text-xs text-white/50">{activeCourse.lessons.length} ta dars</p>
+                  </div>
+                </div>
+
+                <div className="flex-1 overflow-y-auto p-2 space-y-2">
+                  {activeCourse.lessons.map(lesson => (
+                    <button
+                      key={lesson.id}
+                      onClick={() => setActiveLesson(lesson)}
+                      className={`w-full p-3 rounded-xl flex items-center gap-3 transition-colors ${activeLesson.id === lesson.id ? "bg-blue-600 text-white" : "hover:bg-white/5 text-white/70"}`}
+                    >
+                      <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold ${activeLesson.id === lesson.id ? "bg-white/20" : "bg-white/10"}`}>
+                        {lesson.id}
+                      </div>
+                      <div className="text-left flex-1">
+                        <p className="text-sm font-medium line-clamp-1">{lesson.title}</p>
+                        <p className="text-xs opacity-60">{lesson.duration}</p>
+                      </div>
+                      {activeLesson.id === lesson.id && <Play size={16} className="fill-current" />}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Main Content - Video Player */}
+              <div className="flex-1 flex flex-col h-full relative">
+                {/* Top Bar for Mobile */}
+                <div className="md:hidden p-4 border-b border-white/10 flex items-center gap-2">
+                  <button onClick={() => handleViewChange('paid-courses')}>
+                    <ArrowLeft />
+                  </button>
+                  <span className="font-bold truncate">{activeLesson.title}</span>
+                </div>
+
+                {/* Video Area */}
+                <div className="flex-1 bg-black flex items-center justify-center p-4 md:p-10">
+                  <div className="w-full max-w-4xl aspect-video bg-slate-900 rounded-2xl overflow-hidden shadow-2xl relative group">
+                    <iframe
+                      src={activeLesson.videoUrl}
+                      title={activeLesson.title}
+                      className="w-full h-full"
+                      allowFullScreen
+                    />
+                  </div>
+                </div>
+
+                {/* Description Area */}
+                <div className="p-6 md:p-8 bg-slate-900/50 border-t border-white/10 h-1/3 overflow-y-auto">
+                  <h2 className="text-2xl font-bold mb-2">{activeLesson.title}</h2>
+                  <p className="text-white/60 mb-4">{activeCourse.desc}</p>
+                  <div className="flex gap-4">
+                    <button className="px-6 py-2 bg-blue-600 hover:bg-blue-500 rounded-lg font-medium transition-colors">
+                      Materiallarni yuklash
+                    </button>
+                    <button className="px-6 py-2 border border-white/20 hover:bg-white/10 rounded-lg font-medium transition-colors">
+                      Savol berish
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
           )
         }
 
@@ -1603,86 +1790,95 @@ export default function Home() {
               transform: none !important;
             }
           }
+          /* Custom 3D Utilities */
+          .scrollbar-hide::-webkit-scrollbar { display: none; }
+          .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+          .perspective-1000 { perspective: 1000px; }
+          .rotate-y-12 { transform: rotateY(12deg); }
+          .rotate-x-6 { transform: rotateX(6deg); }
+          .translate-z-10 { transform: translateZ(10px); }
+          .translate-z-20 { transform: translateZ(20px); }
         `}</style>
 
         {/* Info Modal */}
-        {modalOpen && (
-          <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-md p-4" onClick={() => setModalOpen(false)}>
-            <div className="bg-slate-900 border border-white/10 rounded-3xl p-6 lg:p-8 max-w-2xl w-full max-h-[80vh] overflow-y-auto relative shadow-2xl" onClick={e => e.stopPropagation()}>
-              <button
-                onClick={() => setModalOpen(false)}
-                className="absolute top-4 right-4 p-2 rounded-full bg-white/5 hover:bg-white/10 text-white/60 hover:text-white transition-colors"
-              >
-                ✕
-              </button>
+        {
+          modalOpen && (
+            <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-md p-4" onClick={() => setModalOpen(false)}>
+              <div className="bg-slate-900 border border-white/10 rounded-3xl p-6 lg:p-8 max-w-2xl w-full max-h-[80vh] overflow-y-auto relative shadow-2xl" onClick={e => e.stopPropagation()}>
+                <button
+                  onClick={() => setModalOpen(false)}
+                  className="absolute top-4 right-4 p-2 rounded-full bg-white/5 hover:bg-white/10 text-white/60 hover:text-white transition-colors"
+                >
+                  ✕
+                </button>
 
-              <h2 className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent mb-6">
-                {modalTitle}
-              </h2>
+                <h2 className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent mb-6">
+                  {modalTitle}
+                </h2>
 
-              <div className="space-y-4">
-                {modalContent.length === 0 ? (
-                  <p className="text-white/40 text-center py-10">Ma'lumot topilmadi.</p>
-                ) : (
-                  modalType === 'project' ? (
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      {modalContent.map((item: any, i: number) => (
-                        <div key={i} className="bg-white/5 border border-white/5 rounded-2xl p-4 hover:bg-white/10 transition-colors">
-                          {item.image && <div className="h-32 bg-slate-800 rounded-xl mb-3 overflow-hidden"><img src={item.image} alt={item.title} className="w-full h-full object-cover" /></div>}
-                          <h3 className="font-bold text-white mb-1">{item.title}</h3>
-                          <p className="text-sm text-white/60">{item.description}</p>
-                        </div>
-                      ))}
-                    </div>
-                  ) : modalType === 'review' ? (
-                    <div className="space-y-4">
-                      {modalContent.map((item: any, i: number) => (
-                        <div key={i} className="bg-white/5 border border-white/5 rounded-2xl p-4">
-                          <div className="flex items-center gap-3 mb-2">
-                            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center font-bold text-white">
-                              {item.name.charAt(0)}
+                <div className="space-y-4">
+                  {modalContent.length === 0 ? (
+                    <p className="text-white/40 text-center py-10">Ma'lumot topilmadi.</p>
+                  ) : (
+                    modalType === 'project' ? (
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        {modalContent.map((item: any, i: number) => (
+                          <div key={i} className="bg-white/5 border border-white/5 rounded-2xl p-4 hover:bg-white/10 transition-colors">
+                            {item.image && <div className="h-32 bg-slate-800 rounded-xl mb-3 overflow-hidden"><img src={item.image} alt={item.title} className="w-full h-full object-cover" /></div>}
+                            <h3 className="font-bold text-white mb-1">{item.title}</h3>
+                            <p className="text-sm text-white/60">{item.description}</p>
+                          </div>
+                        ))}
+                      </div>
+                    ) : modalType === 'review' ? (
+                      <div className="space-y-4">
+                        {modalContent.map((item: any, i: number) => (
+                          <div key={i} className="bg-white/5 border border-white/5 rounded-2xl p-4">
+                            <div className="flex items-center gap-3 mb-2">
+                              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center font-bold text-white">
+                                {item.name.charAt(0)}
+                              </div>
+                              <div>
+                                <p className="font-medium text-white">{item.name}</p>
+                                <p className="text-xs text-white/40">{item.role}</p>
+                              </div>
+                              <div className="ml-auto flex text-yellow-500 text-xs">
+                                {Array(item.rating).fill('⭐').map((s, si) => <span key={si}>{s}</span>)}
+                              </div>
+                            </div>
+                            <p className="text-white/80 text-sm italic">"{item.content}"</p>
+                          </div>
+                        ))}
+                      </div>
+                    ) : modalType === 'graduate' ? (
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        {modalContent.map((item: any, i: number) => (
+                          <div key={i} className="bg-white/5 border border-white/5 rounded-2xl p-4 flex gap-4 items-start">
+                            <div className="w-16 h-16 rounded-xl bg-slate-800 flex-shrink-0 overflow-hidden">
+                              {item.image ? <img src={item.image} alt={item.name} className="w-full h-full object-cover" /> : <div className="w-full h-full flex items-center justify-center text-2xl">🎓</div>}
                             </div>
                             <div>
-                              <p className="font-medium text-white">{item.name}</p>
-                              <p className="text-xs text-white/40">{item.role}</p>
-                            </div>
-                            <div className="ml-auto flex text-yellow-500 text-xs">
-                              {Array(item.rating).fill('⭐').map((s, si) => <span key={si}>{s}</span>)}
+                              <h3 className="font-bold text-white">{item.name}</h3>
+                              <p className="text-xs text-purple-400 font-medium mb-1">{item.company}</p>
+                              <p className="text-xs text-white/60 line-clamp-2">{item.story}</p>
                             </div>
                           </div>
-                          <p className="text-white/80 text-sm italic">"{item.content}"</p>
-                        </div>
-                      ))}
-                    </div>
-                  ) : modalType === 'graduate' ? (
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      {modalContent.map((item: any, i: number) => (
-                        <div key={i} className="bg-white/5 border border-white/5 rounded-2xl p-4 flex gap-4 items-start">
-                          <div className="w-16 h-16 rounded-xl bg-slate-800 flex-shrink-0 overflow-hidden">
-                            {item.image ? <img src={item.image} alt={item.name} className="w-full h-full object-cover" /> : <div className="w-full h-full flex items-center justify-center text-2xl">🎓</div>}
-                          </div>
-                          <div>
-                            <h3 className="font-bold text-white">{item.name}</h3>
-                            <p className="text-xs text-purple-400 font-medium mb-1">{item.company}</p>
-                            <p className="text-xs text-white/60 line-clamp-2">{item.story}</p>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  ) : modalType === 'text' ? (
-                    <div className="p-4 rounded-2xl bg-white/5 border border-white/5">
-                      {modalContent.map((item: any, i: number) => (
-                        <p key={i} className="text-lg text-white/80 leading-relaxed text-center">
-                          {item.text}
-                        </p>
-                      ))}
-                    </div>
-                  ) : null
-                )}
+                        ))}
+                      </div>
+                    ) : modalType === 'text' ? (
+                      <div className="p-4 rounded-2xl bg-white/5 border border-white/5">
+                        {modalContent.map((item: any, i: number) => (
+                          <p key={i} className="text-lg text-white/80 leading-relaxed text-center">
+                            {item.text}
+                          </p>
+                        ))}
+                      </div>
+                    ) : null
+                  )}
+                </div>
               </div>
             </div>
-          </div>
-        )
+          )
         }
 
         {/* Universal AI Agent - Bottom Right */}
