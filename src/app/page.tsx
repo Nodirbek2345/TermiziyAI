@@ -797,7 +797,7 @@ export default function Home() {
         </div>
 
         {/* STICKY HEADER - Always Visible */}
-        <header className={`fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 py-3 md:px-8 md:py-4 transition-all duration-300 ${scrollY > 20 ? (darkMode ? "bg-transparent backdrop-blur-md" : "bg-transparent backdrop-blur-md") : "bg-transparent"}`}>
+        <header className={`fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 py-3 md:px-8 md:py-4 transition-all duration-300 ${scrollY > 20 ? (darkMode ? "bg-slate-900/30 backdrop-blur-xl border-b border-white/10" : "bg-white/30 backdrop-blur-xl border-b border-white/20 shadow-sm") : "bg-transparent"}`}>
 
           {/* Social Icons (Left) */}
           <div className="flex gap-2 md:gap-3">
@@ -811,7 +811,7 @@ export default function Home() {
                 href={link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`p-2 rounded-xl transition-all hover:scale-110 cursor-pointer group border ${darkMode ? "bg-white/5 border-white/5 hover:bg-white/10 text-white" : "bg-white/10 border-white/10 hover:bg-white/20 text-slate-200"}`}
+                className={`p-2 rounded-xl transition-all hover:scale-110 cursor-pointer group border ${darkMode ? "bg-white/5 border-white/10 hover:bg-white/10 text-white" : "bg-white/40 border-white/20 hover:bg-white/60 text-slate-800 shadow-sm"}`}
               >
                 <Icon className={`w-5 h-5 md:w-5 md:h-5 transition-colors ${color}`} />
               </a>
@@ -825,7 +825,7 @@ export default function Home() {
             <div className="relative">
               <button
                 onClick={() => setLangDropdownOpen(!langDropdownOpen)}
-                className={`flex items-center gap-1.5 px-3 py-2 rounded-xl transition-all hover:scale-105 border font-bold text-sm ${darkMode ? "bg-white/5 border-white/5 text-white hover:bg-white/10" : "bg-white/10 border-white/10 text-slate-200 hover:bg-white/20"}`}
+                className={`flex items-center gap-1.5 px-3 py-2 rounded-xl transition-all hover:scale-105 border font-bold text-sm ${darkMode ? "bg-white/5 border-white/10 text-white hover:bg-white/10" : "bg-white/40 border-white/20 text-slate-800 hover:bg-white/60 shadow-sm"}`}
               >
                 <span>{language === 'UZ' ? "O'Z" : language}</span>
                 <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-300 ${langDropdownOpen ? 'rotate-180' : ''}`} />
@@ -856,7 +856,7 @@ export default function Home() {
             {/* Dark Mode Toggle */}
             <button
               onClick={() => setDarkMode(!darkMode)}
-              className={`p-2 rounded-xl transition-all hover:scale-110 border group overflow-hidden relative ${darkMode ? "bg-white/5 border-white/5 hover:bg-white/10 text-white" : "bg-white/10 border-white/10 hover:bg-white/20 text-slate-200"}`}
+              className={`p-2 rounded-xl transition-all hover:scale-110 border group overflow-hidden relative ${darkMode ? "bg-white/5 border-white/10 hover:bg-white/10 text-white" : "bg-white/40 border-white/20 hover:bg-white/60 text-slate-800 shadow-sm"}`}
             >
               <div className="relative z-10">
                 {darkMode ? <Sun className="w-5 h-5 group-hover:rotate-180 transition-transform duration-500" /> : <Moon className="w-5 h-5" />}
