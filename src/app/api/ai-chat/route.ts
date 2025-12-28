@@ -11,8 +11,9 @@ const GEMINI_API_KEYS = GEMINI_KEYS_STRING.split(',').map(k => k.trim()).filter(
 // GitHub Token (for GitHub Models)
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 
-// OpenAI API Key
-const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
+// OpenAI API Keys
+const OPENAI_KEYS_STRING = process.env.OPENAI_API_KEYS || process.env.OPENAI_API_KEY || '';
+const OPENAI_API_KEYS_LIST = OPENAI_KEYS_STRING.split(',').map(k => k.trim()).filter(k => k.length > 0);
 
 // Gemini Models Priority
 const GEMINI_MODELS = [
@@ -165,22 +166,26 @@ export async function POST(request: Request) {
         let lastError = null;
 
         // 1. Try OpenAI (PRIORITY 1)
-        if (OPENAI_API_KEY) {
-            for (const model of OPENAI_MODELS) {
-                try {
-                    const aiResponse = await callOpenAICompatible(
-                        message, history, OPENAI_API_KEY, model, "https://api.openai.com/v1/chat/completions"
-                    );
-                    if (aiResponse && aiResponse.content) {
-                        return NextResponse.json({
-                            success: true,
-                            response: aiResponse.content,
-                            debug: { provider: 'OpenAI', model, limits: aiResponse.limits }
-                        });
+        // 1. Try OpenAI (PRIORITY 1)
+        if (OPENAI_API_KEYS_LIST.length > 0) {
+            for (const apiKey of OPENAI_API_KEYS_LIST) {
+                for (const model of OPENAI_MODELS) {
+                    try {
+                        const aiResponse = await callOpenAICompatible(
+                            message, history, apiKey, model, "https://api.openai.com/v1/chat/completions"
+                        );
+                        if (aiResponse && aiResponse.content) {
+                            return NextResponse.json({
+                                success: true,
+                                response: aiResponse.content,
+                                debug: { provider: 'OpenAI', model, key: apiKey.substring(0, 5) + '...', limits: aiResponse.limits }
+                            });
+                        }
+                    } catch (error) {
+                        console.warn(`OpenAI Failed: Key=${apiKey.substring(0, 5)}... Model=${model}`, error);
+                        lastError = error;
+                        // Continue to next model/key
                     }
-                } catch (error) {
-                    console.warn(`OpenAI Failed: Model=${model}`, error);
-                    lastError = error;
                 }
             }
         }

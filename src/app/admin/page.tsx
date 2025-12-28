@@ -8,7 +8,8 @@ import {
     TrendingUp,
     ArrowUpRight,
     MoreHorizontal,
-    RefreshCcw
+    RefreshCcw,
+    Sparkles
 } from "lucide-react";
 
 interface Stats {
@@ -21,6 +22,31 @@ interface Stats {
 export default function AdminPage() {
     const [stats, setStats] = useState<Stats | null>(null);
     const [loading, setLoading] = useState(true);
+    const [analyzing, setAnalyzing] = useState(false);
+    const [analysis, setAnalysis] = useState<string | null>(null);
+
+    const handleAnalyze = async () => {
+        if (!stats) return;
+        setAnalyzing(true);
+        try {
+            const res = await fetch('/api/ai-chat', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    message: "Quyidagi statistika bo'yicha qisqacha tahlil va maslahatlar ber (o'zbek tilida): " + JSON.stringify(stats),
+                    history: []
+                })
+            });
+            const data = await res.json();
+            if (data.success) {
+                setAnalysis(data.response);
+            }
+        } catch (error) {
+            console.error(error);
+        } finally {
+            setAnalyzing(false);
+        }
+    };
 
     const fetchStats = async () => {
         setLoading(true);
@@ -60,11 +86,41 @@ export default function AdminPage() {
                         <option>Bu hafta</option>
                         <option>Bu oy</option>
                     </select>
+                    <button
+                        onClick={handleAnalyze}
+                        disabled={analyzing || !stats}
+                        className="flex-1 md:flex-none flex items-center justify-center gap-2 bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white px-3 py-2 md:px-4 rounded-lg text-sm md:text-base font-medium transition-all shadow-lg shadow-purple-500/25 disabled:opacity-50"
+                    >
+                        {analyzing ? (
+                            <RefreshCcw size={18} className="animate-spin" />
+                        ) : (
+                            <Sparkles size={18} />
+                        )}
+                        AI Tahlil
+                    </button>
                     <button className="flex-1 md:flex-none bg-purple-600 hover:bg-purple-500 text-white px-3 py-2 md:px-4 rounded-lg text-sm md:text-base font-medium transition-colors whitespace-nowrap">
                         Hisobotni yuklash
                     </button>
                 </div>
             </div>
+
+            {/* AI Analysis Result */}
+            {analysis && (
+                <div className="bg-gradient-to-br from-indigo-900/50 to-purple-900/50 backdrop-blur-xl border border-indigo-500/20 rounded-2xl p-6 relative overflow-hidden animate-slideUp">
+                    <div className="absolute top-0 right-0 p-4 opacity-10">
+                        <Sparkles size={100} />
+                    </div>
+                    <div className="relative z-10">
+                        <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
+                            <Sparkles size={24} className="text-purple-400" />
+                            AI Tahlil Natijasi
+                        </h3>
+                        <div className="prose prose-invert max-w-none">
+                            <p className="text-gray-300 whitespace-pre-wrap leading-relaxed">{analysis}</p>
+                        </div>
+                    </div>
+                </div>
+            )}
 
             {/* Stats Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
