@@ -932,10 +932,10 @@ export default function Home() {
                 </div>
 
                 {/* Bottom Charts Grid */}
-                <div className="grid grid-cols-2 gap-3 md:gap-6">
+                <div className="grid grid-cols-2 gap-1.5 md:gap-6">
 
                   {/* Left Column: Region Ranking */}
-                  <div className="bg-slate-800/40 rounded-xl md:rounded-3xl p-3 md:p-8 border border-white/5 backdrop-blur-sm">
+                  <div className="bg-slate-800/40 rounded-xl md:rounded-3xl p-1.5 md:p-8 border border-white/5 backdrop-blur-sm">
                     <div className="flex justify-between items-center mb-3 md:mb-8">
                       <div>
                         <h4 className="font-bold text-xs md:text-xl text-white">Hududlar reytingi</h4>
@@ -968,7 +968,7 @@ export default function Home() {
                   </div>
 
                   {/* Right Column: Course Ranking */}
-                  <div className="bg-slate-800/40 rounded-xl md:rounded-3xl p-3 md:p-8 border border-white/5 backdrop-blur-sm">
+                  <div className="bg-slate-800/40 rounded-xl md:rounded-3xl p-1.5 md:p-8 border border-white/5 backdrop-blur-sm">
                     <div className="flex justify-between items-center mb-3 md:mb-8">
                       <div>
                         <h4 className="font-bold text-xs md:text-xl text-white">Kurslar reytingi</h4>
