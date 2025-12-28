@@ -662,16 +662,16 @@ export default function Home() {
                   className="group relative"
                 >
                   <div
-                    className={`relative p-6 md:p-8 rounded-2xl md:rounded-3xl backdrop-blur-lg md:backdrop-blur-2xl border transition-all duration-300 active:scale-95 active:opacity-80 ${darkMode ? "bg-white/5 border-white/10 active:bg-white/15" : "bg-white/10 border-white/20 active:bg-white/40 shadow-lg"} cursor-pointer`}
+                    className={`relative p-3 md:p-8 rounded-2xl md:rounded-3xl backdrop-blur-lg md:backdrop-blur-2xl border transition-all duration-300 active:scale-95 active:opacity-80 ${darkMode ? "bg-white/5 border-white/10 active:bg-white/15" : "bg-white/10 border-white/20 active:bg-white/40 shadow-lg"} cursor-pointer`}
                     style={{ WebkitTapHighlightColor: 'transparent' }}
                     onClick={() => setActiveDropdown(activeDropdown === i ? null : i)}
                   >
                     <div className={`absolute inset-0 bg-gradient-to-br ${stat.color} opacity-0 group-hover:opacity-20 rounded-2xl md:rounded-3xl transition-opacity blur-xl`} />
-                    <div className="flex justify-center mb-3 md:mb-4 text-cyan-400">{stat.icon}</div>
-                    <div className={`text-2xl md:text-3xl font-black bg-gradient-to-r ${stat.color} bg-clip-text text-transparent mb-2 whitespace-nowrap text-center`}>
+                    <div className="flex justify-center mb-2 md:mb-4 text-cyan-400">{stat.icon}</div>
+                    <div className={`text-lg md:text-3xl font-black bg-gradient-to-r ${stat.color} bg-clip-text text-transparent mb-1 md:mb-2 text-center leading-tight break-words`}>
                       {stat.number}
                     </div>
-                    <div className={`text-xs md:text-sm font-semibold text-center ${darkMode ? "text-gray-400" : "text-slate-600"}`}>{stat.label}</div>
+                    <div className={`text-[10px] md:text-sm font-semibold text-center ${darkMode ? "text-gray-400" : "text-slate-600"}`}>{stat.label}</div>
                   </div>
 
                   {/* Dropdown Menu */}
