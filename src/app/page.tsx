@@ -1051,13 +1051,13 @@ export default function Home() {
                 {/* Navigation Arrows - Hidden on Mobile */}
                 <button
                   onClick={handlePrevSlide}
-                  className="absolute left-2 md:left-10 z-50 p-3 md:p-4 bg-white/10 hover:bg-white/20 backdrop-blur-xl border border-white/20 rounded-full text-white transition-all hover:scale-110 active:scale-95 opacity-30 hover:opacity-100 duration-300 hidden md:flex"
+                  className="absolute left-2 md:left-10 z-50 p-2 md:p-4 bg-white/10 hover:bg-white/20 backdrop-blur-xl border border-white/20 rounded-full text-white transition-all hover:scale-110 active:scale-95 opacity-50 hover:opacity-100 duration-300"
                 >
                   <ChevronLeft size={32} />
                 </button>
                 <button
                   onClick={handleNextSlide}
-                  className="absolute right-2 md:right-10 z-50 p-3 md:p-4 bg-white/10 hover:bg-white/20 backdrop-blur-xl border border-white/20 rounded-full text-white transition-all hover:scale-110 active:scale-95 opacity-30 hover:opacity-100 duration-300 hidden md:flex"
+                  className="absolute right-2 md:right-10 z-50 p-2 md:p-4 bg-white/10 hover:bg-white/20 backdrop-blur-xl border border-white/20 rounded-full text-white transition-all hover:scale-110 active:scale-95 opacity-50 hover:opacity-100 duration-300"
                 >
                   <ChevronRight size={32} />
                 </button>
@@ -1142,8 +1142,8 @@ export default function Home() {
                     key={index}
                     onClick={() => setActiveCarouselIndex(index)}
                     className={`w-3 h-3 rounded-full transition-all duration-300 ${index === activeCarouselIndex
-                        ? 'bg-cyan-500 scale-125'
-                        : 'bg-white/30 hover:bg-white/50'
+                      ? 'bg-cyan-500 scale-125'
+                      : 'bg-white/30 hover:bg-white/50'
                       }`}
                   />
                 ))}
