@@ -911,12 +911,11 @@ export default function Home() {
               </span>
             </h1>
 
-            <p className={`text-base md:text-2xl mb-8 md:mb-16 max-w-5xl mx-auto font-light leading-relaxed ${darkMode ? "text-gray-300" : "text-slate-600"}`}>
-              TERMIZIY AI bepul kurslari orqali sun’iy intellekt asoslarini o‘rganing.
-              <br className="hidden md:block" />
-              ChatGPT, prompt yozish va AI vositalari bilan ishlashni bepul o‘rganing.
-              <br className="hidden md:block" />
-              <span className="text-cyan-400 font-medium">Kurs yakunida sertifikat beriladi.</span>
+            <p className={`text-base md:text-4xl mb-8 md:mb-16 max-w-5xl mx-auto font-light leading-relaxed ${darkMode ? "text-gray-300" : "text-slate-600"}`}>
+              <span className="text-cyan-400 font-semibold">Sun&apos;iy intellekt</span> •{' '}
+              <span className="text-purple-400 font-semibold">ChatGPT</span> •{' '}
+              <span className="text-pink-400 font-semibold">Midjourney</span> •{' '}
+              <span className="text-emerald-400 font-semibold">Professional</span> kurslar
             </p>
 
             {/* 3D Stats Cards */}
@@ -1149,8 +1148,12 @@ export default function Home() {
               <h2 className={`text-3xl md:text-5xl font-black text-center mb-4 tracking-tight ${darkMode ? 'text-white' : 'text-slate-800'}`}>
                 BEPUL KURSLARIMIZ
               </h2>
-              <p className={`text-center mb-10 md:mb-16 text-sm md:text-lg font-medium ${darkMode ? 'text-white/70' : 'text-slate-600'}`}>
-                Bepul kurslar orqali AI dunyosiga birinchi qadamingizni qo'ying
+              <p className={`text-center mb-10 md:mb-16 text-sm md:text-lg font-medium max-w-4xl mx-auto leading-relaxed ${darkMode ? 'text-white/70' : 'text-slate-600'}`}>
+                TERMIZIY AI bepul kurslari orqali sun’iy intellekt asoslarini o‘rganing.
+                <br className="hidden md:block" />
+                ChatGPT, prompt yozish va AI vositalari bilan ishlashni bepul o‘rganing.
+                <br className="hidden md:block py-2" />
+                <span className="text-cyan-400 font-bold block mt-2 md:mt-0">Kurs yakunida sertifikat beriladi.</span>
               </p>
 
 
