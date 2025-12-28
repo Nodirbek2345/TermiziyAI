@@ -1037,10 +1037,10 @@ export default function Home() {
 
             {/* BEPUL KURSLARIMIZ - Carousel Style */}
             <div className="max-w-7xl mx-auto mb-20 md:mb-40 px-3 md:px-4 relative z-10">
-              <h2 className="text-3xl md:text-5xl font-black text-center mb-4 text-white tracking-tight">
+              <h2 className={`text-3xl md:text-5xl font-black text-center mb-4 tracking-tight ${darkMode ? 'text-white' : 'text-slate-800'}`}>
                 BEPUL KURSLARIMIZ
               </h2>
-              <p className="text-center text-white/50 mb-10 md:mb-16 text-sm md:text-lg">
+              <p className={`text-center mb-10 md:mb-16 text-sm md:text-lg font-medium ${darkMode ? 'text-white/70' : 'text-slate-600'}`}>
                 Bepul kurslar orqali AI dunyosiga birinchi qadamingizni qo'ying
               </p>
 
