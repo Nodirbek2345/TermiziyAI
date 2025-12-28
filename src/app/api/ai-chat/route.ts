@@ -165,7 +165,26 @@ export async function POST(request: Request) {
 
         let lastError = null;
 
-        // 1. Try OpenAI (PRIORITY 1)
+        // 1. Try Gemini Models (PRIORITY 1 - MOVED TO TOP due to OpenAI issues)
+        for (const model of GEMINI_MODELS) {
+            for (const apiKey of GEMINI_API_KEYS) {
+                try {
+                    const aiResponse = await callGemini(message, history, apiKey, model);
+                    if (aiResponse && aiResponse.content) {
+                        return NextResponse.json({
+                            success: true,
+                            response: aiResponse.content,
+                            debug: { provider: 'Gemini', model, key: `...${apiKey.slice(-4)}` }
+                        });
+                    }
+                } catch (error) {
+                    console.warn(`Gemini Failed: Model=${model}, Key=...${apiKey.slice(-4)}`, error);
+                    lastError = error;
+                }
+            }
+        }
+
+        // 2. Try OpenAI (PRIORITY 2)
         // 1. Try OpenAI (PRIORITY 1)
         if (OPENAI_API_KEYS_LIST.length > 0) {
             for (const apiKey of OPENAI_API_KEYS_LIST) {
@@ -211,24 +230,7 @@ export async function POST(request: Request) {
             }
         }
 
-        // 3. Try Gemini Models (Fallback)
-        for (const model of GEMINI_MODELS) {
-            for (const apiKey of GEMINI_API_KEYS) {
-                try {
-                    const aiResponse = await callGemini(message, history, apiKey, model);
-                    if (aiResponse && aiResponse.content) {
-                        return NextResponse.json({
-                            success: true,
-                            response: aiResponse.content,
-                            debug: { provider: 'Gemini', model, key: `...${apiKey.slice(-4)}` }
-                        });
-                    }
-                } catch (error) {
-                    console.warn(`Gemini Failed: Model=${model}, Key=...${apiKey.slice(-4)}`, error);
-                    lastError = error;
-                }
-            }
-        }
+
 
         // 4. Try OpenAI (Already tried as Priority 1, but keeping structure if needed for fallback logic later, currently empty here as it's moved up)
         // OpenAI logic moved to top.
