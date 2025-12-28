@@ -714,6 +714,76 @@ export default function Home() {
         {/* Universal Chatbot - Only visible in Hero */}
         {view === 'hero' && <UniversalAgent />}
 
+        {/* STICKY HEADER - Always Visible */}
+        <header className={`fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 py-3 md:px-8 md:py-4 transition-all duration-300 ${scrollY > 20 ? (darkMode ? "bg-slate-950/80 backdrop-blur-xl border-b border-white/10" : "bg-white/60 backdrop-blur-xl border-b border-white/20 shadow-sm") : "bg-transparent"}`}>
+
+          {/* Social Icons (Left) */}
+          <div className="flex gap-2 md:gap-3">
+            {[
+              { Icon: Instagram, link: 'https://www.instagram.com/', color: 'hover:text-pink-500' },
+              { Icon: Youtube, link: 'https://www.youtube.com/', color: 'hover:text-red-500' },
+              { Icon: Facebook, link: 'https://www.facebook.com/?locale=ru_RU', color: 'hover:text-blue-500' }
+            ].map(({ Icon, link, color }, i) => (
+              <a
+                key={i}
+                href={link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`p-2 rounded-xl transition-all hover:scale-110 cursor-pointer group border ${darkMode ? "bg-white/5 border-white/10 hover:bg-white/10 text-white" : "bg-white/50 border-white/20 hover:bg-white/80 text-slate-700 shadow-sm"}`}
+              >
+                <Icon className={`w-5 h-5 md:w-5 md:h-5 transition-colors ${color}`} />
+              </a>
+            ))}
+          </div>
+
+          {/* Right Side Settings */}
+          <div className="flex items-center gap-3 md:gap-4 relative">
+
+            {/* Language Switcher */}
+            <div className="relative">
+              <button
+                onClick={() => setLangDropdownOpen(!langDropdownOpen)}
+                className={`flex items-center gap-1.5 px-3 py-2 rounded-xl transition-all hover:scale-105 border font-bold text-sm ${darkMode ? "bg-white/5 border-white/10 text-white hover:bg-white/10" : "bg-white/50 border-white/20 text-slate-800 hover:bg-white/80 shadow-sm"}`}
+              >
+                <span>{language === 'UZ' ? "O'Z" : language}</span>
+                <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-300 ${langDropdownOpen ? 'rotate-180' : ''}`} />
+              </button>
+
+              {/* Dropdown Menu */}
+              {langDropdownOpen && (
+                <div className={`absolute top-full right-0 mt-2 w-24 rounded-xl overflow-hidden backdrop-blur-xl border shadow-2xl animate-in fade-in zoom-in-95 duration-200 ${darkMode ? "bg-slate-900/90 border-white/10" : "bg-white/90 border-white/20"}`}>
+                  {['UZ', 'RU', 'EN'].map((lang) => (
+                    <button
+                      key={lang}
+                      onClick={() => {
+                        setLanguage(lang as any);
+                        setLangDropdownOpen(false);
+                      }}
+                      className={`w-full text-center py-2 text-sm font-bold transition-colors ${language === lang
+                        ? (darkMode ? 'bg-white/10 text-cyan-400' : 'bg-blue-50 text-blue-600')
+                        : (darkMode ? 'text-white/70 hover:bg-white/5' : 'text-slate-600 hover:bg-slate-100')
+                        }`}
+                    >
+                      {lang === 'UZ' ? "O'Z" : lang}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* Dark Mode Toggle */}
+            <button
+              onClick={() => setDarkMode(!darkMode)}
+              className={`p-2 rounded-xl transition-all hover:scale-110 border group overflow-hidden relative ${darkMode ? "bg-white/5 border-white/10 hover:bg-white/10 text-white" : "bg-white/50 border-white/20 hover:bg-white/80 text-slate-800 shadow-sm"}`}
+            >
+              <div className="relative z-10">
+                {darkMode ? <Sun className="w-5 h-5 group-hover:rotate-180 transition-transform duration-500" /> : <Moon className="w-5 h-5" />}
+              </div>
+              <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-lg blur opacity-0 group-hover:opacity-20 transition-opacity" />
+            </button>
+          </div>
+        </header>
+
         {/* Neural network grid */}
         <div className="fixed inset-0 pointer-events-none opacity-10">
           <div className="absolute inset-0" style={{
@@ -726,57 +796,11 @@ export default function Home() {
           }} />
         </div>
 
-        {/* Language Switcher - Only Visible in Hero */}
-        {view === 'hero' && (
-          <div className="fixed top-[5%] right-20 md:right-28 z-50">
-            <button
-              onClick={() => setLangDropdownOpen(!langDropdownOpen)}
-              className={`flex items-center gap-1 md:gap-2 px-3 py-3 md:px-4 md:py-3.5 rounded-2xl backdrop-blur-lg md:backdrop-blur-2xl transition-all shadow-xl hover:scale-105 border ${darkMode ? "bg-white/5 border-white/10 text-white hover:bg-white/10" : "bg-white/70 border-white/20 text-slate-800 hover:bg-white/90"}`}
-            >
-              <span className="font-bold text-sm md:text-base">{language === 'UZ' ? "O'Z" : language}</span>
-              <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${langDropdownOpen ? 'rotate-180' : ''}`} />
-            </button>
+        {/* STICKY HEADER - Always Visible */}
+        <header className={`fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 py-3 md:px-8 md:py-4 transition-all duration-300 ${scrollY > 20 ? (darkMode ? "bg-slate-950/80 backdrop-blur-xl border-b border-white/10" : "bg-white/60 backdrop-blur-xl border-b border-white/20 shadow-sm") : "bg-transparent"}`}>
 
-            {/* Dropdown Menu */}
-            {langDropdownOpen && (
-              <div className={`absolute top-full right-0 mt-2 w-full min-w-[80px] rounded-xl overflow-hidden backdrop-blur-xl border shadow-2xl animate-in fade-in zoom-in-95 duration-200 ${darkMode ? "bg-slate-900/90 border-white/10" : "bg-white/90 border-white/20"}`}>
-                {['UZ', 'RU', 'EN'].map((lang) => (
-                  <button
-                    key={lang}
-                    onClick={() => {
-                      setLanguage(lang as any);
-                      setLangDropdownOpen(false);
-                    }}
-                    className={`w-full text-center py-2.5 text-sm font-bold transition-colors ${language === lang
-                        ? (darkMode ? 'bg-white/10 text-cyan-400' : 'bg-blue-50 text-blue-600')
-                        : (darkMode ? 'text-white/70 hover:bg-white/5' : 'text-slate-600 hover:bg-slate-100')
-                      }`}
-                  >
-                    {lang === 'UZ' ? "O'Z" : lang}
-                  </button>
-                ))}
-              </div>
-            )}
-          </div>
-        )}
-
-        {/* Dark Mode Toggle - Only Visible in Hero */}
-        {view === 'hero' && (
-          <button
-            onClick={() => setDarkMode(!darkMode)}
-            className={`fixed top-[5%] right-4 md:right-8 z-50 p-3 md:p-4 rounded-2xl backdrop-blur-lg md:backdrop-blur-2xl transition-all shadow-2xl hover:scale-110 group ${darkMode ? "bg-white/5 border-white/10 hover:bg-white/10" : "bg-white/10 border-white/20 hover:bg-white/30 shadow-lg"}`}
-            style={{ borderWidth: 1 }}
-          >
-            <div className="relative">
-              {darkMode ? <Sun className="w-6 h-6 md:w-7 md:h-7 group-hover:rotate-180 transition-transform duration-500" /> : <Moon className="w-6 h-6 md:w-7 md:h-7" />}
-              <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-full blur-xl opacity-0 group-hover:opacity-50 transition-opacity" />
-            </div>
-          </button>
-        )}
-
-        {/* Floating Social Icons - Only Visible in Hero */}
-        {view === 'hero' && (
-          <div className="fixed top-[5%] left-4 md:left-8 z-50 flex gap-2 md:gap-3">
+          {/* Social Icons (Left) */}
+          <div className="flex gap-2 md:gap-3">
             {[
               { Icon: Instagram, link: 'https://www.instagram.com/', color: 'hover:text-pink-500' },
               { Icon: Youtube, link: 'https://www.youtube.com/', color: 'hover:text-red-500' },
@@ -787,17 +811,62 @@ export default function Home() {
                 href={link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`p-2.5 md:p-3 rounded-xl backdrop-blur-lg md:backdrop-blur-2xl transition-all hover:scale-110 cursor-pointer group border ${darkMode ? "bg-white/5 border-white/10 hover:bg-white/10 active:bg-white/20" : "bg-white/10 border-white/20 hover:bg-white/30 active:bg-white/50 shadow-lg"}`}
-                style={{
-                  animation: `float 3s ease-in-out infinite`,
-                  animationDelay: `${i * 0.5}s`
-                }}
+                className={`p-2 rounded-xl transition-all hover:scale-110 cursor-pointer group border ${darkMode ? "bg-white/5 border-white/10 hover:bg-white/10 text-white" : "bg-white/50 border-white/20 hover:bg-white/80 text-slate-700 shadow-sm"}`}
               >
-                <Icon className={`w-5 h-5 md:w-6 md:h-6 text-cyan-400 transition-colors ${color}`} />
+                <Icon className={`w-5 h-5 md:w-5 md:h-5 transition-colors ${color}`} />
               </a>
             ))}
           </div>
-        )}
+
+          {/* Right Side Settings */}
+          <div className="flex items-center gap-3 md:gap-4 relative">
+
+            {/* Language Switcher */}
+            <div className="relative">
+              <button
+                onClick={() => setLangDropdownOpen(!langDropdownOpen)}
+                className={`flex items-center gap-1.5 px-3 py-2 rounded-xl transition-all hover:scale-105 border font-bold text-sm ${darkMode ? "bg-white/5 border-white/10 text-white hover:bg-white/10" : "bg-white/50 border-white/20 text-slate-800 hover:bg-white/80 shadow-sm"}`}
+              >
+                <span>{language === 'UZ' ? "O'Z" : language}</span>
+                <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-300 ${langDropdownOpen ? 'rotate-180' : ''}`} />
+              </button>
+
+              {/* Dropdown Menu */}
+              {langDropdownOpen && (
+                <div className={`absolute top-full right-0 mt-2 w-24 rounded-xl overflow-hidden backdrop-blur-xl border shadow-2xl animate-in fade-in zoom-in-95 duration-200 ${darkMode ? "bg-slate-900/90 border-white/10" : "bg-white/90 border-white/20"}`}>
+                  {['UZ', 'RU', 'EN'].map((lang) => (
+                    <button
+                      key={lang}
+                      onClick={() => {
+                        setLanguage(lang as any);
+                        setLangDropdownOpen(false);
+                      }}
+                      className={`w-full text-center py-2 text-sm font-bold transition-colors ${language === lang
+                        ? (darkMode ? 'bg-white/10 text-cyan-400' : 'bg-blue-50 text-blue-600')
+                        : (darkMode ? 'text-white/70 hover:bg-white/5' : 'text-slate-600 hover:bg-slate-100')
+                        }`}
+                    >
+                      {lang === 'UZ' ? "O'Z" : lang}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* Dark Mode Toggle */}
+            <button
+              onClick={() => setDarkMode(!darkMode)}
+              className={`p-2 rounded-xl transition-all hover:scale-110 border group overflow-hidden relative ${darkMode ? "bg-white/5 border-white/10 hover:bg-white/10 text-white" : "bg-white/50 border-white/20 hover:bg-white/80 text-slate-800 shadow-sm"}`}
+            >
+              <div className="relative z-10">
+                {darkMode ? <Sun className="w-5 h-5 group-hover:rotate-180 transition-transform duration-500" /> : <Moon className="w-5 h-5" />}
+              </div>
+              <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-lg blur opacity-0 group-hover:opacity-20 transition-opacity" />
+            </button>
+          </div>
+        </header>
+
+
 
         {/* HERO Section with 3D effect */}
         {view === 'hero' && (
