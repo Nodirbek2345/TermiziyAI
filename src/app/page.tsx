@@ -1,6 +1,6 @@
 'use client'
 
-import { Moon, Sun, Send, Sparkles, Zap, Trophy, Users, Brain, Cpu, Network, Bot, Instagram, Youtube, Facebook, Briefcase, Code, Image as ImageIcon, TrendingUp, GraduationCap, MapPin, Video, Smartphone, Globe, Lock, Play, ArrowLeft, ChevronLeft, ChevronRight } from "lucide-react"
+import { Moon, Sun, Send, Sparkles, Zap, Trophy, Users, Brain, Cpu, Network, Bot, Instagram, Youtube, Facebook, Briefcase, Code, Image as ImageIcon, TrendingUp, GraduationCap, MapPin, Video, Smartphone, Globe, Lock, Play, ArrowLeft, ChevronLeft, ChevronRight, ChevronDown } from "lucide-react"
 import { useState, useEffect, useRef } from "react"
 import UniversalAgent from "@/components/UniversalAgent"
 
@@ -266,6 +266,8 @@ export default function Home() {
   const [activeCarouselIndex, setActiveCarouselIndex] = useState(2);
   const [isPaused, setIsPaused] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [language, setLanguage] = useState<"UZ" | "RU" | "EN">("UZ");
+  const [langDropdownOpen, setLangDropdownOpen] = useState(false);
 
   const freeCourses = [
     {
@@ -723,6 +725,40 @@ export default function Home() {
             transform: `perspective(1000px) rotateX(60deg) scale(2) translateY(-50%)`
           }} />
         </div>
+
+        {/* Language Switcher - Only Visible in Hero */}
+        {view === 'hero' && (
+          <div className="fixed top-[5%] right-20 md:right-28 z-50">
+            <button
+              onClick={() => setLangDropdownOpen(!langDropdownOpen)}
+              className={`flex items-center gap-1 md:gap-2 px-3 py-3 md:px-4 md:py-3.5 rounded-2xl backdrop-blur-lg md:backdrop-blur-2xl transition-all shadow-xl hover:scale-105 border ${darkMode ? "bg-white/5 border-white/10 text-white hover:bg-white/10" : "bg-white/70 border-white/20 text-slate-800 hover:bg-white/90"}`}
+            >
+              <span className="font-bold text-sm md:text-base">{language === 'UZ' ? "O'Z" : language}</span>
+              <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${langDropdownOpen ? 'rotate-180' : ''}`} />
+            </button>
+
+            {/* Dropdown Menu */}
+            {langDropdownOpen && (
+              <div className={`absolute top-full right-0 mt-2 w-full min-w-[80px] rounded-xl overflow-hidden backdrop-blur-xl border shadow-2xl animate-in fade-in zoom-in-95 duration-200 ${darkMode ? "bg-slate-900/90 border-white/10" : "bg-white/90 border-white/20"}`}>
+                {['UZ', 'RU', 'EN'].map((lang) => (
+                  <button
+                    key={lang}
+                    onClick={() => {
+                      setLanguage(lang as any);
+                      setLangDropdownOpen(false);
+                    }}
+                    className={`w-full text-center py-2.5 text-sm font-bold transition-colors ${language === lang
+                        ? (darkMode ? 'bg-white/10 text-cyan-400' : 'bg-blue-50 text-blue-600')
+                        : (darkMode ? 'text-white/70 hover:bg-white/5' : 'text-slate-600 hover:bg-slate-100')
+                      }`}
+                  >
+                    {lang === 'UZ' ? "O'Z" : lang}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
 
         {/* Dark Mode Toggle - Only Visible in Hero */}
         {view === 'hero' && (
